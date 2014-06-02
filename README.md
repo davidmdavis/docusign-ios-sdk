@@ -62,14 +62,14 @@ If the user has a DocuSign account, you can present a `DSLoginViewController` an
 First, present the `DSLoginViewController`:
 ```objective-c
 DSLoginViewController *loginViewController = [[DSLoginViewController alloc] initWithIntegratorKey:@"<#IntegratorKey#>"
-                                                                                   forEnvironment:DSTableViewControllerEnvironment
+                                                                                   forEnvironment:DSRestAPIEnvironmentDemo
                                                                                             email:@"<#email#>" //This will pre-populate the UI
                                                                                          delegate:self];
 UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:loginViewController];
 [self presentViewController:navController animated:YES completion:nil];
 ```
 
-Then implement the delegate methods:
+Then implement the `DSLoginViewControllerDelegate` methods:
 
 ```objective-c
 - (void)loginViewController:(DSLoginViewController *)controller didLoginWithSessionManager:(DSSessionManager *)sessionManager {

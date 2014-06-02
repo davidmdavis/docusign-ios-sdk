@@ -69,7 +69,7 @@ UINavigationController *navController = [[UINavigationController alloc] initWith
 [self presentViewController:navController animated:YES completion:nil];
 ```
 
-Then implement the delegate methods:
+Then implement the `DSLoginViewControllerDelegate` methods:
 
 ```objective-c
 - (void)loginViewController:(DSLoginViewController *)controller didLoginWithSessionManager:(DSSessionManager *)sessionManager {

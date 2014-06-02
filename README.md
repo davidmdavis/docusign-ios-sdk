@@ -1,14 +1,14 @@
 DocuSign iOS SDK Beta
 =========================================
 
-This **BETA** SDK is built on our public [REST API](https://www.docusign.com/p/RESTAPIGuide/RESTAPIGuide.htm) and provides a quick and easy way for registered developers to add DocuSign's world-class document signing experience to their native iOS apps.
+This **BETA** SDK is built on our public [REST API](https://www.docusign.com/p/RESTAPIGuide/RESTAPIGuide.htm) and provides a quick and easy way for developers to add DocuSign's world-class document signing experience to their native iOS apps.
 
 Pre-requisites
 ----------
 
-### Register for a DocuSign Developer account
+### DocuSign Developer account (Free)
 
-You can do this at the [DocuSign DevCenter](https://www.docusign.com/developer-center) using this [registration from](https://www.docusign.com/developer-center/get-started). You will need the **Integrator Key** from your developer account in order to use the DocuSign iOS SDK.
+You can create your free dev account at the [DocuSign DevCenter](https://www.docusign.com/developer-center) using this [registration from](https://www.docusign.com/developer-center/get-started). You will need the **Integrator Key** from your developer account in order to use the DocuSign iOS SDK.
 
 ### Useful Reading
 
@@ -17,7 +17,7 @@ See [Common Terms](https://www.docusign.com/developer-center/explore/common-term
 Quickstart Guide
 ----------
 
-### Add the SDK as a dependency using CocoaPods
+### Add the SDK using CocoaPods
 
 [CocoaPods](http://cocoapods.org) is a dependency manager for Objective-C projects. It is distributed as a ruby gem and can be installed using:
 
@@ -41,7 +41,7 @@ $ pod install
 
 This will update or create a workspace that includes the DocuSign iOS SDK and all its dependencies combined with your project. `pod install` fetches the latest version of the SDK. After installation, you can update all your CocoaPods dependencies using `pod update`. For more options on how to manage dependencies see the official [CocoaPods guide](http://guides.cocoapods.org/using/the-podfile.html).
 
-**From now on to run your project you must use the `.xcworkspace`, *NOT* the `.xcodeproj`**
+**NOTE:  From now on to run your project you must use the `.xcworkspace`, *NOT* the `.xcodeproj`**
 
 ### Import the Headers
 

@@ -1,0 +1,6 @@
+platform :ios, '7.0'
+
+pod 'Mantle',	'~>1.4'
+pod 'AKANetworkLogging', '~>0.1'
+pod 'TPKeyboardAvoiding', '~>1.2'
+pod 'DSTextEntryValidation', '~>1.0'

@@ -1,0 +1,972 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		171C106719382E63002C7CCC /* NSString+DS_ValidEmail.m in Sources */ = {isa = PBXBuildFile; fileRef = 171C106619382E63002C7CCC /* NSString+DS_ValidEmail.m */; };
+		172D19B3C7084454AD458B2E /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D67ED8D8B7E54337B189ABA3 /* libPods.a */; };
+		177F2239193818A300BEC92C /* Sales Order.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 177F2238193818A300BEC92C /* Sales Order.pdf */; };
+		17EA2003192C370900AA6A4C /* DocuSign-iOS-SDK.podspec in Resources */ = {isa = PBXBuildFile; fileRef = 17EA2002192C370900AA6A4C /* DocuSign-iOS-SDK.podspec */; };
+		17EA2005192C38F700AA6A4C /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 17EA2004192C38F700AA6A4C /* LICENSE */; };
+		5706DC1419195993002E2B6A /* DSFinePrintViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5706DC1319195993002E2B6A /* DSFinePrintViewController.m */; };
+		57119594190F0B0400A98859 /* DSSigningViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 57119593190F0B0400A98859 /* DSSigningViewController.m */; };
+		57119596190F133E00A98859 /* DSSigning.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 57119595190F133E00A98859 /* DSSigning.storyboard */; };
+		57603F451906D41500E8C850 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57603F441906D41500E8C850 /* Foundation.framework */; };
+		57603F471906D41500E8C850 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57603F461906D41500E8C850 /* CoreGraphics.framework */; };
+		57603F491906D41500E8C850 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57603F481906D41500E8C850 /* UIKit.framework */; };
+		57603F4F1906D41500E8C850 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 57603F4D1906D41500E8C850 /* InfoPlist.strings */; };
+		57603F511906D41500E8C850 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 57603F501906D41500E8C850 /* main.m */; };
+		57603F551906D41500E8C850 /* DSAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 57603F541906D41500E8C850 /* DSAppDelegate.m */; };
+		57603F5E1906D41500E8C850 /* DSTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 57603F5D1906D41500E8C850 /* DSTableViewController.m */; };
+		57603F601906D41500E8C850 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 57603F5F1906D41500E8C850 /* Images.xcassets */; };
+		57603F671906D41500E8C850 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57603F661906D41500E8C850 /* XCTest.framework */; };
+		57603F681906D41500E8C850 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57603F441906D41500E8C850 /* Foundation.framework */; };
+		57603F691906D41500E8C850 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57603F481906D41500E8C850 /* UIKit.framework */; };
+		57603F711906D41500E8C850 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 57603F6F1906D41500E8C850 /* InfoPlist.strings */; };
+		57603F731906D41500E8C850 /* DocuSign_iOS_SDKTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 57603F721906D41500E8C850 /* DocuSign_iOS_SDKTests.m */; };
+		57603F7F1906D5A700E8C850 /* DSSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 57603F7E1906D5A700E8C850 /* DSSessionManager.m */; };
+		57603F8E19071FA400E8C850 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 57603F591906D41500E8C850 /* Main.storyboard */; };
+		57603FB1190990AD00E8C850 /* DSSigningAPIAddCCRecipients.m in Sources */ = {isa = PBXBuildFile; fileRef = 57603FA2190990AD00E8C850 /* DSSigningAPIAddCCRecipients.m */; };
+		57603FB2190990AD00E8C850 /* DSSigningAPIAdoptSignatureTabDetails.m in Sources */ = {isa = PBXBuildFile; fileRef = 57603FA4190990AD00E8C850 /* DSSigningAPIAdoptSignatureTabDetails.m */; };
+		57603FB3190990AD00E8C850 /* DSSigningAPICanFinishChanged.m in Sources */ = {isa = PBXBuildFile; fileRef = 57603FA6190990AD00E8C850 /* DSSigningAPICanFinishChanged.m */; };
+		57603FB4190990AD00E8C850 /* DSSigningAPIRecipient.m in Sources */ = {isa = PBXBuildFile; fileRef = 57603FA8190990AD00E8C850 /* DSSigningAPIRecipient.m */; };
+		57603FB5190990AD00E8C850 /* DSSigningAPIConsumerDisclosure.m in Sources */ = {isa = PBXBuildFile; fileRef = 57603FAA190990AD00E8C850 /* DSSigningAPIConsumerDisclosure.m */; };
+		57603FB6190990AD00E8C850 /* DSSigningAPIDeclineOptions.m in Sources */ = {isa = PBXBuildFile; fileRef = 57603FAC190990AD00E8C850 /* DSSigningAPIDeclineOptions.m */; };
+		57603FB7190990AD00E8C850 /* DSSigningAPIDeclineSigning.m in Sources */ = {isa = PBXBuildFile; fileRef = 57603FAE190990AD00E8C850 /* DSSigningAPIDeclineSigning.m */; };
+		57603FB8190990AD00E8C850 /* DSSigningAPIManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 57603FB0190990AD00E8C850 /* DSSigningAPIManager.m */; };
+		5773A55719256682007BFB7B /* DSCreateEnvelopeResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 5773A55619256682007BFB7B /* DSCreateEnvelopeResponse.m */; };
+		578463C919257CC90024CCAE /* NSURL+DSMimeType.m in Sources */ = {isa = PBXBuildFile; fileRef = 578463C819257CC90024CCAE /* NSURL+DSMimeType.m */; };
+		57BB2D18191D2B36002639C7 /* DSLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 57BB2D17191D2B36002639C7 /* DSLoginViewController.m */; };
+		57BB2D1B191D2B55002639C7 /* DSChooseAccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 57BB2D1A191D2B55002639C7 /* DSChooseAccountViewController.m */; };
+		57BB2D1D191D2BA0002639C7 /* DSLogin.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 57BB2D1C191D2BA0002639C7 /* DSLogin.storyboard */; };
+		57BB2D1F191D2BAE002639C7 /* DSLogin.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 57BB2D1E191D2BAE002639C7 /* DSLogin.xcassets */; };
+		57BB2D3A191D3E54002639C7 /* DSDrawSignatureController.m in Sources */ = {isa = PBXBuildFile; fileRef = 57BB2D23191D3E54002639C7 /* DSDrawSignatureController.m */; };
+		57BB2D3B191D3E54002639C7 /* DSDrawSignatureView.m in Sources */ = {isa = PBXBuildFile; fileRef = 57BB2D25191D3E54002639C7 /* DSDrawSignatureView.m */; };
+		57BB2D3E191D3E54002639C7 /* DSSignature.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 57BB2D2A191D3E54002639C7 /* DSSignature.xcassets */; };
+		57BB2D3F191D3E54002639C7 /* DSSignatureCaptureController.m in Sources */ = {isa = PBXBuildFile; fileRef = 57BB2D2C191D3E54002639C7 /* DSSignatureCaptureController.m */; };
+		57BB2D40191D3E54002639C7 /* DSSignatureCreationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 57BB2D2F191D3E54002639C7 /* DSSignatureCreationController.m */; };
+		57BB2D46191D3E86002639C7 /* DSSignature.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 57BB2D45191D3E86002639C7 /* DSSignature.storyboard */; };
+		57BB2D71191D3FE8002639C7 /* NSDateFormatter+DS_ISO8601.m in Sources */ = {isa = PBXBuildFile; fileRef = 57BB2D4B191D3FE8002639C7 /* NSDateFormatter+DS_ISO8601.m */; };
+		57BB2D72191D3FE8002639C7 /* NSDictionary+DS_JSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 57BB2D4D191D3FE8002639C7 /* NSDictionary+DS_JSON.m */; };
+		57BB2D73191D3FE8002639C7 /* NSString+DS_URLEncoding.m in Sources */ = {isa = PBXBuildFile; fileRef = 57BB2D4F191D3FE8002639C7 /* NSString+DS_URLEncoding.m */; };
+		57BB2D74191D3FE8002639C7 /* NSURL+DS_QueryDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = 57BB2D51191D3FE8002639C7 /* NSURL+DS_QueryDictionary.m */; };
+		57BB2D75191D3FE8002639C7 /* NSValueTransformer+DS_CustomTransformers.m in Sources */ = {isa = PBXBuildFile; fileRef = 57BB2D53191D3FE8002639C7 /* NSValueTransformer+DS_CustomTransformers.m */; };
+		57BB2D76191D3FE8002639C7 /* DSEnvelopeDetailsResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 57BB2D56191D3FE8002639C7 /* DSEnvelopeDetailsResponse.m */; };
+		57BB2D77191D3FE8002639C7 /* DSEnvelopeInPersonSigner.m in Sources */ = {isa = PBXBuildFile; fileRef = 57BB2D58191D3FE8002639C7 /* DSEnvelopeInPersonSigner.m */; };
+		57BB2D78191D3FE8002639C7 /* DSEnvelopeRecipient.m in Sources */ = {isa = PBXBuildFile; fileRef = 57BB2D5A191D3FE8002639C7 /* DSEnvelopeRecipient.m */; };
+		57BB2D79191D3FE8002639C7 /* DSEnvelopeRecipientEmailNotification.m in Sources */ = {isa = PBXBuildFile; fileRef = 57BB2D5C191D3FE8002639C7 /* DSEnvelopeRecipientEmailNotification.m */; };
+		57BB2D7A191D3FE8002639C7 /* DSEnvelopeRecipientsResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 57BB2D5E191D3FE8002639C7 /* DSEnvelopeRecipientsResponse.m */; };
+		57BB2D7B191D3FE8002639C7 /* DSEnvelopeSigner.m in Sources */ = {isa = PBXBuildFile; fileRef = 57BB2D60191D3FE8002639C7 /* DSEnvelopeSigner.m */; };
+		57BB2D7C191D3FE8002639C7 /* DSEnvelopesListEnvelope.m in Sources */ = {isa = PBXBuildFile; fileRef = 57BB2D62191D3FE8002639C7 /* DSEnvelopesListEnvelope.m */; };
+		57BB2D7D191D3FE8002639C7 /* DSEnvelopesListResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 57BB2D64191D3FE8002639C7 /* DSEnvelopesListResponse.m */; };
+		57BB2D7E191D3FE8002639C7 /* DSLoginAccount.m in Sources */ = {isa = PBXBuildFile; fileRef = 57BB2D68191D3FE8002639C7 /* DSLoginAccount.m */; };
+		57BB2D7F191D3FE8002639C7 /* DSLoginInformationResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 57BB2D6A191D3FE8002639C7 /* DSLoginInformationResponse.m */; };
+		57BB2D80191D3FE8002639C7 /* DSRestAPIResponseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 57BB2D6C191D3FE8002639C7 /* DSRestAPIResponseModel.m */; };
+		57BB2D81191D3FE8002639C7 /* DSUserSignature.m in Sources */ = {isa = PBXBuildFile; fileRef = 57BB2D6E191D3FE8002639C7 /* DSUserSignature.m */; };
+		57BB2D82191D3FE8002639C7 /* DSUserSignaturesResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 57BB2D70191D3FE8002639C7 /* DSUserSignaturesResponse.m */; };
+		57BB2D92191D4003002639C7 /* DSCircleButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 57BB2D85191D4003002639C7 /* DSCircleButton.m */; };
+		57BB2D93191D4003002639C7 /* DSNavigationFadeSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 57BB2D87191D4003002639C7 /* DSNavigationFadeSegue.m */; };
+		57BB2D94191D4003002639C7 /* DSRotationForwardingNavigationControllerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 57BB2D89191D4003002639C7 /* DSRotationForwardingNavigationControllerViewController.m */; };
+		57BB2D95191D4003002639C7 /* UIImage+Alpha.m in Sources */ = {isa = PBXBuildFile; fileRef = 57BB2D8B191D4003002639C7 /* UIImage+Alpha.m */; };
+		57BB2D96191D4003002639C7 /* UIImage+Resize.m in Sources */ = {isa = PBXBuildFile; fileRef = 57BB2D8D191D4003002639C7 /* UIImage+Resize.m */; };
+		57BB2D97191D4003002639C7 /* UIImage+RoundedCorner.m in Sources */ = {isa = PBXBuildFile; fileRef = 57BB2D8F191D4003002639C7 /* UIImage+RoundedCorner.m */; };
+		57BB2D98191D4003002639C7 /* UIImage+SignatureCleanup.m in Sources */ = {isa = PBXBuildFile; fileRef = 57BB2D91191D4003002639C7 /* UIImage+SignatureCleanup.m */; };
+		57BB2D9C191D404B002639C7 /* DSNetworkLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 57BB2D9B191D404B002639C7 /* DSNetworkLogger.m */; };
+		57CAAA891922BBE1004A2F16 /* UIViewController+DSLayoutGuides.m in Sources */ = {isa = PBXBuildFile; fileRef = 57CAAA881922BBE1004A2F16 /* UIViewController+DSLayoutGuides.m */; };
+		57FD600A1911536000C58190 /* DSSigning.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 57FD60091911536000C58190 /* DSSigning.xcassets */; };
+		57FD600E1914008400C58190 /* DSDeclineSigningViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 57FD600D1914008400C58190 /* DSDeclineSigningViewController.m */; };
+		57FD6011191400C500C58190 /* DSStartSigningViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 57FD6010191400C500C58190 /* DSStartSigningViewController.m */; };
+		57FD601A191455A900C58190 /* DSCompleteSigningViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 57FD6019191455A900C58190 /* DSCompleteSigningViewController.m */; };
+		57FD601D1914589C00C58190 /* DSStoryboardFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 57FD601C1914589C00C58190 /* DSStoryboardFactory.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		57603F6A1906D41500E8C850 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 57603F391906D41500E8C850 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 57603F401906D41500E8C850;
+			remoteInfo = "DocuSign iOS SDK";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		171C106519382E63002C7CCC /* NSString+DS_ValidEmail.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+DS_ValidEmail.h"; sourceTree = "<group>"; };
+		171C106619382E63002C7CCC /* NSString+DS_ValidEmail.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+DS_ValidEmail.m"; sourceTree = "<group>"; };
+		171C106819384D8D002C7CCC /* README.md */ = {isa = PBXFileReference; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
+		177F2238193818A300BEC92C /* Sales Order.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "Sales Order.pdf"; sourceTree = "<group>"; };
+		17EA2002192C370900AA6A4C /* DocuSign-iOS-SDK.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "DocuSign-iOS-SDK.podspec"; sourceTree = "<group>"; };
+		17EA2004192C38F700AA6A4C /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		17EDFAE7193007BA00D74281 /* DocuSign-iOS-SDK.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "DocuSign-iOS-SDK.h"; sourceTree = "<group>"; };
+		54088CEB7A224B80AED0FB5F /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
+		5706DC1219195993002E2B6A /* DSFinePrintViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSFinePrintViewController.h; sourceTree = "<group>"; };
+		5706DC1319195993002E2B6A /* DSFinePrintViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSFinePrintViewController.m; sourceTree = "<group>"; };
+		57119592190F0B0400A98859 /* DSSigningViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSSigningViewController.h; sourceTree = "<group>"; };
+		57119593190F0B0400A98859 /* DSSigningViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSSigningViewController.m; sourceTree = "<group>"; };
+		57119595190F133E00A98859 /* DSSigning.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = DSSigning.storyboard; sourceTree = "<group>"; };
+		571195A61910729F00A98859 /* DSSigningViewControllerDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DSSigningViewControllerDelegate.h; sourceTree = "<group>"; };
+		574C51C1190B242600B5E2FA /* DSSigningAPITab.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DSSigningAPITab.h; sourceTree = "<group>"; };
+		57603F411906D41500E8C850 /* DocuSign iOS SDK.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "DocuSign iOS SDK.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		57603F441906D41500E8C850 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		57603F461906D41500E8C850 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		57603F481906D41500E8C850 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		57603F4C1906D41500E8C850 /* DocuSign iOS SDK-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "DocuSign iOS SDK-Info.plist"; sourceTree = "<group>"; };
+		57603F4E1906D41500E8C850 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		57603F501906D41500E8C850 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		57603F521906D41500E8C850 /* DocuSign iOS SDK-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "DocuSign iOS SDK-Prefix.pch"; sourceTree = "<group>"; };
+		57603F531906D41500E8C850 /* DSAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DSAppDelegate.h; sourceTree = "<group>"; };
+		57603F541906D41500E8C850 /* DSAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DSAppDelegate.m; sourceTree = "<group>"; };
+		57603F5A1906D41500E8C850 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		57603F5C1906D41500E8C850 /* DSTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DSTableViewController.h; sourceTree = "<group>"; };
+		57603F5D1906D41500E8C850 /* DSTableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DSTableViewController.m; sourceTree = "<group>"; };
+		57603F5F1906D41500E8C850 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		57603F651906D41500E8C850 /* DocuSign iOS SDKTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "DocuSign iOS SDKTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		57603F661906D41500E8C850 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		57603F6E1906D41500E8C850 /* DocuSign iOS SDKTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "DocuSign iOS SDKTests-Info.plist"; sourceTree = "<group>"; };
+		57603F701906D41500E8C850 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		57603F721906D41500E8C850 /* DocuSign_iOS_SDKTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DocuSign_iOS_SDKTests.m; sourceTree = "<group>"; };
+		57603F7D1906D5A700E8C850 /* DSSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSSessionManager.h; sourceTree = "<group>"; };
+		57603F7E1906D5A700E8C850 /* DSSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSSessionManager.m; sourceTree = "<group>"; };
+		57603FA1190990AD00E8C850 /* DSSigningAPIAddCCRecipients.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSSigningAPIAddCCRecipients.h; sourceTree = "<group>"; };
+		57603FA2190990AD00E8C850 /* DSSigningAPIAddCCRecipients.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSSigningAPIAddCCRecipients.m; sourceTree = "<group>"; };
+		57603FA3190990AD00E8C850 /* DSSigningAPIAdoptSignatureTabDetails.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSSigningAPIAdoptSignatureTabDetails.h; sourceTree = "<group>"; };
+		57603FA4190990AD00E8C850 /* DSSigningAPIAdoptSignatureTabDetails.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSSigningAPIAdoptSignatureTabDetails.m; sourceTree = "<group>"; };
+		57603FA5190990AD00E8C850 /* DSSigningAPICanFinishChanged.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSSigningAPICanFinishChanged.h; sourceTree = "<group>"; };
+		57603FA6190990AD00E8C850 /* DSSigningAPICanFinishChanged.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSSigningAPICanFinishChanged.m; sourceTree = "<group>"; };
+		57603FA7190990AD00E8C850 /* DSSigningAPIRecipient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSSigningAPIRecipient.h; sourceTree = "<group>"; };
+		57603FA8190990AD00E8C850 /* DSSigningAPIRecipient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSSigningAPIRecipient.m; sourceTree = "<group>"; };
+		57603FA9190990AD00E8C850 /* DSSigningAPIConsumerDisclosure.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSSigningAPIConsumerDisclosure.h; sourceTree = "<group>"; };
+		57603FAA190990AD00E8C850 /* DSSigningAPIConsumerDisclosure.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSSigningAPIConsumerDisclosure.m; sourceTree = "<group>"; };
+		57603FAB190990AD00E8C850 /* DSSigningAPIDeclineOptions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSSigningAPIDeclineOptions.h; sourceTree = "<group>"; };
+		57603FAC190990AD00E8C850 /* DSSigningAPIDeclineOptions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSSigningAPIDeclineOptions.m; sourceTree = "<group>"; };
+		57603FAD190990AD00E8C850 /* DSSigningAPIDeclineSigning.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSSigningAPIDeclineSigning.h; sourceTree = "<group>"; };
+		57603FAE190990AD00E8C850 /* DSSigningAPIDeclineSigning.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSSigningAPIDeclineSigning.m; sourceTree = "<group>"; };
+		57603FAF190990AD00E8C850 /* DSSigningAPIManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSSigningAPIManager.h; sourceTree = "<group>"; };
+		57603FB0190990AD00E8C850 /* DSSigningAPIManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSSigningAPIManager.m; sourceTree = "<group>"; };
+		576D65431934F6EF00B32444 /* DSRestAPIEnvironment.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DSRestAPIEnvironment.h; sourceTree = "<group>"; };
+		5773A55519256682007BFB7B /* DSCreateEnvelopeResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSCreateEnvelopeResponse.h; sourceTree = "<group>"; };
+		5773A55619256682007BFB7B /* DSCreateEnvelopeResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSCreateEnvelopeResponse.m; sourceTree = "<group>"; };
+		578463C719257CC90024CCAE /* NSURL+DSMimeType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSURL+DSMimeType.h"; sourceTree = "<group>"; };
+		578463C819257CC90024CCAE /* NSURL+DSMimeType.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSURL+DSMimeType.m"; sourceTree = "<group>"; };
+		57BB2D16191D2B36002639C7 /* DSLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSLoginViewController.h; sourceTree = "<group>"; };
+		57BB2D17191D2B36002639C7 /* DSLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSLoginViewController.m; sourceTree = "<group>"; };
+		57BB2D19191D2B55002639C7 /* DSChooseAccountViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSChooseAccountViewController.h; sourceTree = "<group>"; };
+		57BB2D1A191D2B55002639C7 /* DSChooseAccountViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSChooseAccountViewController.m; sourceTree = "<group>"; };
+		57BB2D1C191D2BA0002639C7 /* DSLogin.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = DSLogin.storyboard; sourceTree = "<group>"; };
+		57BB2D1E191D2BAE002639C7 /* DSLogin.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = DSLogin.xcassets; sourceTree = "<group>"; };
+		57BB2D22191D3E54002639C7 /* DSDrawSignatureController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSDrawSignatureController.h; sourceTree = "<group>"; };
+		57BB2D23191D3E54002639C7 /* DSDrawSignatureController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSDrawSignatureController.m; sourceTree = "<group>"; };
+		57BB2D24191D3E54002639C7 /* DSDrawSignatureView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSDrawSignatureView.h; sourceTree = "<group>"; };
+		57BB2D25191D3E54002639C7 /* DSDrawSignatureView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSDrawSignatureView.m; sourceTree = "<group>"; };
+		57BB2D2A191D3E54002639C7 /* DSSignature.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = DSSignature.xcassets; sourceTree = "<group>"; };
+		57BB2D2B191D3E54002639C7 /* DSSignatureCaptureController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSSignatureCaptureController.h; sourceTree = "<group>"; };
+		57BB2D2C191D3E54002639C7 /* DSSignatureCaptureController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSSignatureCaptureController.m; sourceTree = "<group>"; };
+		57BB2D2D191D3E54002639C7 /* DSSignatureCaptureDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSSignatureCaptureDelegate.h; sourceTree = "<group>"; };
+		57BB2D2E191D3E54002639C7 /* DSSignatureCreationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSSignatureCreationController.h; sourceTree = "<group>"; };
+		57BB2D2F191D3E54002639C7 /* DSSignatureCreationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSSignatureCreationController.m; sourceTree = "<group>"; };
+		57BB2D30191D3E54002639C7 /* DSSignaturePart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSSignaturePart.h; sourceTree = "<group>"; };
+		57BB2D45191D3E86002639C7 /* DSSignature.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = DSSignature.storyboard; sourceTree = "<group>"; };
+		57BB2D4A191D3FE8002639C7 /* NSDateFormatter+DS_ISO8601.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDateFormatter+DS_ISO8601.h"; sourceTree = "<group>"; };
+		57BB2D4B191D3FE8002639C7 /* NSDateFormatter+DS_ISO8601.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDateFormatter+DS_ISO8601.m"; sourceTree = "<group>"; };
+		57BB2D4C191D3FE8002639C7 /* NSDictionary+DS_JSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+DS_JSON.h"; sourceTree = "<group>"; };
+		57BB2D4D191D3FE8002639C7 /* NSDictionary+DS_JSON.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+DS_JSON.m"; sourceTree = "<group>"; };
+		57BB2D4E191D3FE8002639C7 /* NSString+DS_URLEncoding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+DS_URLEncoding.h"; sourceTree = "<group>"; };
+		57BB2D4F191D3FE8002639C7 /* NSString+DS_URLEncoding.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+DS_URLEncoding.m"; sourceTree = "<group>"; };
+		57BB2D50191D3FE8002639C7 /* NSURL+DS_QueryDictionary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSURL+DS_QueryDictionary.h"; sourceTree = "<group>"; };
+		57BB2D51191D3FE8002639C7 /* NSURL+DS_QueryDictionary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSURL+DS_QueryDictionary.m"; sourceTree = "<group>"; };
+		57BB2D52191D3FE8002639C7 /* NSValueTransformer+DS_CustomTransformers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSValueTransformer+DS_CustomTransformers.h"; sourceTree = "<group>"; };
+		57BB2D53191D3FE8002639C7 /* NSValueTransformer+DS_CustomTransformers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSValueTransformer+DS_CustomTransformers.m"; sourceTree = "<group>"; };
+		57BB2D55191D3FE8002639C7 /* DSEnvelopeDetailsResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSEnvelopeDetailsResponse.h; sourceTree = "<group>"; };
+		57BB2D56191D3FE8002639C7 /* DSEnvelopeDetailsResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSEnvelopeDetailsResponse.m; sourceTree = "<group>"; };
+		57BB2D57191D3FE8002639C7 /* DSEnvelopeInPersonSigner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSEnvelopeInPersonSigner.h; sourceTree = "<group>"; };
+		57BB2D58191D3FE8002639C7 /* DSEnvelopeInPersonSigner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSEnvelopeInPersonSigner.m; sourceTree = "<group>"; };
+		57BB2D59191D3FE8002639C7 /* DSEnvelopeRecipient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSEnvelopeRecipient.h; sourceTree = "<group>"; };
+		57BB2D5A191D3FE8002639C7 /* DSEnvelopeRecipient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSEnvelopeRecipient.m; sourceTree = "<group>"; };
+		57BB2D5B191D3FE8002639C7 /* DSEnvelopeRecipientEmailNotification.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSEnvelopeRecipientEmailNotification.h; sourceTree = "<group>"; };
+		57BB2D5C191D3FE8002639C7 /* DSEnvelopeRecipientEmailNotification.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSEnvelopeRecipientEmailNotification.m; sourceTree = "<group>"; };
+		57BB2D5D191D3FE8002639C7 /* DSEnvelopeRecipientsResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSEnvelopeRecipientsResponse.h; sourceTree = "<group>"; };
+		57BB2D5E191D3FE8002639C7 /* DSEnvelopeRecipientsResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSEnvelopeRecipientsResponse.m; sourceTree = "<group>"; };
+		57BB2D5F191D3FE8002639C7 /* DSEnvelopeSigner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSEnvelopeSigner.h; sourceTree = "<group>"; };
+		57BB2D60191D3FE8002639C7 /* DSEnvelopeSigner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSEnvelopeSigner.m; sourceTree = "<group>"; };
+		57BB2D61191D3FE8002639C7 /* DSEnvelopesListEnvelope.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSEnvelopesListEnvelope.h; sourceTree = "<group>"; };
+		57BB2D62191D3FE8002639C7 /* DSEnvelopesListEnvelope.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSEnvelopesListEnvelope.m; sourceTree = "<group>"; };
+		57BB2D63191D3FE8002639C7 /* DSEnvelopesListResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSEnvelopesListResponse.h; sourceTree = "<group>"; };
+		57BB2D64191D3FE8002639C7 /* DSEnvelopesListResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSEnvelopesListResponse.m; sourceTree = "<group>"; };
+		57BB2D65191D3FE8002639C7 /* DSEnvelopeStatus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSEnvelopeStatus.h; sourceTree = "<group>"; };
+		57BB2D66191D3FE8002639C7 /* DSLogicalEnvelopeGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSLogicalEnvelopeGroup.h; sourceTree = "<group>"; };
+		57BB2D67191D3FE8002639C7 /* DSLoginAccount.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSLoginAccount.h; sourceTree = "<group>"; };
+		57BB2D68191D3FE8002639C7 /* DSLoginAccount.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSLoginAccount.m; sourceTree = "<group>"; };
+		57BB2D69191D3FE8002639C7 /* DSLoginInformationResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSLoginInformationResponse.h; sourceTree = "<group>"; };
+		57BB2D6A191D3FE8002639C7 /* DSLoginInformationResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSLoginInformationResponse.m; sourceTree = "<group>"; };
+		57BB2D6B191D3FE8002639C7 /* DSRestAPIResponseModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSRestAPIResponseModel.h; sourceTree = "<group>"; };
+		57BB2D6C191D3FE8002639C7 /* DSRestAPIResponseModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSRestAPIResponseModel.m; sourceTree = "<group>"; };
+		57BB2D6D191D3FE8002639C7 /* DSUserSignature.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSUserSignature.h; sourceTree = "<group>"; };
+		57BB2D6E191D3FE8002639C7 /* DSUserSignature.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSUserSignature.m; sourceTree = "<group>"; };
+		57BB2D6F191D3FE8002639C7 /* DSUserSignaturesResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSUserSignaturesResponse.h; sourceTree = "<group>"; };
+		57BB2D70191D3FE8002639C7 /* DSUserSignaturesResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSUserSignaturesResponse.m; sourceTree = "<group>"; };
+		57BB2D84191D4003002639C7 /* DSCircleButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSCircleButton.h; sourceTree = "<group>"; };
+		57BB2D85191D4003002639C7 /* DSCircleButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSCircleButton.m; sourceTree = "<group>"; };
+		57BB2D86191D4003002639C7 /* DSNavigationFadeSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSNavigationFadeSegue.h; sourceTree = "<group>"; };
+		57BB2D87191D4003002639C7 /* DSNavigationFadeSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSNavigationFadeSegue.m; sourceTree = "<group>"; };
+		57BB2D88191D4003002639C7 /* DSRotationForwardingNavigationControllerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSRotationForwardingNavigationControllerViewController.h; sourceTree = "<group>"; };
+		57BB2D89191D4003002639C7 /* DSRotationForwardingNavigationControllerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSRotationForwardingNavigationControllerViewController.m; sourceTree = "<group>"; };
+		57BB2D8A191D4003002639C7 /* UIImage+Alpha.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Alpha.h"; sourceTree = "<group>"; };
+		57BB2D8B191D4003002639C7 /* UIImage+Alpha.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Alpha.m"; sourceTree = "<group>"; };
+		57BB2D8C191D4003002639C7 /* UIImage+Resize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Resize.h"; sourceTree = "<group>"; };
+		57BB2D8D191D4003002639C7 /* UIImage+Resize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Resize.m"; sourceTree = "<group>"; };
+		57BB2D8E191D4003002639C7 /* UIImage+RoundedCorner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+RoundedCorner.h"; sourceTree = "<group>"; };
+		57BB2D8F191D4003002639C7 /* UIImage+RoundedCorner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+RoundedCorner.m"; sourceTree = "<group>"; };
+		57BB2D90191D4003002639C7 /* UIImage+SignatureCleanup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+SignatureCleanup.h"; sourceTree = "<group>"; };
+		57BB2D91191D4003002639C7 /* UIImage+SignatureCleanup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+SignatureCleanup.m"; sourceTree = "<group>"; };
+		57BB2D9A191D404B002639C7 /* DSNetworkLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSNetworkLogger.h; sourceTree = "<group>"; };
+		57BB2D9B191D404B002639C7 /* DSNetworkLogger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSNetworkLogger.m; sourceTree = "<group>"; };
+		57CAAA871922BBE1004A2F16 /* UIViewController+DSLayoutGuides.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+DSLayoutGuides.h"; sourceTree = "<group>"; };
+		57CAAA881922BBE1004A2F16 /* UIViewController+DSLayoutGuides.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+DSLayoutGuides.m"; sourceTree = "<group>"; };
+		57FD60091911536000C58190 /* DSSigning.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = DSSigning.xcassets; sourceTree = "<group>"; };
+		57FD600B1913EFD800C58190 /* DSSigningCompletedStatus.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DSSigningCompletedStatus.h; sourceTree = "<group>"; };
+		57FD600C1914008400C58190 /* DSDeclineSigningViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSDeclineSigningViewController.h; sourceTree = "<group>"; };
+		57FD600D1914008400C58190 /* DSDeclineSigningViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSDeclineSigningViewController.m; sourceTree = "<group>"; };
+		57FD600F191400C500C58190 /* DSStartSigningViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSStartSigningViewController.h; sourceTree = "<group>"; };
+		57FD6010191400C500C58190 /* DSStartSigningViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSStartSigningViewController.m; sourceTree = "<group>"; };
+		57FD6018191455A900C58190 /* DSCompleteSigningViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSCompleteSigningViewController.h; sourceTree = "<group>"; };
+		57FD6019191455A900C58190 /* DSCompleteSigningViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSCompleteSigningViewController.m; sourceTree = "<group>"; };
+		57FD601B1914589C00C58190 /* DSStoryboardFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSStoryboardFactory.h; sourceTree = "<group>"; };
+		57FD601C1914589C00C58190 /* DSStoryboardFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSStoryboardFactory.m; sourceTree = "<group>"; };
+		D67ED8D8B7E54337B189ABA3 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		57603F3E1906D41500E8C850 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				57603F471906D41500E8C850 /* CoreGraphics.framework in Frameworks */,
+				57603F491906D41500E8C850 /* UIKit.framework in Frameworks */,
+				57603F451906D41500E8C850 /* Foundation.framework in Frameworks */,
+				172D19B3C7084454AD458B2E /* libPods.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		57603F621906D41500E8C850 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				57603F671906D41500E8C850 /* XCTest.framework in Frameworks */,
+				57603F691906D41500E8C850 /* UIKit.framework in Frameworks */,
+				57603F681906D41500E8C850 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		17996E9B191B461F0072711A /* Signature */ = {
+			isa = PBXGroup;
+			children = (
+				57BB2D45191D3E86002639C7 /* DSSignature.storyboard */,
+				57BB2D2A191D3E54002639C7 /* DSSignature.xcassets */,
+				57BB2D30191D3E54002639C7 /* DSSignaturePart.h */,
+				57BB2D2D191D3E54002639C7 /* DSSignatureCaptureDelegate.h */,
+				57BB2D2B191D3E54002639C7 /* DSSignatureCaptureController.h */,
+				57BB2D2C191D3E54002639C7 /* DSSignatureCaptureController.m */,
+				57BB2D2E191D3E54002639C7 /* DSSignatureCreationController.h */,
+				57BB2D2F191D3E54002639C7 /* DSSignatureCreationController.m */,
+				57BB2D22191D3E54002639C7 /* DSDrawSignatureController.h */,
+				57BB2D23191D3E54002639C7 /* DSDrawSignatureController.m */,
+				57BB2D24191D3E54002639C7 /* DSDrawSignatureView.h */,
+				57BB2D25191D3E54002639C7 /* DSDrawSignatureView.m */,
+				57BB2D83191D4003002639C7 /* Helpers */,
+			);
+			path = Signature;
+			sourceTree = "<group>";
+		};
+		574C5186190AF56E00B5E2FA /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				171C106519382E63002C7CCC /* NSString+DS_ValidEmail.h */,
+				171C106619382E63002C7CCC /* NSString+DS_ValidEmail.m */,
+				57FD601B1914589C00C58190 /* DSStoryboardFactory.h */,
+				57FD601C1914589C00C58190 /* DSStoryboardFactory.m */,
+				57CAAA871922BBE1004A2F16 /* UIViewController+DSLayoutGuides.h */,
+				57CAAA881922BBE1004A2F16 /* UIViewController+DSLayoutGuides.m */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		574C518A190B0DF100B5E2FA /* Javascript API */ = {
+			isa = PBXGroup;
+			children = (
+				57603FAF190990AD00E8C850 /* DSSigningAPIManager.h */,
+				57603FB0190990AD00E8C850 /* DSSigningAPIManager.m */,
+				57603FA1190990AD00E8C850 /* DSSigningAPIAddCCRecipients.h */,
+				57603FA2190990AD00E8C850 /* DSSigningAPIAddCCRecipients.m */,
+				57603FA7190990AD00E8C850 /* DSSigningAPIRecipient.h */,
+				57603FA8190990AD00E8C850 /* DSSigningAPIRecipient.m */,
+				574C51C1190B242600B5E2FA /* DSSigningAPITab.h */,
+				57603FA3190990AD00E8C850 /* DSSigningAPIAdoptSignatureTabDetails.h */,
+				57603FA4190990AD00E8C850 /* DSSigningAPIAdoptSignatureTabDetails.m */,
+				57603FA5190990AD00E8C850 /* DSSigningAPICanFinishChanged.h */,
+				57603FA6190990AD00E8C850 /* DSSigningAPICanFinishChanged.m */,
+				57603FAB190990AD00E8C850 /* DSSigningAPIDeclineOptions.h */,
+				57603FAC190990AD00E8C850 /* DSSigningAPIDeclineOptions.m */,
+				57603FA9190990AD00E8C850 /* DSSigningAPIConsumerDisclosure.h */,
+				57603FAA190990AD00E8C850 /* DSSigningAPIConsumerDisclosure.m */,
+				57603FAD190990AD00E8C850 /* DSSigningAPIDeclineSigning.h */,
+				57603FAE190990AD00E8C850 /* DSSigningAPIDeclineSigning.m */,
+			);
+			name = "Javascript API";
+			path = API;
+			sourceTree = "<group>";
+		};
+		57603F381906D41500E8C850 = {
+			isa = PBXGroup;
+			children = (
+				57603F7C1906D4EC00E8C850 /* SDK */,
+				57603F4A1906D41500E8C850 /* Example */,
+				57603F6C1906D41500E8C850 /* DocuSign iOS SDKTests */,
+				57603F431906D41500E8C850 /* Frameworks */,
+				57603F421906D41500E8C850 /* Products */,
+				17EA2002192C370900AA6A4C /* DocuSign-iOS-SDK.podspec */,
+				17EA2004192C38F700AA6A4C /* LICENSE */,
+				171C106819384D8D002C7CCC /* README.md */,
+				54088CEB7A224B80AED0FB5F /* Pods.xcconfig */,
+			);
+			sourceTree = "<group>";
+		};
+		57603F421906D41500E8C850 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				57603F411906D41500E8C850 /* DocuSign iOS SDK.app */,
+				57603F651906D41500E8C850 /* DocuSign iOS SDKTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		57603F431906D41500E8C850 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				57603F441906D41500E8C850 /* Foundation.framework */,
+				57603F461906D41500E8C850 /* CoreGraphics.framework */,
+				57603F481906D41500E8C850 /* UIKit.framework */,
+				57603F661906D41500E8C850 /* XCTest.framework */,
+				D67ED8D8B7E54337B189ABA3 /* libPods.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		57603F4A1906D41500E8C850 /* Example */ = {
+			isa = PBXGroup;
+			children = (
+				57603F531906D41500E8C850 /* DSAppDelegate.h */,
+				57603F541906D41500E8C850 /* DSAppDelegate.m */,
+				57603F591906D41500E8C850 /* Main.storyboard */,
+				57603F5C1906D41500E8C850 /* DSTableViewController.h */,
+				57603F5D1906D41500E8C850 /* DSTableViewController.m */,
+				57603F5F1906D41500E8C850 /* Images.xcassets */,
+				57603F4B1906D41500E8C850 /* Supporting Files */,
+			);
+			name = Example;
+			path = "DocuSign iOS SDK/Example";
+			sourceTree = "<group>";
+		};
+		57603F4B1906D41500E8C850 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				177F2238193818A300BEC92C /* Sales Order.pdf */,
+				57603F4C1906D41500E8C850 /* DocuSign iOS SDK-Info.plist */,
+				57603F4D1906D41500E8C850 /* InfoPlist.strings */,
+				57603F501906D41500E8C850 /* main.m */,
+				57603F521906D41500E8C850 /* DocuSign iOS SDK-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		57603F6C1906D41500E8C850 /* DocuSign iOS SDKTests */ = {
+			isa = PBXGroup;
+			children = (
+				57603F721906D41500E8C850 /* DocuSign_iOS_SDKTests.m */,
+				57603F6D1906D41500E8C850 /* Supporting Files */,
+			);
+			path = "DocuSign iOS SDKTests";
+			sourceTree = "<group>";
+		};
+		57603F6D1906D41500E8C850 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				57603F6E1906D41500E8C850 /* DocuSign iOS SDKTests-Info.plist */,
+				57603F6F1906D41500E8C850 /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		57603F7C1906D4EC00E8C850 /* SDK */ = {
+			isa = PBXGroup;
+			children = (
+				17EDFAE7193007BA00D74281 /* DocuSign-iOS-SDK.h */,
+				576D65431934F6EF00B32444 /* DSRestAPIEnvironment.h */,
+				57603F7D1906D5A700E8C850 /* DSSessionManager.h */,
+				57603F7E1906D5A700E8C850 /* DSSessionManager.m */,
+				57BB2D48191D3FE8002639C7 /* Rest API */,
+				57BB2D15191D2B20002639C7 /* Login */,
+				57603FA01909909D00E8C850 /* Signing */,
+				17996E9B191B461F0072711A /* Signature */,
+				574C5186190AF56E00B5E2FA /* Helpers */,
+			);
+			name = SDK;
+			path = "DocuSign iOS SDK/SDK";
+			sourceTree = "<group>";
+		};
+		57603FA01909909D00E8C850 /* Signing */ = {
+			isa = PBXGroup;
+			children = (
+				57119595190F133E00A98859 /* DSSigning.storyboard */,
+				57FD60091911536000C58190 /* DSSigning.xcassets */,
+				57FD600B1913EFD800C58190 /* DSSigningCompletedStatus.h */,
+				571195A61910729F00A98859 /* DSSigningViewControllerDelegate.h */,
+				57119592190F0B0400A98859 /* DSSigningViewController.h */,
+				57119593190F0B0400A98859 /* DSSigningViewController.m */,
+				57FD600F191400C500C58190 /* DSStartSigningViewController.h */,
+				57FD6010191400C500C58190 /* DSStartSigningViewController.m */,
+				5706DC1219195993002E2B6A /* DSFinePrintViewController.h */,
+				5706DC1319195993002E2B6A /* DSFinePrintViewController.m */,
+				57FD6018191455A900C58190 /* DSCompleteSigningViewController.h */,
+				57FD6019191455A900C58190 /* DSCompleteSigningViewController.m */,
+				57FD600C1914008400C58190 /* DSDeclineSigningViewController.h */,
+				57FD600D1914008400C58190 /* DSDeclineSigningViewController.m */,
+				574C518A190B0DF100B5E2FA /* Javascript API */,
+			);
+			path = Signing;
+			sourceTree = "<group>";
+		};
+		57BB2D15191D2B20002639C7 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				57BB2D1C191D2BA0002639C7 /* DSLogin.storyboard */,
+				57BB2D1E191D2BAE002639C7 /* DSLogin.xcassets */,
+				57BB2D16191D2B36002639C7 /* DSLoginViewController.h */,
+				57BB2D17191D2B36002639C7 /* DSLoginViewController.m */,
+				57BB2D19191D2B55002639C7 /* DSChooseAccountViewController.h */,
+				57BB2D1A191D2B55002639C7 /* DSChooseAccountViewController.m */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
+		57BB2D48191D3FE8002639C7 /* Rest API */ = {
+			isa = PBXGroup;
+			children = (
+				57BB2D54191D3FE8002639C7 /* Models */,
+				57BB2D99191D404B002639C7 /* Logging */,
+				57BB2D49191D3FE8002639C7 /* Helpers */,
+			);
+			path = "Rest API";
+			sourceTree = "<group>";
+		};
+		57BB2D49191D3FE8002639C7 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				57BB2D4A191D3FE8002639C7 /* NSDateFormatter+DS_ISO8601.h */,
+				57BB2D4B191D3FE8002639C7 /* NSDateFormatter+DS_ISO8601.m */,
+				57BB2D4C191D3FE8002639C7 /* NSDictionary+DS_JSON.h */,
+				57BB2D4D191D3FE8002639C7 /* NSDictionary+DS_JSON.m */,
+				57BB2D4E191D3FE8002639C7 /* NSString+DS_URLEncoding.h */,
+				57BB2D4F191D3FE8002639C7 /* NSString+DS_URLEncoding.m */,
+				57BB2D50191D3FE8002639C7 /* NSURL+DS_QueryDictionary.h */,
+				57BB2D51191D3FE8002639C7 /* NSURL+DS_QueryDictionary.m */,
+				57BB2D52191D3FE8002639C7 /* NSValueTransformer+DS_CustomTransformers.h */,
+				57BB2D53191D3FE8002639C7 /* NSValueTransformer+DS_CustomTransformers.m */,
+				578463C719257CC90024CCAE /* NSURL+DSMimeType.h */,
+				578463C819257CC90024CCAE /* NSURL+DSMimeType.m */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		57BB2D54191D3FE8002639C7 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				57BB2D6B191D3FE8002639C7 /* DSRestAPIResponseModel.h */,
+				57BB2D6C191D3FE8002639C7 /* DSRestAPIResponseModel.m */,
+				57BB2D69191D3FE8002639C7 /* DSLoginInformationResponse.h */,
+				57BB2D6A191D3FE8002639C7 /* DSLoginInformationResponse.m */,
+				57BB2D67191D3FE8002639C7 /* DSLoginAccount.h */,
+				57BB2D68191D3FE8002639C7 /* DSLoginAccount.m */,
+				57BB2D65191D3FE8002639C7 /* DSEnvelopeStatus.h */,
+				5773A55519256682007BFB7B /* DSCreateEnvelopeResponse.h */,
+				5773A55619256682007BFB7B /* DSCreateEnvelopeResponse.m */,
+				57BB2D66191D3FE8002639C7 /* DSLogicalEnvelopeGroup.h */,
+				57BB2D63191D3FE8002639C7 /* DSEnvelopesListResponse.h */,
+				57BB2D64191D3FE8002639C7 /* DSEnvelopesListResponse.m */,
+				57BB2D61191D3FE8002639C7 /* DSEnvelopesListEnvelope.h */,
+				57BB2D62191D3FE8002639C7 /* DSEnvelopesListEnvelope.m */,
+				57BB2D55191D3FE8002639C7 /* DSEnvelopeDetailsResponse.h */,
+				57BB2D56191D3FE8002639C7 /* DSEnvelopeDetailsResponse.m */,
+				57BB2D5D191D3FE8002639C7 /* DSEnvelopeRecipientsResponse.h */,
+				57BB2D5E191D3FE8002639C7 /* DSEnvelopeRecipientsResponse.m */,
+				57BB2D59191D3FE8002639C7 /* DSEnvelopeRecipient.h */,
+				57BB2D5A191D3FE8002639C7 /* DSEnvelopeRecipient.m */,
+				57BB2D5F191D3FE8002639C7 /* DSEnvelopeSigner.h */,
+				57BB2D60191D3FE8002639C7 /* DSEnvelopeSigner.m */,
+				57BB2D57191D3FE8002639C7 /* DSEnvelopeInPersonSigner.h */,
+				57BB2D58191D3FE8002639C7 /* DSEnvelopeInPersonSigner.m */,
+				57BB2D5B191D3FE8002639C7 /* DSEnvelopeRecipientEmailNotification.h */,
+				57BB2D5C191D3FE8002639C7 /* DSEnvelopeRecipientEmailNotification.m */,
+				57BB2D6F191D3FE8002639C7 /* DSUserSignaturesResponse.h */,
+				57BB2D70191D3FE8002639C7 /* DSUserSignaturesResponse.m */,
+				57BB2D6D191D3FE8002639C7 /* DSUserSignature.h */,
+				57BB2D6E191D3FE8002639C7 /* DSUserSignature.m */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		57BB2D83191D4003002639C7 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				57BB2D84191D4003002639C7 /* DSCircleButton.h */,
+				57BB2D85191D4003002639C7 /* DSCircleButton.m */,
+				57BB2D86191D4003002639C7 /* DSNavigationFadeSegue.h */,
+				57BB2D87191D4003002639C7 /* DSNavigationFadeSegue.m */,
+				57BB2D88191D4003002639C7 /* DSRotationForwardingNavigationControllerViewController.h */,
+				57BB2D89191D4003002639C7 /* DSRotationForwardingNavigationControllerViewController.m */,
+				57BB2D8A191D4003002639C7 /* UIImage+Alpha.h */,
+				57BB2D8B191D4003002639C7 /* UIImage+Alpha.m */,
+				57BB2D8C191D4003002639C7 /* UIImage+Resize.h */,
+				57BB2D8D191D4003002639C7 /* UIImage+Resize.m */,
+				57BB2D8E191D4003002639C7 /* UIImage+RoundedCorner.h */,
+				57BB2D8F191D4003002639C7 /* UIImage+RoundedCorner.m */,
+				57BB2D90191D4003002639C7 /* UIImage+SignatureCleanup.h */,
+				57BB2D91191D4003002639C7 /* UIImage+SignatureCleanup.m */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		57BB2D99191D404B002639C7 /* Logging */ = {
+			isa = PBXGroup;
+			children = (
+				57BB2D9A191D404B002639C7 /* DSNetworkLogger.h */,
+				57BB2D9B191D404B002639C7 /* DSNetworkLogger.m */,
+			);
+			path = Logging;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		57603F401906D41500E8C850 /* DocuSign iOS SDK */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 57603F761906D41500E8C850 /* Build configuration list for PBXNativeTarget "DocuSign iOS SDK" */;
+			buildPhases = (
+				CB6A0492659542E2B8430E9D /* Check Pods Manifest.lock */,
+				57603F3D1906D41500E8C850 /* Sources */,
+				57603F3E1906D41500E8C850 /* Frameworks */,
+				57603F3F1906D41500E8C850 /* Resources */,
+				2D565B3BC2A6484DB3F55786 /* Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "DocuSign iOS SDK";
+			productName = "DocuSign iOS SDK";
+			productReference = 57603F411906D41500E8C850 /* DocuSign iOS SDK.app */;
+			productType = "com.apple.product-type.application";
+		};
+		57603F641906D41500E8C850 /* DocuSign iOS SDKTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 57603F791906D41500E8C850 /* Build configuration list for PBXNativeTarget "DocuSign iOS SDKTests" */;
+			buildPhases = (
+				57603F611906D41500E8C850 /* Sources */,
+				57603F621906D41500E8C850 /* Frameworks */,
+				57603F631906D41500E8C850 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				57603F6B1906D41500E8C850 /* PBXTargetDependency */,
+			);
+			name = "DocuSign iOS SDKTests";
+			productName = "DocuSign iOS SDKTests";
+			productReference = 57603F651906D41500E8C850 /* DocuSign iOS SDKTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		57603F391906D41500E8C850 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = DS;
+				LastUpgradeCheck = 0510;
+				ORGANIZATIONNAME = "DocuSign Inc.";
+				TargetAttributes = {
+					57603F641906D41500E8C850 = {
+						TestTargetID = 57603F401906D41500E8C850;
+					};
+				};
+			};
+			buildConfigurationList = 57603F3C1906D41500E8C850 /* Build configuration list for PBXProject "DocuSign iOS SDK" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 57603F381906D41500E8C850;
+			productRefGroup = 57603F421906D41500E8C850 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				57603F401906D41500E8C850 /* DocuSign iOS SDK */,
+				57603F641906D41500E8C850 /* DocuSign iOS SDKTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		57603F3F1906D41500E8C850 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				57FD600A1911536000C58190 /* DSSigning.xcassets in Resources */,
+				17EA2003192C370900AA6A4C /* DocuSign-iOS-SDK.podspec in Resources */,
+				57119596190F133E00A98859 /* DSSigning.storyboard in Resources */,
+				57BB2D46191D3E86002639C7 /* DSSignature.storyboard in Resources */,
+				57603F601906D41500E8C850 /* Images.xcassets in Resources */,
+				17EA2005192C38F700AA6A4C /* LICENSE in Resources */,
+				57603F8E19071FA400E8C850 /* Main.storyboard in Resources */,
+				57BB2D1F191D2BAE002639C7 /* DSLogin.xcassets in Resources */,
+				57603F4F1906D41500E8C850 /* InfoPlist.strings in Resources */,
+				57BB2D3E191D3E54002639C7 /* DSSignature.xcassets in Resources */,
+				57BB2D1D191D2BA0002639C7 /* DSLogin.storyboard in Resources */,
+				177F2239193818A300BEC92C /* Sales Order.pdf in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		57603F631906D41500E8C850 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				57603F711906D41500E8C850 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		2D565B3BC2A6484DB3F55786 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		CB6A0492659542E2B8430E9D /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		57603F3D1906D41500E8C850 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				57603F511906D41500E8C850 /* main.m in Sources */,
+				57BB2D95191D4003002639C7 /* UIImage+Alpha.m in Sources */,
+				57BB2D80191D3FE8002639C7 /* DSRestAPIResponseModel.m in Sources */,
+				57BB2D7B191D3FE8002639C7 /* DSEnvelopeSigner.m in Sources */,
+				57BB2D7A191D3FE8002639C7 /* DSEnvelopeRecipientsResponse.m in Sources */,
+				57603F5E1906D41500E8C850 /* DSTableViewController.m in Sources */,
+				57BB2D40191D3E54002639C7 /* DSSignatureCreationController.m in Sources */,
+				57603FB2190990AD00E8C850 /* DSSigningAPIAdoptSignatureTabDetails.m in Sources */,
+				57BB2D78191D3FE8002639C7 /* DSEnvelopeRecipient.m in Sources */,
+				57603FB5190990AD00E8C850 /* DSSigningAPIConsumerDisclosure.m in Sources */,
+				57BB2D7D191D3FE8002639C7 /* DSEnvelopesListResponse.m in Sources */,
+				57603FB7190990AD00E8C850 /* DSSigningAPIDeclineSigning.m in Sources */,
+				57BB2D97191D4003002639C7 /* UIImage+RoundedCorner.m in Sources */,
+				57BB2D74191D3FE8002639C7 /* NSURL+DS_QueryDictionary.m in Sources */,
+				57603FB1190990AD00E8C850 /* DSSigningAPIAddCCRecipients.m in Sources */,
+				57BB2D82191D3FE8002639C7 /* DSUserSignaturesResponse.m in Sources */,
+				57BB2D96191D4003002639C7 /* UIImage+Resize.m in Sources */,
+				57BB2D72191D3FE8002639C7 /* NSDictionary+DS_JSON.m in Sources */,
+				57BB2D92191D4003002639C7 /* DSCircleButton.m in Sources */,
+				57BB2D7F191D3FE8002639C7 /* DSLoginInformationResponse.m in Sources */,
+				57603F551906D41500E8C850 /* DSAppDelegate.m in Sources */,
+				57BB2D9C191D404B002639C7 /* DSNetworkLogger.m in Sources */,
+				57FD600E1914008400C58190 /* DSDeclineSigningViewController.m in Sources */,
+				57BB2D7C191D3FE8002639C7 /* DSEnvelopesListEnvelope.m in Sources */,
+				171C106719382E63002C7CCC /* NSString+DS_ValidEmail.m in Sources */,
+				57FD6011191400C500C58190 /* DSStartSigningViewController.m in Sources */,
+				57BB2D73191D3FE8002639C7 /* NSString+DS_URLEncoding.m in Sources */,
+				57119594190F0B0400A98859 /* DSSigningViewController.m in Sources */,
+				57BB2D3B191D3E54002639C7 /* DSDrawSignatureView.m in Sources */,
+				57603FB8190990AD00E8C850 /* DSSigningAPIManager.m in Sources */,
+				57BB2D76191D3FE8002639C7 /* DSEnvelopeDetailsResponse.m in Sources */,
+				57BB2D1B191D2B55002639C7 /* DSChooseAccountViewController.m in Sources */,
+				5706DC1419195993002E2B6A /* DSFinePrintViewController.m in Sources */,
+				57BB2D3A191D3E54002639C7 /* DSDrawSignatureController.m in Sources */,
+				5773A55719256682007BFB7B /* DSCreateEnvelopeResponse.m in Sources */,
+				57603FB4190990AD00E8C850 /* DSSigningAPIRecipient.m in Sources */,
+				57BB2D79191D3FE8002639C7 /* DSEnvelopeRecipientEmailNotification.m in Sources */,
+				57CAAA891922BBE1004A2F16 /* UIViewController+DSLayoutGuides.m in Sources */,
+				57FD601D1914589C00C58190 /* DSStoryboardFactory.m in Sources */,
+				57BB2D98191D4003002639C7 /* UIImage+SignatureCleanup.m in Sources */,
+				57FD601A191455A900C58190 /* DSCompleteSigningViewController.m in Sources */,
+				57BB2D93191D4003002639C7 /* DSNavigationFadeSegue.m in Sources */,
+				57603FB6190990AD00E8C850 /* DSSigningAPIDeclineOptions.m in Sources */,
+				57BB2D71191D3FE8002639C7 /* NSDateFormatter+DS_ISO8601.m in Sources */,
+				57BB2D3F191D3E54002639C7 /* DSSignatureCaptureController.m in Sources */,
+				57603FB3190990AD00E8C850 /* DSSigningAPICanFinishChanged.m in Sources */,
+				57BB2D7E191D3FE8002639C7 /* DSLoginAccount.m in Sources */,
+				57BB2D81191D3FE8002639C7 /* DSUserSignature.m in Sources */,
+				57BB2D18191D2B36002639C7 /* DSLoginViewController.m in Sources */,
+				57BB2D94191D4003002639C7 /* DSRotationForwardingNavigationControllerViewController.m in Sources */,
+				57BB2D75191D3FE8002639C7 /* NSValueTransformer+DS_CustomTransformers.m in Sources */,
+				578463C919257CC90024CCAE /* NSURL+DSMimeType.m in Sources */,
+				57603F7F1906D5A700E8C850 /* DSSessionManager.m in Sources */,
+				57BB2D77191D3FE8002639C7 /* DSEnvelopeInPersonSigner.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		57603F611906D41500E8C850 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				57603F731906D41500E8C850 /* DocuSign_iOS_SDKTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		57603F6B1906D41500E8C850 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 57603F401906D41500E8C850 /* DocuSign iOS SDK */;
+			targetProxy = 57603F6A1906D41500E8C850 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		57603F4D1906D41500E8C850 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				57603F4E1906D41500E8C850 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		57603F591906D41500E8C850 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				57603F5A1906D41500E8C850 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		57603F6F1906D41500E8C850 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				57603F701906D41500E8C850 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		57603F741906D41500E8C850 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		57603F751906D41500E8C850 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		57603F771906D41500E8C850 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 54088CEB7A224B80AED0FB5F /* Pods.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "DocuSign iOS SDK/Example/DocuSign iOS SDK-Prefix.pch";
+				INFOPLIST_FILE = "DocuSign iOS SDK/Example/DocuSign iOS SDK-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		57603F781906D41500E8C850 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 54088CEB7A224B80AED0FB5F /* Pods.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "DocuSign iOS SDK/Example/DocuSign iOS SDK-Prefix.pch";
+				INFOPLIST_FILE = "DocuSign iOS SDK/Example/DocuSign iOS SDK-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		57603F7A1906D41500E8C850 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/DocuSign iOS SDK.app/DocuSign iOS SDK";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "DocuSign iOS SDK/DocuSign iOS SDK-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "DocuSign iOS SDKTests/DocuSign iOS SDKTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Debug;
+		};
+		57603F7B1906D41500E8C850 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/DocuSign iOS SDK.app/DocuSign iOS SDK";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "DocuSign iOS SDK/DocuSign iOS SDK-Prefix.pch";
+				INFOPLIST_FILE = "DocuSign iOS SDKTests/DocuSign iOS SDKTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		57603F3C1906D41500E8C850 /* Build configuration list for PBXProject "DocuSign iOS SDK" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				57603F741906D41500E8C850 /* Debug */,
+				57603F751906D41500E8C850 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		57603F761906D41500E8C850 /* Build configuration list for PBXNativeTarget "DocuSign iOS SDK" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				57603F771906D41500E8C850 /* Debug */,
+				57603F781906D41500E8C850 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		57603F791906D41500E8C850 /* Build configuration list for PBXNativeTarget "DocuSign iOS SDKTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				57603F7A1906D41500E8C850 /* Debug */,
+				57603F7B1906D41500E8C850 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 57603F391906D41500E8C850 /* Project object */;
+}

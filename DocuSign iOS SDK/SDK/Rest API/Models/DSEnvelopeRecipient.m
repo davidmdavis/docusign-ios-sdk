@@ -15,7 +15,8 @@
 @implementation DSEnvelopeRecipient
 
 + (NSDictionary *)JSONKeyPathsByPropertyKey {
-    return @{ NSStringFromSelector(@selector(recipientID)) : @"recipientId",
+    return @{ NSStringFromSelector(@selector(clientUserID)) : @"clientUserId",
+              NSStringFromSelector(@selector(recipientID)) : @"recipientId",
               NSStringFromSelector(@selector(recipientIDGuid)) : @"recipientIdGuid",
               NSStringFromSelector(@selector(userID)) : @"userId" };
 }

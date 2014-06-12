@@ -12,6 +12,7 @@
 
 @interface DSEnvelopeRecipient : MTLModel <MTLJSONSerializing>
 
+@property (nonatomic) NSString  *clientUserID;
 @property (nonatomic) NSArray   *customFields; // NSString
 @property (nonatomic) NSString  *declinedReason;
 @property (nonatomic) NSString  *deliveryMethod;

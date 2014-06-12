@@ -144,7 +144,7 @@ typedef NS_ENUM(NSInteger, DSSigningViewControllerViewTag) {
             }
             self.recipientsResponse = response;
             for (DSEnvelopeRecipient *recipient in [self.recipientsResponse allSigners]) {
-                if ([recipient.userID isEqualToString:self.sessionManager.account.userID]) {
+                if ([recipient.userID isEqualToString:self.sessionManager.account.userID] || [recipient.clientUserID length] > 0) {
                     self.currentSigner = recipient;
                     if ([self.recipientID length] == 0) {
                         self.recipientID = self.currentSigner.recipientID;
@@ -166,7 +166,7 @@ typedef NS_ENUM(NSInteger, DSSigningViewControllerViewTag) {
                 [self failedSigningWithError:[NSError errorWithDomain:DSSigningViewControllerErrorDomain code:DSSigningViewControllerErrorCodeInvalidSigner userInfo:nil]];
                 return;
             }
-            [self.sessionManager startSigningURLTaskForRecipientWithID:self.recipientID inEnvelopeWithID:self.envelopeID returnURL:self.messageURL completionHandler:^(NSString *signingURLString, NSError *error) {
+            [self.sessionManager startSigningURLTaskForRecipientWithID:self.currentSigner.recipientID userID:self.currentSigner.userID clientUserID:self.currentSigner.clientUserID inEnvelopeWithID:self.envelopeID returnURL:self.messageURL completionHandler:^(NSString *signingURLString, NSError *error) {
                 if (error) {
                     [self failedSigningWithError:error];
                     return;

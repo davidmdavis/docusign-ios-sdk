@@ -513,6 +513,8 @@ withResponseObject:(id)responseObject
 
 
 - (NSURLSessionDataTask *)startSigningURLTaskForRecipientWithID:(NSString *)recipientID
+                                                         userID:(NSString *)userID
+                                                   clientUserID:(NSString *)clientUserID
                                                inEnvelopeWithID:(NSString *)envelopeID
                                                       returnURL:(NSURL *)returnURL
                                               completionHandler:(void (^)(NSString *signingURLString, NSError *error))completionHandler {
@@ -523,12 +525,16 @@ withResponseObject:(id)responseObject
     NSParameterAssert(completionHandler);
     
     NSString *relativeURLString = [[NSString alloc] initWithFormat:@"accounts/%@/envelopes/%@/views/recipient", self.account.accountID, envelopeID];
+    
+    NSDictionary *requestDictionary = [NSDictionary dictionaryWithObjectsAndKeys:
+                                       returnURL.absoluteString, @"returnUrl",
+                                       userID ?: self.account.userID, @"userId",
+                                       recipientID, @"recipientId",
+                                       @"password", @"authenticationMethod",
+                                       clientUserID, @"clientUserId", nil];
     return [self startDataTaskWithMethod:@"POST"
                        relativeURLString:relativeURLString
-                                bodyData:[@{ @"returnUrl" : returnURL.absoluteString,
-                                             @"userId" : self.account.userID,
-                                             @"recipientId" : recipientID,
-                                             @"authenticationMethod" : @"password" } ds_JSONData] // not sure about authenticationMethod but currently it is required - PLAT-1973
+                                bodyData:[requestDictionary ds_JSONData] // not sure about authenticationMethod but currently it is required - PLAT-1973
                            responseClass:nil
                        completionHandler:^(id JSONObject, NSError *error) {
                            if (error) {

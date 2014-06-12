@@ -149,6 +149,8 @@ extern NSString * const DSSessionManagerNotificationUserInfoKeyError;
 
 
 - (NSURLSessionDataTask *)startSigningURLTaskForRecipientWithID:(NSString *)recipientID
+                                                         userID:(NSString *)userID
+                                                   clientUserID:(NSString *)clientUserID
                                                inEnvelopeWithID:(NSString *)envelopeID
                                                       returnURL:(NSURL *)returnURL
                                               completionHandler:(void (^)(NSString *signingURLString, NSError *error))completionHandler;

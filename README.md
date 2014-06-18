@@ -174,4 +174,4 @@ If you have a file in that needs to be signed, create a DocuSign envelope and pr
 License
 ----------
 
-The DocuSign iOS SDK is licensed under the [DOCUSIGN API SDK LICENSE](LICENSE).
+The DocuSign iOS SDK is licensed under the [DOCUSIGN Mobile iOS SDK LICENSE](LICENSE).

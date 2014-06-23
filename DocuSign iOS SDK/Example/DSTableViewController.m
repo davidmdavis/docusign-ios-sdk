@@ -65,7 +65,7 @@ NSInteger const DSTableViewControllerAlertViewTagCompleted = 1;
         [self presentViewController:navController animated:YES completion:nil];
     }
     
-    self.uploadBarButton.title = UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone ? @"Upload" : @"Upload Example Document";
+    self.uploadBarButton.title = UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone ? @"New" : @"New Document to Sign";
 }
 
 
@@ -226,7 +226,7 @@ NSInteger const DSTableViewControllerAlertViewTagCompleted = 1;
                 break;
         }
         
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Signing Finished" message:message delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:otherButtonTitle, nil];
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Returned from Signing" message:message delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:otherButtonTitle, nil];
         alertView.tag = DSTableViewControllerAlertViewTagCompleted;
         [alertView show];
     }];

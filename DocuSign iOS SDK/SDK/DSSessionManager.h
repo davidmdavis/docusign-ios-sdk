@@ -152,9 +152,26 @@ extern NSString * const DSSessionManagerNotificationUserInfoKeyError;
 - (void)cancelAllTasks;
 
 
+/**
+ *  Retrives login information for a given set of user credentials.
+ *
+ *  @return A newly initialized NSURLSessionDataTask object.
+ */
 - (NSURLSessionDataTask *)startLoginInformationTaskWithCompletionHandler:(void (^)(DSLoginInformationResponse *response, NSError *error))completionHandler;
 
 
+/**
+ *  Generates a signing URL for an embedded recipient using the recipientID, userID, clientUserID and envelopeID that are passed in.  The returnURL
+ *  parameter is used to re-direct the signer to a given URL once they are finished signing.
+ *
+ *  @param recipientID  The recipientID of the recipient that is passed in.
+ *  @param userID       The userID of the recipient that is passed in.
+ *  @param clientUserID The clientUserID of the recipient (required for embedded signers)
+ *  @param envelopeID   The envelopeID of the envelope the recipient will be signing.
+ *  @param returnURL    The URL to return the signer to once signing is complete.
+ *
+ *  @return A newly initialized NSURLSessionDataTask object.
+ */
 - (NSURLSessionDataTask *)startSigningURLTaskForRecipientWithID:(NSString *)recipientID
                                                          userID:(NSString *)userID
                                                    clientUserID:(NSString *)clientUserID
@@ -163,15 +180,44 @@ extern NSString * const DSSessionManagerNotificationUserInfoKeyError;
                                               completionHandler:(void (^)(NSString *signingURLString, NSError *error))completionHandler;
 
 
+/**
+ *  Creates a new envelope from a local document and initiates an embedded signing session on that envelope for the authenticated
+ *  DSSessionManager user.  (Note: this function can be altered to request signatures for alternate/additional recipients.)
+ *
+ *  @param fileName     Name of the local file (document) for which the signature request will be made on.
+ *  @param fileURL      Location (full path) of the file for which the signature request will be made on.
+ *
+ *  @return A newly initialized NSURLSessionDataTask object.
+ */
 - (NSURLSessionDataTask *)startCreateSelfSignEnvelopeTaskWithFileName:(NSString *)fileName
                                                               fileURL:(NSURL *)fileURL
                                                     completionHandler:(void (^)(DSCreateEnvelopeResponse *response, NSError *error))completionHandler;
 
+
+/**
+ *  Sends a signature request from a server template to the recipients passed in.
+ *
+ *  @param templateId   A valid templateId copied from an existing server template in your account.
+ *  @param recipients   An array of DSEnvelopeRecipients.  Currently signers and in-person signer recipient types are supported.
+ *
+ *  @return A newly initialized NSURLSessionDataTask object.
+ */
 - (NSURLSessionDataTask *)startSendEnvelopeFromTemplateTaskWithTemplateId:(NSString *)templateId
                                                                recipients:(NSArray *)recipients
                                                         completionHandler:(void (^)(DSCreateEnvelopeResponse *response, NSError *error))completionHandler;
 
 
+/**
+ *  Lists (retrieves) envelopes for a given search folder.  (I.E. See what envelopes are awaiting your signature)
+ *
+ *  @param logicalGroup         Enum (DSLogicalEnvelopeGroup) used to specify which account folder to search.
+ *  @param range                Numerical range used to limit number of envelopes retrieved.
+ *  @param fromDate             Search filter starting date.
+ *  @param toDate               Search filter ending date.
+ *  @param includeRecipients    Flag (BOOL) for including recipients information in response or not.
+ *
+ *  @return A newly initialized NSURLSessionDataTask object.
+ */
 - (NSURLSessionDataTask *)startEnvelopesListTaskWithLogicalGrouping:(DSLogicalEnvelopeGroup)logicalGroup
                                                               range:(NSRange)range
                                                            fromDate:(NSDate *)fromDate
@@ -180,21 +226,63 @@ extern NSString * const DSSessionManagerNotificationUserInfoKeyError;
                                                   completionHandler:(void (^)(DSEnvelopesListResponse *response, NSError *error))completionHandler;
 
 
+/**
+ *  Retrieves envelope information for an existing envelope.
+ *
+ *  @param envelopeID   The envelopeId of an existing envelope.
+ *
+ *  @return A newly initialized NSURLSessionDataTask object.
+ */
 - (NSURLSessionDataTask *)startEnvelopeDetailsTaskForEnvelopeWithID:(NSString *)envelopeID
                                                   completionHandler:(void (^)(DSEnvelopeDetailsResponse *response, NSError *error))completionHandler;
 
+
+/**
+ *  Retrieves template information for an existing account template.
+ *
+ *  @param templateID   The templateId of an existing account template.
+ *
+ *  @return A newly initialized NSURLSessionDataTask object.
+ */
 - (NSURLSessionDataTask *)startTemplateDetailsTaskForTemplateWithID:(NSString *)templateID
                                                   completionHandler:(void (^)(DSTemplateDetailsResponse *response, NSError *error))completionHandler;
 
+
+/**
+ *  Retrieves recipients information for an existing envelope.
+ *
+ *  @param envelopeID   The envelopeId of the envelope for which you want to retrieve recipients information.
+ *
+ *  @return A newly initialized NSURLSessionDataTask object.
+ */
 - (NSURLSessionDataTask *)startEnvelopeRecipientsTaskForEnvelopeWithID:(NSString *)envelopeID
                                                      completionHandler:(void (^)(DSEnvelopeRecipientsResponse *response, NSError *error))completionHandler;
 
 
+/**
+ *  Download completed envelope document(s) for a given envelope.
+ *
+ *  @param envelopeID           The envelopeId of the envelope for which you want to download the completed document(s) from.
+ *  @param destinationFileURL   The location (full path) for where you want the downloaded document(s) to go.
+ *
+ *  @return A newly initialized NSURLSessionDataTask object.
+ */
 - (NSURLSessionDownloadTask *)startDownloadCompletedDocumentTaskForEnvelopeWithID:(NSString *)envelopeID
                                                                destinationFileURL:(NSURL *)destinationFileURL
                                                                 completionHandler:(void (^)(NSError *error))completionHandler;
 
 
+/**
+ *  Sets the signature (or initials) image for an accountless signer.  (Note: supported image formats for this file are: gif, png, jpeg, and bmp.
+ *  The file size must be less than 200K.)
+ *
+ *  @param recipientID      The recipientId for whom we want to set the signature or initials image.
+ *  @param envelopeID       The envelopeId for the envelope this recipient belongs to.
+ *  @param image            The image file of the new signature (or initials).
+ *  @param signaturePart    Used to indicate if the signature or initials image is being set.
+ *
+ *  @return A newly initialized NSURLSessionDataTask object.
+ */
 - (NSURLSessionDataTask *)startRecipientSignatureCreateTaskForRecipientID:(NSString *)recipientID
                                                          inEnvelopeWithID:(NSString *)envelopeID
                                                                     image:(UIImage *)image
@@ -202,14 +290,34 @@ extern NSString * const DSSessionManagerNotificationUserInfoKeyError;
                                                         completionHandler:(void (^)(NSError *error))completionHandler;
 
 
+/**
+ *  Retrieve's signature information for an accountless signer.
+ *
+ *  @param recipientID  The recipientId of the recipient we will retrieve signature info for.
+ *  @param envelopeID   The envelopeId of the envelope the recipient belongs to.
+ *
+ *  @return A newly initialized NSURLSessionDataTask object.
+ */
 - (NSURLSessionDataTask *)startRecipientSignatureDetailsTaskForRecipientID:(NSString *)recipientID
                                                           inEnvelopeWithID:(NSString *)envelopeID
                                                          completionHandler:(void (^)(DSUserSignature *response, NSError *error))completionHandler;
 
 
+/**
+ *  Returns a list of signature definitions for the authenticated DSSessionManager user.
+ *
+ *  @return A newly initialized NSURLSessionDataTask object.
+ */
 - (NSURLSessionDataTask *)startSignaturesTaskWithCompletionHandler:(void (^)(DSUserSignaturesResponse *response, NSError *error))completionHandler;
 
 
+/**
+ *  Removes the signature information for the authenticated DSSessionManager user.
+ *
+ *  @param signatureID  The signatureId of the signature we want to close (remove) for the authenticated user.
+ *
+ *  @return A newly initialized NSURLSessionDataTask object.
+ */
 - (NSURLSessionDataTask *)startSignatureDeleteTaskForSignatureWithID:(NSString *)signatureID
                                                    completionHandler:(void (^)(NSError *error))completionHandler;
 
@@ -217,6 +325,16 @@ extern NSString * const DSSessionManagerNotificationUserInfoKeyError;
 #pragma mark - Signing
 
 
+/**
+ *  Instantiate a new signing session for a given envelope recipient.  (Note: Similar to the |startCreateSelfSignEnvelopeTaskWithFileName| function
+ *  except does not create a new envelope but rather is used for signing an existing envelope).
+ *
+ *  @param recipientID  The valid recipientId of the recipient who will be signing the envelope.
+ *  @param envelopeID   The envelopeId of an existing envelope that has been sent but not completed. 
+ *  @param delegate     A delegate for once the signing has completed.
+ *
+ *  @return A newly initialized NSURLSessionDataTask object.
+ */
 - (DSSigningViewController *)signingViewControllerForRecipientWithID:(NSString *)recipientID inEnvelopeWithID:(NSString *)envelopeID delegate:(id<DSSigningViewControllerDelegate>)delegate;
 
 

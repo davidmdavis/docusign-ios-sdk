@@ -27,7 +27,10 @@
 
 #import "DSEnvelopesListResponse.h"
 #import "DSEnvelopeDetailsResponse.h"
+#import "DSTemplateDetailsResponse.h"
 #import "DSEnvelopeRecipientsResponse.h"
+#import "DSEnvelopeSigner.h"
+#import "DSEnvelopeInPersonSigner.h"
 
 #import "DSUserSignaturesResponse.h"
 #import "DSUserSignature.h"
@@ -651,6 +654,81 @@ withResponseObject:(id)responseObject
                        completionHandler:completionHandler];
 }
 
+- (NSURLSessionDataTask *)startSendEnvelopeFromTemplateTaskWithTemplateId:(NSString *)templateId
+                                                               recipients:(NSArray *)recipients
+                                                        completionHandler:(void (^)(DSCreateEnvelopeResponse *response, NSError *error))completionHandler {
+    NSAssert(self.isAuthenticated, @"Call -[DSSessionManager authenticate] before starting additional tasks.");
+    NSParameterAssert(templateId);
+    NSParameterAssert(recipients);
+    NSParameterAssert(completionHandler);
+
+    NSMutableDictionary *recipientDict;
+    NSMutableArray *recipientsList = [[NSMutableArray alloc] init];
+    int numValidRecips = 0;
+    int numRecips = [recipients count];
+    
+    // dynamically construct the "templateRoles" request-body node.  Currently only
+    // signers and in-person signers (recipient types) are supported
+    for (int i = 0; i < numRecips; i++) {
+        DSEnvelopeRecipient *recipient = recipients[i];
+        if ([recipient isKindOfClass:[DSEnvelopeSigner class]]) {
+            DSEnvelopeSigner *signer = (DSEnvelopeSigner*)recipient;
+            if (signer.name.length != 0 && signer.email.length != 0 && signer.roleName.length != 0)
+            {
+                // name, email, and roleName are required template parameters for signers.
+                // Set any additional recipient properties here...
+                recipientDict = [NSMutableDictionary dictionaryWithDictionary:
+                                 @{@"name"      : signer.name,
+                                   @"email"     : signer.email,
+                                   @"roleName"  : signer.roleName }];
+                // check to see if embedded signer (i.e. clientUserId present) and if so then add to the request body
+                if (signer.clientUserID.length != 0)
+                    [recipientDict setObject:signer.clientUserID forKey:@"clientUserId"];
+                recipientsList[numValidRecips++] = recipientDict;
+            }
+        }
+        else if ([recipient isKindOfClass:[DSEnvelopeInPersonSigner class]]) {
+            DSEnvelopeInPersonSigner *inPersonSigner = (DSEnvelopeInPersonSigner*)recipient;
+            if (inPersonSigner.hostName.length != 0 && inPersonSigner.hostEmail.length != 0 && inPersonSigner.signerName.length != 0 && inPersonSigner.roleName.length != 0)
+            {
+                // hostName, hostEmail, signerName, and roleName are required template parameters for in-person signers
+                recipientDict = [NSMutableDictionary dictionaryWithDictionary:
+                                 @{@"hostName"      : inPersonSigner.hostName,
+                                   @"hostEmail"     : inPersonSigner.hostEmail,
+                                   @"signerName"    : inPersonSigner.signerName,
+                                   @"roleName"      : inPersonSigner.roleName }];
+                if (inPersonSigner.clientUserID.length != 0)
+                    [recipientDict setObject:inPersonSigner.clientUserID forKey:@"clientUserId"];
+                recipientsList[numValidRecips++] = recipientDict;
+            }
+        }
+        else {
+            [[[UIAlertView alloc] initWithTitle:@"Un-supported recipient type"
+                                        message:@"* Error: Un-supported recipient type passed to startSendEnvelopeFromTemplateTaskWithTemplateId function."
+                                       delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
+            return nil;
+        }
+    }
+    
+    // configure endpoint, build request body, and send
+    NSString *relativeURLString = [[NSString alloc] initWithFormat:@"accounts/%@/envelopes", self.account.accountID];
+    return [self startDataTaskWithMethod:@"POST"
+                       relativeURLString:relativeURLString
+                                bodyData:[@{ @"emailSubject" : [NSString stringWithFormat:@"%@ %@", @"Envelope created from templateId: ", templateId],
+                                             @"status"       : DSStringFromEnvelopeStatus(DSEnvelopeStatusSent),
+                                             @"templateId"   : templateId,
+                                             @"templateRoles": recipientsList } ds_JSONData]
+                           responseClass:[DSCreateEnvelopeResponse class]
+                       completionHandler:^(DSCreateEnvelopeResponse *createEnvelopeResponse, NSError *error) {
+                           if (error) {
+                               completionHandler(nil, error);
+                               return;
+                           }
+                           else
+                               completionHandler(createEnvelopeResponse, nil);
+                       }];
+}
+
 
 - (NSURLSessionDataTask *)startEnvelopesListTaskWithLogicalGrouping:(DSLogicalEnvelopeGroup)logicalGroup
                                                               range:(NSRange)range
@@ -712,6 +790,19 @@ withResponseObject:(id)responseObject
     return [self startDataTaskToGETRelativeURLString:relativeURLString
                                      queryDictionary:nil
                                        responseClass:[DSEnvelopeDetailsResponse class]
+                                   completionHandler:completionHandler];
+}
+
+- (NSURLSessionDataTask *)startTemplateDetailsTaskForTemplateWithID:(NSString *)templateID
+                                                  completionHandler:(void (^)(DSTemplateDetailsResponse *response, NSError *error))completionHandler {
+    NSAssert(self.isAuthenticated, @"Call -[DSSessionManager authenticate] before starting additional tasks.");
+    NSParameterAssert(templateID);
+    NSParameterAssert(completionHandler);
+    
+    NSString *relativeURLString = [[NSString alloc] initWithFormat:@"accounts/%@/templates/%@", self.account.accountID, templateID];
+    return [self startDataTaskToGETRelativeURLString:relativeURLString
+                                     queryDictionary:nil
+                                       responseClass:[DSTemplateDetailsResponse class]
                                    completionHandler:completionHandler];
 }
 

@@ -42,7 +42,7 @@ extern NSString * const DSSessionManagerNotificationUserInfoKeyError;
 @class DSLoginInformationResponse, DSLoginAccount;
 @class DSCreateEnvelopeResponse;
 @class DSEnvelopesListResponse;
-@class DSEnvelopeDetailsResponse, DSEnvelopeRecipientsResponse;
+@class DSEnvelopeDetailsResponse, DSTemplateDetailsResponse, DSEnvelopeRecipientsResponse;
 @class DSUserSignaturesResponse, DSUserSignature;
 
 
@@ -167,6 +167,10 @@ extern NSString * const DSSessionManagerNotificationUserInfoKeyError;
                                                               fileURL:(NSURL *)fileURL
                                                     completionHandler:(void (^)(DSCreateEnvelopeResponse *response, NSError *error))completionHandler;
 
+- (NSURLSessionDataTask *)startSendEnvelopeFromTemplateTaskWithTemplateId:(NSString *)templateId
+                                                               recipients:(NSArray *)recipients
+                                                        completionHandler:(void (^)(DSCreateEnvelopeResponse *response, NSError *error))completionHandler;
+
 
 - (NSURLSessionDataTask *)startEnvelopesListTaskWithLogicalGrouping:(DSLogicalEnvelopeGroup)logicalGroup
                                                               range:(NSRange)range
@@ -179,6 +183,8 @@ extern NSString * const DSSessionManagerNotificationUserInfoKeyError;
 - (NSURLSessionDataTask *)startEnvelopeDetailsTaskForEnvelopeWithID:(NSString *)envelopeID
                                                   completionHandler:(void (^)(DSEnvelopeDetailsResponse *response, NSError *error))completionHandler;
 
+- (NSURLSessionDataTask *)startTemplateDetailsTaskForTemplateWithID:(NSString *)templateID
+                                                  completionHandler:(void (^)(DSTemplateDetailsResponse *response, NSError *error))completionHandler;
 
 - (NSURLSessionDataTask *)startEnvelopeRecipientsTaskForEnvelopeWithID:(NSString *)envelopeID
                                                      completionHandler:(void (^)(DSEnvelopeRecipientsResponse *response, NSError *error))completionHandler;

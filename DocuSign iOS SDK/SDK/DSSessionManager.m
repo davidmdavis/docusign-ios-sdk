@@ -662,47 +662,41 @@ withResponseObject:(id)responseObject
     NSParameterAssert(recipients);
     NSParameterAssert(completionHandler);
 
-    NSMutableDictionary *recipientDict;
-    NSMutableArray *recipientsList = [[NSMutableArray alloc] init];
-    int numValidRecips = 0;
-    int numRecips = [recipients count];
+    NSMutableArray *templateRoles = [[NSMutableArray alloc] init];
     
     // dynamically construct the "templateRoles" request-body node.  Currently only
     // signers and in-person signers (recipient types) are supported
-    for (int i = 0; i < numRecips; i++) {
-        DSEnvelopeRecipient *recipient = recipients[i];
+    for (DSEnvelopeRecipient *recipient in recipients) {
         if ([recipient isKindOfClass:[DSEnvelopeSigner class]]) {
             DSEnvelopeSigner *signer = (DSEnvelopeSigner*)recipient;
-            if (signer.name.length != 0 && signer.email.length != 0 && signer.roleName.length != 0)
-            {
+            if ([signer.name length] != 0 && [signer.email length] != 0 && [signer.roleName length] != 0) {
                 // name, email, and roleName are required template parameters for signers.
                 // Set any additional recipient properties here...
-                recipientDict = [NSMutableDictionary dictionaryWithDictionary:
+                NSMutableDictionary *templateRole = [NSMutableDictionary dictionaryWithDictionary:
                                  @{@"name"      : signer.name,
                                    @"email"     : signer.email,
                                    @"roleName"  : signer.roleName }];
                 // check to see if embedded signer (i.e. clientUserId present) and if so then add to the request body
-                if (signer.clientUserID.length != 0)
-                    [recipientDict setObject:signer.clientUserID forKey:@"clientUserId"];
-                recipientsList[numValidRecips++] = recipientDict;
+                if ([signer.clientUserID length] != 0) {
+                    templateRole[@"clientUserId"] = signer.clientUserID;
+                }
+                [templateRoles addObject:templateRole];
             }
-        }
-        else if ([recipient isKindOfClass:[DSEnvelopeInPersonSigner class]]) {
+        } else if ([recipient isKindOfClass:[DSEnvelopeInPersonSigner class]]) {
             DSEnvelopeInPersonSigner *inPersonSigner = (DSEnvelopeInPersonSigner*)recipient;
-            if (inPersonSigner.hostName.length != 0 && inPersonSigner.hostEmail.length != 0 && inPersonSigner.signerName.length != 0 && inPersonSigner.roleName.length != 0)
-            {
+            if ([inPersonSigner.hostName length] != 0 && [inPersonSigner.hostEmail length] != 0 && [inPersonSigner.signerName length] != 0 && [inPersonSigner.roleName length] != 0) {
                 // hostName, hostEmail, signerName, and roleName are required template parameters for in-person signers
-                recipientDict = [NSMutableDictionary dictionaryWithDictionary:
+                NSMutableDictionary *templateRole = [NSMutableDictionary dictionaryWithDictionary:
                                  @{@"hostName"      : inPersonSigner.hostName,
                                    @"hostEmail"     : inPersonSigner.hostEmail,
                                    @"signerName"    : inPersonSigner.signerName,
                                    @"roleName"      : inPersonSigner.roleName }];
-                if (inPersonSigner.clientUserID.length != 0)
-                    [recipientDict setObject:inPersonSigner.clientUserID forKey:@"clientUserId"];
-                recipientsList[numValidRecips++] = recipientDict;
+                if ([inPersonSigner.clientUserID length] != 0) {
+                    templateRole[@"clientUserId"] = inPersonSigner.clientUserID;
+                }
+                [templateRoles addObject:templateRole];
             }
-        }
-        else {
+        } else {
             [[[UIAlertView alloc] initWithTitle:@"Un-supported recipient type"
                                         message:@"* Error: Un-supported recipient type passed to startSendEnvelopeFromTemplateTaskWithTemplateId function."
                                        delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
@@ -717,15 +711,15 @@ withResponseObject:(id)responseObject
                                 bodyData:[@{ @"emailSubject" : [NSString stringWithFormat:@"%@ %@", @"Envelope created from templateId: ", templateId],
                                              @"status"       : DSStringFromEnvelopeStatus(DSEnvelopeStatusSent),
                                              @"templateId"   : templateId,
-                                             @"templateRoles": recipientsList } ds_JSONData]
+                                             @"templateRoles": templateRoles } ds_JSONData]
                            responseClass:[DSCreateEnvelopeResponse class]
                        completionHandler:^(DSCreateEnvelopeResponse *createEnvelopeResponse, NSError *error) {
                            if (error) {
                                completionHandler(nil, error);
                                return;
-                           }
-                           else
+                           } else {
                                completionHandler(createEnvelopeResponse, nil);
+                           }
                        }];
 }
 

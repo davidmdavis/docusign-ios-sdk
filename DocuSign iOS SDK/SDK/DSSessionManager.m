@@ -654,6 +654,66 @@ withResponseObject:(id)responseObject
                        completionHandler:completionHandler];
 }
 
+- (NSArray *)templateRolesFromRecipients:(NSArray *)recipients error:(NSError **)outError {
+    
+    NSError *error;
+    NSMutableArray *templateRoles;
+    
+    for (DSEnvelopeRecipient *recipient in recipients) {
+        if ([recipient isKindOfClass:[DSEnvelopeSigner class]]) {
+            DSEnvelopeSigner *signer = (DSEnvelopeSigner*)recipient;
+            if ([signer.name length] != 0 && [signer.email length] != 0 && [signer.roleName length] != 0) {
+                // name, email, and roleName are required template parameters for signers.
+                // Set any additional recipient properties here...
+                NSMutableDictionary *templateRole = [NSMutableDictionary dictionaryWithDictionary:
+                                                     @{@"name"      : signer.name,
+                                                       @"email"     : signer.email,
+                                                       @"roleName"  : signer.roleName }];
+                // check to see if embedded signer (i.e. clientUserId present) and if so then add to the request body
+                if ([signer.clientUserID length] != 0) {
+                    templateRole[@"clientUserId"] = signer.clientUserID;
+                }
+                [templateRoles addObject:templateRole];
+            } else {
+                error = [NSError errorWithDomain:DSSessionManagerErrorDomain
+                                            code:DSSessionManagerErrorCodeUnsupportedTemplateRecipient
+                                        userInfo:@{NSLocalizedDescriptionKey: @"Signer role missing name, email, or roleName"}];
+                break;
+            }
+        } else if ([recipient isKindOfClass:[DSEnvelopeInPersonSigner class]]) {
+            DSEnvelopeInPersonSigner *inPersonSigner = (DSEnvelopeInPersonSigner*)recipient;
+            if ([inPersonSigner.hostName length] != 0 && [inPersonSigner.hostEmail length] != 0 && [inPersonSigner.signerName length] != 0 && [inPersonSigner.roleName length] != 0) {
+                // hostName, hostEmail, signerName, and roleName are required template parameters for in-person signers
+                NSMutableDictionary *templateRole = [NSMutableDictionary dictionaryWithDictionary:
+                                                     @{@"hostName"      : inPersonSigner.hostName,
+                                                       @"hostEmail"     : inPersonSigner.hostEmail,
+                                                       @"signerName"    : inPersonSigner.signerName,
+                                                       @"roleName"      : inPersonSigner.roleName }];
+                if ([inPersonSigner.clientUserID length] != 0) {
+                    templateRole[@"clientUserId"] = inPersonSigner.clientUserID;
+                }
+                [templateRoles addObject:templateRole];
+            }  else {
+                error = [NSError errorWithDomain:DSSessionManagerErrorDomain
+                                            code:DSSessionManagerErrorCodeUnsupportedTemplateRecipient
+                                        userInfo:@{NSLocalizedDescriptionKey: @"In-person signer role missing name, email, signerName, or roleName"}];
+                break;
+            }
+        } else {
+            error = [NSError errorWithDomain:DSSessionManagerErrorDomain
+                                        code:DSSessionManagerErrorCodeUnsupportedTemplateRecipient
+                                    userInfo:@{NSLocalizedDescriptionKey: @"Unsupported recipient type: Only signer and in-person signer roles are supported."}];
+            break;
+        }
+    }
+    if (error && outError) {
+        *outError = error;
+        return nil;
+    } else {
+        return templateRoles;
+    }
+}
+
 - (NSURLSessionDataTask *)startSendEnvelopeFromTemplateTaskWithTemplateId:(NSString *)templateId
                                                                recipients:(NSArray *)recipients
                                                         completionHandler:(void (^)(DSCreateEnvelopeResponse *response, NSError *error))completionHandler {
@@ -662,46 +722,11 @@ withResponseObject:(id)responseObject
     NSParameterAssert(recipients);
     NSParameterAssert(completionHandler);
 
-    NSMutableArray *templateRoles = [[NSMutableArray alloc] init];
-    
-    // dynamically construct the "templateRoles" request-body node.  Currently only
-    // signers and in-person signers (recipient types) are supported
-    for (DSEnvelopeRecipient *recipient in recipients) {
-        if ([recipient isKindOfClass:[DSEnvelopeSigner class]]) {
-            DSEnvelopeSigner *signer = (DSEnvelopeSigner*)recipient;
-            if ([signer.name length] != 0 && [signer.email length] != 0 && [signer.roleName length] != 0) {
-                // name, email, and roleName are required template parameters for signers.
-                // Set any additional recipient properties here...
-                NSMutableDictionary *templateRole = [NSMutableDictionary dictionaryWithDictionary:
-                                 @{@"name"      : signer.name,
-                                   @"email"     : signer.email,
-                                   @"roleName"  : signer.roleName }];
-                // check to see if embedded signer (i.e. clientUserId present) and if so then add to the request body
-                if ([signer.clientUserID length] != 0) {
-                    templateRole[@"clientUserId"] = signer.clientUserID;
-                }
-                [templateRoles addObject:templateRole];
-            }
-        } else if ([recipient isKindOfClass:[DSEnvelopeInPersonSigner class]]) {
-            DSEnvelopeInPersonSigner *inPersonSigner = (DSEnvelopeInPersonSigner*)recipient;
-            if ([inPersonSigner.hostName length] != 0 && [inPersonSigner.hostEmail length] != 0 && [inPersonSigner.signerName length] != 0 && [inPersonSigner.roleName length] != 0) {
-                // hostName, hostEmail, signerName, and roleName are required template parameters for in-person signers
-                NSMutableDictionary *templateRole = [NSMutableDictionary dictionaryWithDictionary:
-                                 @{@"hostName"      : inPersonSigner.hostName,
-                                   @"hostEmail"     : inPersonSigner.hostEmail,
-                                   @"signerName"    : inPersonSigner.signerName,
-                                   @"roleName"      : inPersonSigner.roleName }];
-                if ([inPersonSigner.clientUserID length] != 0) {
-                    templateRole[@"clientUserId"] = inPersonSigner.clientUserID;
-                }
-                [templateRoles addObject:templateRole];
-            }
-        } else {
-            [[[UIAlertView alloc] initWithTitle:@"Un-supported recipient type"
-                                        message:@"* Error: Un-supported recipient type passed to startSendEnvelopeFromTemplateTaskWithTemplateId function."
-                                       delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
-            return nil;
-        }
+    NSError *templateRolesError;
+    NSArray *templateRoles = [self templateRolesFromRecipients:recipients error:&templateRolesError];
+    if (templateRolesError) {
+        completionHandler(nil, templateRolesError);
+        return nil;
     }
     
     // configure endpoint, build request body, and send

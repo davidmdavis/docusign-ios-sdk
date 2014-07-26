@@ -26,7 +26,8 @@ extern NSString * const DSSessionManagerErrorUserInfoKeyErrorMessage;
 typedef NS_ENUM(NSInteger, DSSessionManagerErrorCode) {
     DSSessionManagerErrorCodeHTTPStatus = -1,
     DSSessionManagerErrorCodeUnknown = 0,
-    DSSessionManagerErrorCodeUserAuthenticationFailed = 1
+    DSSessionManagerErrorCodeUserAuthenticationFailed = 1,
+    DSSessionManagerErrorCodeUnsupportedTemplateRecipient = 2
 };
 
 extern NSString * const DSSessionManagerNotificationTaskStarted;

@@ -12,6 +12,63 @@
 		177F2239193818A300BEC92C /* Sales Order.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 177F2238193818A300BEC92C /* Sales Order.pdf */; };
 		17EA2003192C370900AA6A4C /* DocuSign-iOS-SDK.podspec in Resources */ = {isa = PBXBuildFile; fileRef = 17EA2002192C370900AA6A4C /* DocuSign-iOS-SDK.podspec */; };
 		17EA2005192C38F700AA6A4C /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 17EA2004192C38F700AA6A4C /* LICENSE */; };
+		2AC9676019870A2400B80976 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2AC9675F19870A2400B80976 /* libPods.a */; };
+		2AE9A48F1981ADFF004C8C24 /* DSApproveTab.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AE9A4581981ADFF004C8C24 /* DSApproveTab.m */; };
+		2AE9A4901981ADFF004C8C24 /* DSApproveTab.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AE9A4581981ADFF004C8C24 /* DSApproveTab.m */; };
+		2AE9A4911981ADFF004C8C24 /* DSCheckboxTab.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AE9A45A1981ADFF004C8C24 /* DSCheckboxTab.m */; };
+		2AE9A4921981ADFF004C8C24 /* DSCheckboxTab.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AE9A45A1981ADFF004C8C24 /* DSCheckboxTab.m */; };
+		2AE9A4931981ADFF004C8C24 /* DSCompanyTab.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AE9A45C1981ADFF004C8C24 /* DSCompanyTab.m */; };
+		2AE9A4941981ADFF004C8C24 /* DSCompanyTab.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AE9A45C1981ADFF004C8C24 /* DSCompanyTab.m */; };
+		2AE9A4951981ADFF004C8C24 /* DSDateSignedTab.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AE9A45E1981ADFF004C8C24 /* DSDateSignedTab.m */; };
+		2AE9A4961981ADFF004C8C24 /* DSDateSignedTab.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AE9A45E1981ADFF004C8C24 /* DSDateSignedTab.m */; };
+		2AE9A4971981ADFF004C8C24 /* DSDateTab.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AE9A4601981ADFF004C8C24 /* DSDateTab.m */; };
+		2AE9A4981981ADFF004C8C24 /* DSDateTab.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AE9A4601981ADFF004C8C24 /* DSDateTab.m */; };
+		2AE9A4991981ADFF004C8C24 /* DSDeclineTab.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AE9A4621981ADFF004C8C24 /* DSDeclineTab.m */; };
+		2AE9A49A1981ADFF004C8C24 /* DSDeclineTab.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AE9A4621981ADFF004C8C24 /* DSDeclineTab.m */; };
+		2AE9A49B1981ADFF004C8C24 /* DSEmailAddressTab.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AE9A4641981ADFF004C8C24 /* DSEmailAddressTab.m */; };
+		2AE9A49C1981ADFF004C8C24 /* DSEmailAddressTab.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AE9A4641981ADFF004C8C24 /* DSEmailAddressTab.m */; };
+		2AE9A49D1981ADFF004C8C24 /* DSEmailTab.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AE9A4661981ADFF004C8C24 /* DSEmailTab.m */; };
+		2AE9A49E1981ADFF004C8C24 /* DSEmailTab.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AE9A4661981ADFF004C8C24 /* DSEmailTab.m */; };
+		2AE9A49F1981ADFF004C8C24 /* DSEnvelopeIdTab.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AE9A4681981ADFF004C8C24 /* DSEnvelopeIdTab.m */; };
+		2AE9A4A01981ADFF004C8C24 /* DSEnvelopeIdTab.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AE9A4681981ADFF004C8C24 /* DSEnvelopeIdTab.m */; };
+		2AE9A4A31981ADFF004C8C24 /* DSFirstNameTab.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AE9A46C1981ADFF004C8C24 /* DSFirstNameTab.m */; };
+		2AE9A4A41981ADFF004C8C24 /* DSFirstNameTab.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AE9A46C1981ADFF004C8C24 /* DSFirstNameTab.m */; };
+		2AE9A4A51981ADFF004C8C24 /* DSFormulaTab.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AE9A46E1981ADFF004C8C24 /* DSFormulaTab.m */; };
+		2AE9A4A61981ADFF004C8C24 /* DSFormulaTab.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AE9A46E1981ADFF004C8C24 /* DSFormulaTab.m */; };
+		2AE9A4A71981ADFF004C8C24 /* DSFullNameTab.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AE9A4701981ADFF004C8C24 /* DSFullNameTab.m */; };
+		2AE9A4A81981ADFF004C8C24 /* DSFullNameTab.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AE9A4701981ADFF004C8C24 /* DSFullNameTab.m */; };
+		2AE9A4A91981ADFF004C8C24 /* DSInitialHereTab.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AE9A4721981ADFF004C8C24 /* DSInitialHereTab.m */; };
+		2AE9A4AA1981ADFF004C8C24 /* DSInitialHereTab.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AE9A4721981ADFF004C8C24 /* DSInitialHereTab.m */; };
+		2AE9A4AB1981ADFF004C8C24 /* DSLastNameTab.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AE9A4741981ADFF004C8C24 /* DSLastNameTab.m */; };
+		2AE9A4AC1981ADFF004C8C24 /* DSLastNameTab.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AE9A4741981ADFF004C8C24 /* DSLastNameTab.m */; };
+		2AE9A4AD1981ADFF004C8C24 /* DSListItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AE9A4761981ADFF004C8C24 /* DSListItem.m */; };
+		2AE9A4AE1981ADFF004C8C24 /* DSListItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AE9A4761981ADFF004C8C24 /* DSListItem.m */; };
+		2AE9A4AF1981ADFF004C8C24 /* DSListTab.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AE9A4781981ADFF004C8C24 /* DSListTab.m */; };
+		2AE9A4B01981ADFF004C8C24 /* DSListTab.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AE9A4781981ADFF004C8C24 /* DSListTab.m */; };
+		2AE9A4B11981ADFF004C8C24 /* DSNoteTab.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AE9A47A1981ADFF004C8C24 /* DSNoteTab.m */; };
+		2AE9A4B21981ADFF004C8C24 /* DSNoteTab.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AE9A47A1981ADFF004C8C24 /* DSNoteTab.m */; };
+		2AE9A4B31981ADFF004C8C24 /* DSNumberTab.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AE9A47C1981ADFF004C8C24 /* DSNumberTab.m */; };
+		2AE9A4B41981ADFF004C8C24 /* DSNumberTab.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AE9A47C1981ADFF004C8C24 /* DSNumberTab.m */; };
+		2AE9A4B51981ADFF004C8C24 /* DSRadio.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AE9A47E1981ADFF004C8C24 /* DSRadio.m */; };
+		2AE9A4B61981ADFF004C8C24 /* DSRadio.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AE9A47E1981ADFF004C8C24 /* DSRadio.m */; };
+		2AE9A4B71981ADFF004C8C24 /* DSRadioGroupTab.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AE9A4801981ADFF004C8C24 /* DSRadioGroupTab.m */; };
+		2AE9A4B81981ADFF004C8C24 /* DSRadioGroupTab.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AE9A4801981ADFF004C8C24 /* DSRadioGroupTab.m */; };
+		2AE9A4B91981ADFF004C8C24 /* DSSignerAttachmentTab.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AE9A4821981ADFF004C8C24 /* DSSignerAttachmentTab.m */; };
+		2AE9A4BA1981ADFF004C8C24 /* DSSignerAttachmentTab.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AE9A4821981ADFF004C8C24 /* DSSignerAttachmentTab.m */; };
+		2AE9A4BB1981ADFF004C8C24 /* DSSignHereTab.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AE9A4841981ADFF004C8C24 /* DSSignHereTab.m */; };
+		2AE9A4BC1981ADFF004C8C24 /* DSSignHereTab.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AE9A4841981ADFF004C8C24 /* DSSignHereTab.m */; };
+		2AE9A4BD1981ADFF004C8C24 /* DSSsnTab.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AE9A4861981ADFF004C8C24 /* DSSsnTab.m */; };
+		2AE9A4BE1981ADFF004C8C24 /* DSSsnTab.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AE9A4861981ADFF004C8C24 /* DSSsnTab.m */; };
+		2AE9A4BF1981ADFF004C8C24 /* DSTabs.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AE9A4881981ADFF004C8C24 /* DSTabs.m */; };
+		2AE9A4C01981ADFF004C8C24 /* DSTabs.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AE9A4881981ADFF004C8C24 /* DSTabs.m */; };
+		2AE9A4C11981ADFF004C8C24 /* DSTextTab.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AE9A48A1981ADFF004C8C24 /* DSTextTab.m */; };
+		2AE9A4C21981ADFF004C8C24 /* DSTextTab.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AE9A48A1981ADFF004C8C24 /* DSTextTab.m */; };
+		2AE9A4C31981ADFF004C8C24 /* DSTitleTab.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AE9A48C1981ADFF004C8C24 /* DSTitleTab.m */; };
+		2AE9A4C41981ADFF004C8C24 /* DSTitleTab.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AE9A48C1981ADFF004C8C24 /* DSTitleTab.m */; };
+		2AE9A4C51981ADFF004C8C24 /* DSZipTab.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AE9A48E1981ADFF004C8C24 /* DSZipTab.m */; };
+		2AE9A4C61981ADFF004C8C24 /* DSZipTab.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AE9A48E1981ADFF004C8C24 /* DSZipTab.m */; };
+		2AE9A4C81982D35E004C8C24 /* tabs.json in Resources */ = {isa = PBXBuildFile; fileRef = 2AE9A4C71982D35E004C8C24 /* tabs.json */; };
+		2AE9A4CA1982D55C004C8C24 /* JsonTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AE9A4C91982D55C004C8C24 /* JsonTests.m */; };
 		5706DC1419195993002E2B6A /* DSFinePrintViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5706DC1319195993002E2B6A /* DSFinePrintViewController.m */; };
 		57119594190F0B0400A98859 /* DSSigningViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 57119593190F0B0400A98859 /* DSSigningViewController.m */; };
 		57119596190F133E00A98859 /* DSSigning.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 57119595190F133E00A98859 /* DSSigning.storyboard */; };
@@ -102,6 +159,63 @@
 		17EA2002192C370900AA6A4C /* DocuSign-iOS-SDK.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "DocuSign-iOS-SDK.podspec"; sourceTree = "<group>"; };
 		17EA2004192C38F700AA6A4C /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		17EDFAE7193007BA00D74281 /* DocuSign-iOS-SDK.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "DocuSign-iOS-SDK.h"; sourceTree = "<group>"; };
+		2AC9675F19870A2400B80976 /* libPods.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libPods.a; path = "Pods/build/Debug-iphoneos/libPods.a"; sourceTree = "<group>"; };
+		2AE9A4571981ADFF004C8C24 /* DSApproveTab.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSApproveTab.h; sourceTree = "<group>"; };
+		2AE9A4581981ADFF004C8C24 /* DSApproveTab.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSApproveTab.m; sourceTree = "<group>"; };
+		2AE9A4591981ADFF004C8C24 /* DSCheckboxTab.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSCheckboxTab.h; sourceTree = "<group>"; };
+		2AE9A45A1981ADFF004C8C24 /* DSCheckboxTab.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSCheckboxTab.m; sourceTree = "<group>"; };
+		2AE9A45B1981ADFF004C8C24 /* DSCompanyTab.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSCompanyTab.h; sourceTree = "<group>"; };
+		2AE9A45C1981ADFF004C8C24 /* DSCompanyTab.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSCompanyTab.m; sourceTree = "<group>"; };
+		2AE9A45D1981ADFF004C8C24 /* DSDateSignedTab.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSDateSignedTab.h; sourceTree = "<group>"; };
+		2AE9A45E1981ADFF004C8C24 /* DSDateSignedTab.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSDateSignedTab.m; sourceTree = "<group>"; };
+		2AE9A45F1981ADFF004C8C24 /* DSDateTab.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSDateTab.h; sourceTree = "<group>"; };
+		2AE9A4601981ADFF004C8C24 /* DSDateTab.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSDateTab.m; sourceTree = "<group>"; };
+		2AE9A4611981ADFF004C8C24 /* DSDeclineTab.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSDeclineTab.h; sourceTree = "<group>"; };
+		2AE9A4621981ADFF004C8C24 /* DSDeclineTab.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSDeclineTab.m; sourceTree = "<group>"; };
+		2AE9A4631981ADFF004C8C24 /* DSEmailAddressTab.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSEmailAddressTab.h; sourceTree = "<group>"; };
+		2AE9A4641981ADFF004C8C24 /* DSEmailAddressTab.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSEmailAddressTab.m; sourceTree = "<group>"; };
+		2AE9A4651981ADFF004C8C24 /* DSEmailTab.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSEmailTab.h; sourceTree = "<group>"; };
+		2AE9A4661981ADFF004C8C24 /* DSEmailTab.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSEmailTab.m; sourceTree = "<group>"; };
+		2AE9A4671981ADFF004C8C24 /* DSEnvelopeIdTab.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSEnvelopeIdTab.h; sourceTree = "<group>"; };
+		2AE9A4681981ADFF004C8C24 /* DSEnvelopeIdTab.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSEnvelopeIdTab.m; sourceTree = "<group>"; };
+		2AE9A46B1981ADFF004C8C24 /* DSFirstNameTab.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSFirstNameTab.h; sourceTree = "<group>"; };
+		2AE9A46C1981ADFF004C8C24 /* DSFirstNameTab.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSFirstNameTab.m; sourceTree = "<group>"; };
+		2AE9A46D1981ADFF004C8C24 /* DSFormulaTab.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSFormulaTab.h; sourceTree = "<group>"; };
+		2AE9A46E1981ADFF004C8C24 /* DSFormulaTab.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSFormulaTab.m; sourceTree = "<group>"; };
+		2AE9A46F1981ADFF004C8C24 /* DSFullNameTab.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSFullNameTab.h; sourceTree = "<group>"; };
+		2AE9A4701981ADFF004C8C24 /* DSFullNameTab.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSFullNameTab.m; sourceTree = "<group>"; };
+		2AE9A4711981ADFF004C8C24 /* DSInitialHereTab.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSInitialHereTab.h; sourceTree = "<group>"; };
+		2AE9A4721981ADFF004C8C24 /* DSInitialHereTab.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSInitialHereTab.m; sourceTree = "<group>"; };
+		2AE9A4731981ADFF004C8C24 /* DSLastNameTab.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSLastNameTab.h; sourceTree = "<group>"; };
+		2AE9A4741981ADFF004C8C24 /* DSLastNameTab.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSLastNameTab.m; sourceTree = "<group>"; };
+		2AE9A4751981ADFF004C8C24 /* DSListItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSListItem.h; sourceTree = "<group>"; };
+		2AE9A4761981ADFF004C8C24 /* DSListItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSListItem.m; sourceTree = "<group>"; };
+		2AE9A4771981ADFF004C8C24 /* DSListTab.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSListTab.h; sourceTree = "<group>"; };
+		2AE9A4781981ADFF004C8C24 /* DSListTab.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSListTab.m; sourceTree = "<group>"; };
+		2AE9A4791981ADFF004C8C24 /* DSNoteTab.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSNoteTab.h; sourceTree = "<group>"; };
+		2AE9A47A1981ADFF004C8C24 /* DSNoteTab.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSNoteTab.m; sourceTree = "<group>"; };
+		2AE9A47B1981ADFF004C8C24 /* DSNumberTab.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSNumberTab.h; sourceTree = "<group>"; };
+		2AE9A47C1981ADFF004C8C24 /* DSNumberTab.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSNumberTab.m; sourceTree = "<group>"; };
+		2AE9A47D1981ADFF004C8C24 /* DSRadio.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSRadio.h; sourceTree = "<group>"; };
+		2AE9A47E1981ADFF004C8C24 /* DSRadio.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSRadio.m; sourceTree = "<group>"; };
+		2AE9A47F1981ADFF004C8C24 /* DSRadioGroupTab.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSRadioGroupTab.h; sourceTree = "<group>"; };
+		2AE9A4801981ADFF004C8C24 /* DSRadioGroupTab.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSRadioGroupTab.m; sourceTree = "<group>"; };
+		2AE9A4811981ADFF004C8C24 /* DSSignerAttachmentTab.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSSignerAttachmentTab.h; sourceTree = "<group>"; };
+		2AE9A4821981ADFF004C8C24 /* DSSignerAttachmentTab.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSSignerAttachmentTab.m; sourceTree = "<group>"; };
+		2AE9A4831981ADFF004C8C24 /* DSSignHereTab.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSSignHereTab.h; sourceTree = "<group>"; };
+		2AE9A4841981ADFF004C8C24 /* DSSignHereTab.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSSignHereTab.m; sourceTree = "<group>"; };
+		2AE9A4851981ADFF004C8C24 /* DSSsnTab.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSSsnTab.h; sourceTree = "<group>"; };
+		2AE9A4861981ADFF004C8C24 /* DSSsnTab.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSSsnTab.m; sourceTree = "<group>"; };
+		2AE9A4871981ADFF004C8C24 /* DSTabs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSTabs.h; sourceTree = "<group>"; };
+		2AE9A4881981ADFF004C8C24 /* DSTabs.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSTabs.m; sourceTree = "<group>"; };
+		2AE9A4891981ADFF004C8C24 /* DSTextTab.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSTextTab.h; sourceTree = "<group>"; };
+		2AE9A48A1981ADFF004C8C24 /* DSTextTab.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSTextTab.m; sourceTree = "<group>"; };
+		2AE9A48B1981ADFF004C8C24 /* DSTitleTab.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSTitleTab.h; sourceTree = "<group>"; };
+		2AE9A48C1981ADFF004C8C24 /* DSTitleTab.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSTitleTab.m; sourceTree = "<group>"; };
+		2AE9A48D1981ADFF004C8C24 /* DSZipTab.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSZipTab.h; sourceTree = "<group>"; };
+		2AE9A48E1981ADFF004C8C24 /* DSZipTab.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSZipTab.m; sourceTree = "<group>"; };
+		2AE9A4C71982D35E004C8C24 /* tabs.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = tabs.json; sourceTree = "<group>"; };
+		2AE9A4C91982D55C004C8C24 /* JsonTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JsonTests.m; sourceTree = "<group>"; };
 		54088CEB7A224B80AED0FB5F /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 		5706DC1219195993002E2B6A /* DSFinePrintViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSFinePrintViewController.h; sourceTree = "<group>"; };
 		5706DC1319195993002E2B6A /* DSFinePrintViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSFinePrintViewController.m; sourceTree = "<group>"; };
@@ -255,6 +369,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2AC9676019870A2400B80976 /* libPods.a in Frameworks */,
 				57603F671906D41500E8C850 /* XCTest.framework in Frameworks */,
 				57603F691906D41500E8C850 /* UIKit.framework in Frameworks */,
 				57603F681906D41500E8C850 /* Foundation.framework in Frameworks */,
@@ -349,6 +464,7 @@
 		57603F431906D41500E8C850 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				2AC9675F19870A2400B80976 /* libPods.a */,
 				57603F441906D41500E8C850 /* Foundation.framework */,
 				57603F461906D41500E8C850 /* CoreGraphics.framework */,
 				57603F481906D41500E8C850 /* UIKit.framework */,
@@ -376,11 +492,11 @@
 		57603F4B1906D41500E8C850 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				57603F521906D41500E8C850 /* DocuSign iOS SDK-Prefix.pch */,
 				177F2238193818A300BEC92C /* Sales Order.pdf */,
 				57603F4C1906D41500E8C850 /* DocuSign iOS SDK-Info.plist */,
 				57603F4D1906D41500E8C850 /* InfoPlist.strings */,
 				57603F501906D41500E8C850 /* main.m */,
-				57603F521906D41500E8C850 /* DocuSign iOS SDK-Prefix.pch */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -390,6 +506,8 @@
 			children = (
 				57603F721906D41500E8C850 /* DocuSign_iOS_SDKTests.m */,
 				57603F6D1906D41500E8C850 /* Supporting Files */,
+				2AE9A4C71982D35E004C8C24 /* tabs.json */,
+				2AE9A4C91982D55C004C8C24 /* JsonTests.m */,
 			);
 			path = "DocuSign iOS SDKTests";
 			sourceTree = "<group>";
@@ -487,6 +605,60 @@
 		57BB2D54191D3FE8002639C7 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				2AE9A4571981ADFF004C8C24 /* DSApproveTab.h */,
+				2AE9A4581981ADFF004C8C24 /* DSApproveTab.m */,
+				2AE9A4591981ADFF004C8C24 /* DSCheckboxTab.h */,
+				2AE9A45A1981ADFF004C8C24 /* DSCheckboxTab.m */,
+				2AE9A45B1981ADFF004C8C24 /* DSCompanyTab.h */,
+				2AE9A45C1981ADFF004C8C24 /* DSCompanyTab.m */,
+				2AE9A45D1981ADFF004C8C24 /* DSDateSignedTab.h */,
+				2AE9A45E1981ADFF004C8C24 /* DSDateSignedTab.m */,
+				2AE9A45F1981ADFF004C8C24 /* DSDateTab.h */,
+				2AE9A4601981ADFF004C8C24 /* DSDateTab.m */,
+				2AE9A4611981ADFF004C8C24 /* DSDeclineTab.h */,
+				2AE9A4621981ADFF004C8C24 /* DSDeclineTab.m */,
+				2AE9A4631981ADFF004C8C24 /* DSEmailAddressTab.h */,
+				2AE9A4641981ADFF004C8C24 /* DSEmailAddressTab.m */,
+				2AE9A4651981ADFF004C8C24 /* DSEmailTab.h */,
+				2AE9A4661981ADFF004C8C24 /* DSEmailTab.m */,
+				2AE9A4671981ADFF004C8C24 /* DSEnvelopeIdTab.h */,
+				2AE9A4681981ADFF004C8C24 /* DSEnvelopeIdTab.m */,
+				2AE9A46B1981ADFF004C8C24 /* DSFirstNameTab.h */,
+				2AE9A46C1981ADFF004C8C24 /* DSFirstNameTab.m */,
+				2AE9A46D1981ADFF004C8C24 /* DSFormulaTab.h */,
+				2AE9A46E1981ADFF004C8C24 /* DSFormulaTab.m */,
+				2AE9A46F1981ADFF004C8C24 /* DSFullNameTab.h */,
+				2AE9A4701981ADFF004C8C24 /* DSFullNameTab.m */,
+				2AE9A4711981ADFF004C8C24 /* DSInitialHereTab.h */,
+				2AE9A4721981ADFF004C8C24 /* DSInitialHereTab.m */,
+				2AE9A4731981ADFF004C8C24 /* DSLastNameTab.h */,
+				2AE9A4741981ADFF004C8C24 /* DSLastNameTab.m */,
+				2AE9A4751981ADFF004C8C24 /* DSListItem.h */,
+				2AE9A4761981ADFF004C8C24 /* DSListItem.m */,
+				2AE9A4771981ADFF004C8C24 /* DSListTab.h */,
+				2AE9A4781981ADFF004C8C24 /* DSListTab.m */,
+				2AE9A4791981ADFF004C8C24 /* DSNoteTab.h */,
+				2AE9A47A1981ADFF004C8C24 /* DSNoteTab.m */,
+				2AE9A47B1981ADFF004C8C24 /* DSNumberTab.h */,
+				2AE9A47C1981ADFF004C8C24 /* DSNumberTab.m */,
+				2AE9A47D1981ADFF004C8C24 /* DSRadio.h */,
+				2AE9A47E1981ADFF004C8C24 /* DSRadio.m */,
+				2AE9A47F1981ADFF004C8C24 /* DSRadioGroupTab.h */,
+				2AE9A4801981ADFF004C8C24 /* DSRadioGroupTab.m */,
+				2AE9A4811981ADFF004C8C24 /* DSSignerAttachmentTab.h */,
+				2AE9A4821981ADFF004C8C24 /* DSSignerAttachmentTab.m */,
+				2AE9A4831981ADFF004C8C24 /* DSSignHereTab.h */,
+				2AE9A4841981ADFF004C8C24 /* DSSignHereTab.m */,
+				2AE9A4851981ADFF004C8C24 /* DSSsnTab.h */,
+				2AE9A4861981ADFF004C8C24 /* DSSsnTab.m */,
+				2AE9A4871981ADFF004C8C24 /* DSTabs.h */,
+				2AE9A4881981ADFF004C8C24 /* DSTabs.m */,
+				2AE9A4891981ADFF004C8C24 /* DSTextTab.h */,
+				2AE9A48A1981ADFF004C8C24 /* DSTextTab.m */,
+				2AE9A48B1981ADFF004C8C24 /* DSTitleTab.h */,
+				2AE9A48C1981ADFF004C8C24 /* DSTitleTab.m */,
+				2AE9A48D1981ADFF004C8C24 /* DSZipTab.h */,
+				2AE9A48E1981ADFF004C8C24 /* DSZipTab.m */,
 				57BB2D6B191D3FE8002639C7 /* DSRestAPIResponseModel.h */,
 				57BB2D6C191D3FE8002639C7 /* DSRestAPIResponseModel.m */,
 				57BB2D69191D3FE8002639C7 /* DSLoginInformationResponse.h */,
@@ -650,6 +822,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				57603F711906D41500E8C850 /* InfoPlist.strings in Resources */,
+				2AE9A4C81982D35E004C8C24 /* tabs.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -694,25 +867,35 @@
 			buildActionMask = 2147483647;
 			files = (
 				57603F511906D41500E8C850 /* main.m in Sources */,
+				2AE9A4A91981ADFF004C8C24 /* DSInitialHereTab.m in Sources */,
+				2AE9A4B51981ADFF004C8C24 /* DSRadio.m in Sources */,
 				57BB2D95191D4003002639C7 /* UIImage+Alpha.m in Sources */,
+				2AE9A49F1981ADFF004C8C24 /* DSEnvelopeIdTab.m in Sources */,
 				57BB2D80191D3FE8002639C7 /* DSRestAPIResponseModel.m in Sources */,
 				57BB2D7B191D3FE8002639C7 /* DSEnvelopeSigner.m in Sources */,
+				2AE9A4931981ADFF004C8C24 /* DSCompanyTab.m in Sources */,
+				2AE9A4C31981ADFF004C8C24 /* DSTitleTab.m in Sources */,
 				57BB2D7A191D3FE8002639C7 /* DSEnvelopeRecipientsResponse.m in Sources */,
 				57603F5E1906D41500E8C850 /* DSTableViewController.m in Sources */,
 				57BB2D40191D3E54002639C7 /* DSSignatureCreationController.m in Sources */,
+				2AE9A4BB1981ADFF004C8C24 /* DSSignHereTab.m in Sources */,
 				57603FB2190990AD00E8C850 /* DSSigningAPIAdoptSignatureTabDetails.m in Sources */,
 				57BB2D78191D3FE8002639C7 /* DSEnvelopeRecipient.m in Sources */,
 				57603FB5190990AD00E8C850 /* DSSigningAPIConsumerDisclosure.m in Sources */,
+				2AE9A49B1981ADFF004C8C24 /* DSEmailAddressTab.m in Sources */,
 				57BB2D7D191D3FE8002639C7 /* DSEnvelopesListResponse.m in Sources */,
 				57603FB7190990AD00E8C850 /* DSSigningAPIDeclineSigning.m in Sources */,
 				57BB2D97191D4003002639C7 /* UIImage+RoundedCorner.m in Sources */,
 				57BB2D74191D3FE8002639C7 /* NSURL+DS_QueryDictionary.m in Sources */,
 				57603FB1190990AD00E8C850 /* DSSigningAPIAddCCRecipients.m in Sources */,
+				2AE9A4B71981ADFF004C8C24 /* DSRadioGroupTab.m in Sources */,
 				57BB2D82191D3FE8002639C7 /* DSUserSignaturesResponse.m in Sources */,
 				57BB2D96191D4003002639C7 /* UIImage+Resize.m in Sources */,
 				57BB2D72191D3FE8002639C7 /* NSDictionary+DS_JSON.m in Sources */,
 				57BB2D92191D4003002639C7 /* DSCircleButton.m in Sources */,
 				57BB2D7F191D3FE8002639C7 /* DSLoginInformationResponse.m in Sources */,
+				2AE9A4A71981ADFF004C8C24 /* DSFullNameTab.m in Sources */,
+				2AE9A4AF1981ADFF004C8C24 /* DSListTab.m in Sources */,
 				57603F551906D41500E8C850 /* DSAppDelegate.m in Sources */,
 				57BB2D9C191D404B002639C7 /* DSNetworkLogger.m in Sources */,
 				57FD600E1914008400C58190 /* DSDeclineSigningViewController.m in Sources */,
@@ -722,31 +905,48 @@
 				57BB2D73191D3FE8002639C7 /* NSString+DS_URLEncoding.m in Sources */,
 				57119594190F0B0400A98859 /* DSSigningViewController.m in Sources */,
 				57BB2D3B191D3E54002639C7 /* DSDrawSignatureView.m in Sources */,
+				2AE9A4AB1981ADFF004C8C24 /* DSLastNameTab.m in Sources */,
+				2AE9A48F1981ADFF004C8C24 /* DSApproveTab.m in Sources */,
 				57603FB8190990AD00E8C850 /* DSSigningAPIManager.m in Sources */,
 				57BB2D76191D3FE8002639C7 /* DSEnvelopeDetailsResponse.m in Sources */,
 				57BB2D1B191D2B55002639C7 /* DSChooseAccountViewController.m in Sources */,
 				5706DC1419195993002E2B6A /* DSFinePrintViewController.m in Sources */,
 				57BB2D3A191D3E54002639C7 /* DSDrawSignatureController.m in Sources */,
+				2AE9A4951981ADFF004C8C24 /* DSDateSignedTab.m in Sources */,
 				5773A55719256682007BFB7B /* DSCreateEnvelopeResponse.m in Sources */,
+				2AE9A4971981ADFF004C8C24 /* DSDateTab.m in Sources */,
+				2AE9A4AD1981ADFF004C8C24 /* DSListItem.m in Sources */,
+				2AE9A4B91981ADFF004C8C24 /* DSSignerAttachmentTab.m in Sources */,
 				57603FB4190990AD00E8C850 /* DSSigningAPIRecipient.m in Sources */,
 				57BB2D79191D3FE8002639C7 /* DSEnvelopeRecipientEmailNotification.m in Sources */,
+				2AE9A4A31981ADFF004C8C24 /* DSFirstNameTab.m in Sources */,
 				57CAAA891922BBE1004A2F16 /* UIViewController+DSLayoutGuides.m in Sources */,
 				57FD601D1914589C00C58190 /* DSStoryboardFactory.m in Sources */,
 				57BB2D98191D4003002639C7 /* UIImage+SignatureCleanup.m in Sources */,
+				2AE9A4C11981ADFF004C8C24 /* DSTextTab.m in Sources */,
+				2AE9A4B31981ADFF004C8C24 /* DSNumberTab.m in Sources */,
+				2AE9A4C51981ADFF004C8C24 /* DSZipTab.m in Sources */,
 				57FD601A191455A900C58190 /* DSCompleteSigningViewController.m in Sources */,
 				57BB2D93191D4003002639C7 /* DSNavigationFadeSegue.m in Sources */,
+				2AE9A49D1981ADFF004C8C24 /* DSEmailTab.m in Sources */,
 				57603FB6190990AD00E8C850 /* DSSigningAPIDeclineOptions.m in Sources */,
+				2AE9A4991981ADFF004C8C24 /* DSDeclineTab.m in Sources */,
+				2AE9A4BD1981ADFF004C8C24 /* DSSsnTab.m in Sources */,
 				57BB2D71191D3FE8002639C7 /* NSDateFormatter+DS_ISO8601.m in Sources */,
 				57BB2D3F191D3E54002639C7 /* DSSignatureCaptureController.m in Sources */,
 				57603FB3190990AD00E8C850 /* DSSigningAPICanFinishChanged.m in Sources */,
 				57BB2D7E191D3FE8002639C7 /* DSLoginAccount.m in Sources */,
 				57BB2D81191D3FE8002639C7 /* DSUserSignature.m in Sources */,
+				2AE9A4BF1981ADFF004C8C24 /* DSTabs.m in Sources */,
 				57BB2D18191D2B36002639C7 /* DSLoginViewController.m in Sources */,
+				2AE9A4A51981ADFF004C8C24 /* DSFormulaTab.m in Sources */,
 				57BB2D94191D4003002639C7 /* DSRotationForwardingNavigationControllerViewController.m in Sources */,
+				2AE9A4B11981ADFF004C8C24 /* DSNoteTab.m in Sources */,
 				57BB2D75191D3FE8002639C7 /* NSValueTransformer+DS_CustomTransformers.m in Sources */,
 				578463C919257CC90024CCAE /* NSURL+DSMimeType.m in Sources */,
 				57603F7F1906D5A700E8C850 /* DSSessionManager.m in Sources */,
 				57BB2D77191D3FE8002639C7 /* DSEnvelopeInPersonSigner.m in Sources */,
+				2AE9A4911981ADFF004C8C24 /* DSCheckboxTab.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -754,6 +954,34 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2AE9A4B61981ADFF004C8C24 /* DSRadio.m in Sources */,
+				2AE9A4B01981ADFF004C8C24 /* DSListTab.m in Sources */,
+				2AE9A4B81981ADFF004C8C24 /* DSRadioGroupTab.m in Sources */,
+				2AE9A4B21981ADFF004C8C24 /* DSNoteTab.m in Sources */,
+				2AE9A4C01981ADFF004C8C24 /* DSTabs.m in Sources */,
+				2AE9A4A81981ADFF004C8C24 /* DSFullNameTab.m in Sources */,
+				2AE9A4901981ADFF004C8C24 /* DSApproveTab.m in Sources */,
+				2AE9A4AE1981ADFF004C8C24 /* DSListItem.m in Sources */,
+				2AE9A4A01981ADFF004C8C24 /* DSEnvelopeIdTab.m in Sources */,
+				2AE9A4A61981ADFF004C8C24 /* DSFormulaTab.m in Sources */,
+				2AE9A4CA1982D55C004C8C24 /* JsonTests.m in Sources */,
+				2AE9A4921981ADFF004C8C24 /* DSCheckboxTab.m in Sources */,
+				2AE9A49C1981ADFF004C8C24 /* DSEmailAddressTab.m in Sources */,
+				2AE9A4981981ADFF004C8C24 /* DSDateTab.m in Sources */,
+				2AE9A4BC1981ADFF004C8C24 /* DSSignHereTab.m in Sources */,
+				2AE9A4961981ADFF004C8C24 /* DSDateSignedTab.m in Sources */,
+				2AE9A49E1981ADFF004C8C24 /* DSEmailTab.m in Sources */,
+				2AE9A4BA1981ADFF004C8C24 /* DSSignerAttachmentTab.m in Sources */,
+				2AE9A4AA1981ADFF004C8C24 /* DSInitialHereTab.m in Sources */,
+				2AE9A4BE1981ADFF004C8C24 /* DSSsnTab.m in Sources */,
+				2AE9A4C61981ADFF004C8C24 /* DSZipTab.m in Sources */,
+				2AE9A4941981ADFF004C8C24 /* DSCompanyTab.m in Sources */,
+				2AE9A4C21981ADFF004C8C24 /* DSTextTab.m in Sources */,
+				2AE9A4B41981ADFF004C8C24 /* DSNumberTab.m in Sources */,
+				2AE9A4C41981ADFF004C8C24 /* DSTitleTab.m in Sources */,
+				2AE9A49A1981ADFF004C8C24 /* DSDeclineTab.m in Sources */,
+				2AE9A4AC1981ADFF004C8C24 /* DSLastNameTab.m in Sources */,
+				2AE9A4A41981ADFF004C8C24 /* DSFirstNameTab.m in Sources */,
 				57603F731906D41500E8C850 /* DocuSign_iOS_SDKTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -898,6 +1126,7 @@
 		};
 		57603F7A1906D41500E8C850 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 54088CEB7A224B80AED0FB5F /* Pods.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/DocuSign iOS SDK.app/DocuSign iOS SDK";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -905,13 +1134,17 @@
 					"$(inherited)",
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
 				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "DocuSign iOS SDK/DocuSign iOS SDK-Prefix.pch";
+				GCC_PRECOMPILE_PREFIX_HEADER = NO;
+				GCC_PREFIX_HEADER = "DocuSign iOS SDK/Example/DocuSign iOS SDK-Prefix.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = "DocuSign iOS SDKTests/DocuSign iOS SDKTests-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Pods/build/Debug-iphoneos",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
@@ -920,6 +1153,7 @@
 		};
 		57603F7B1906D41500E8C850 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 54088CEB7A224B80AED0FB5F /* Pods.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/DocuSign iOS SDK.app/DocuSign iOS SDK";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -927,9 +1161,13 @@
 					"$(inherited)",
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
 				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "DocuSign iOS SDK/DocuSign iOS SDK-Prefix.pch";
+				GCC_PRECOMPILE_PREFIX_HEADER = NO;
+				GCC_PREFIX_HEADER = "DocuSign iOS SDK/Example/DocuSign iOS SDK-Prefix.pch";
 				INFOPLIST_FILE = "DocuSign iOS SDKTests/DocuSign iOS SDKTests-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Pods/build/Debug-iphoneos",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;

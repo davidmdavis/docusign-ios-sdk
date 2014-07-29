@@ -33,4 +33,6 @@
 @property (nonatomic) NSDate    *sentDateTime;
 @property (nonatomic) NSDate    *signedDateTime;
 
+@property (nonatomic) NSArray   *tabs;
+
 @end

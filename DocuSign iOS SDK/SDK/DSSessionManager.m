@@ -601,6 +601,18 @@ withResponseObject:(id)responseObject
 }
 
 
+- (NSURLSessionDataTask *)startRemoteSignEnvelopeTaskWithFileName:(NSString *)fileName
+                                                          fileURL:(NSURL *)fileURL
+                                                        recipient:(DSEnvelopeRecipient*)recipient
+                                                completionHandler:(void (^)(DSCreateEnvelopeResponse *response, NSError *error))completionHandler
+{
+    // TODO: implement this
+    [self doesNotRecognizeSelector:_cmd];
+    return nil;
+}
+
+
+
 - (NSURLSessionDataTask *)startUploadDocumentTaskWithFileName:(NSString *)fileName
                                                       fileURL:(NSURL *)fileURL
                                                    documentID:(NSString *)documentID

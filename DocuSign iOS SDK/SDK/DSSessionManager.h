@@ -16,6 +16,8 @@
 
 #import "DSLogicalEnvelopeGroup.h"
 
+#import "DSEnvelopeRecipient.h"
+
 
 extern NSString * const DSSessionManagerErrorDomain;
 
@@ -165,6 +167,11 @@ extern NSString * const DSSessionManagerNotificationUserInfoKeyError;
 
 - (NSURLSessionDataTask *)startCreateSelfSignEnvelopeTaskWithFileName:(NSString *)fileName
                                                               fileURL:(NSURL *)fileURL
+                                                    completionHandler:(void (^)(DSCreateEnvelopeResponse *response, NSError *error))completionHandler;
+
+- (NSURLSessionDataTask *)startRemoteSignEnvelopeTaskWithFileName:(NSString *)fileName
+                                                              fileURL:(NSURL *)fileURL
+                                                            recipient:(DSEnvelopeRecipient*)recipient
                                                     completionHandler:(void (^)(DSCreateEnvelopeResponse *response, NSError *error))completionHandler;
 
 

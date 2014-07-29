@@ -12,6 +12,8 @@
 
 #import "NSValueTransformer+DS_CustomTransformers.h"
 
+#import "DSTabs.h"
+
 @implementation DSEnvelopeRecipient
 
 + (NSDictionary *)JSONKeyPathsByPropertyKey {

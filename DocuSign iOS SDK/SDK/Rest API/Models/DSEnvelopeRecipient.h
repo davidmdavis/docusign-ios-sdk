@@ -8,6 +8,7 @@
 
 #import <Mantle/Mantle.h>
 
+@class DSTabs;
 @class DSEnvelopeRecipientEmailNotification;
 
 @interface DSEnvelopeRecipient : MTLModel <MTLJSONSerializing>
@@ -33,6 +34,6 @@
 @property (nonatomic) NSDate    *sentDateTime;
 @property (nonatomic) NSDate    *signedDateTime;
 
-@property (nonatomic) NSArray   *tabs;
+@property (nonatomic) DSTabs   *tabs;
 
 @end

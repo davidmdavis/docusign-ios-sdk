@@ -1,0 +1,9 @@
+{
+    "name": "Joe Doe",
+    "email": "some-email@some-domain.com",
+    "recipientId": "1",
+    "accessCode": "123",
+    "requireIdLookup": "true",
+    "clientUserId": "0xA1",
+    "routingOrder": "1"
+}

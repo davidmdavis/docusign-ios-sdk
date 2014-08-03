@@ -32,6 +32,8 @@
 #import "DSUserSignaturesResponse.h"
 #import "DSUserSignature.h"
 
+#import "DSTabs.h"
+
 
 NSString * const DSSessionManagerErrorDomain = @"DSSessionManagerErrorDomain";
 
@@ -606,9 +608,71 @@ withResponseObject:(id)responseObject
                                                         recipient:(DSEnvelopeRecipient*)recipient
                                                 completionHandler:(void (^)(DSCreateEnvelopeResponse *response, NSError *error))completionHandler
 {
-    // TODO: implement this
-    [self doesNotRecognizeSelector:_cmd];
-    return nil;
+    NSAssert(self.isAuthenticated, @"Call -[DSSessionManager authenticate] before starting additional tasks.");
+    NSParameterAssert(fileURL);
+    NSParameterAssert(completionHandler);
+    NSParameterAssert(recipient);
+    
+    if (!fileName) {
+        fileName = [fileURL lastPathComponent];
+    }
+    
+    NSAssert([fileURL isFileURL], @"fileURL must be a URL to a file");
+    NSAssert([[NSFileManager defaultManager] fileExistsAtPath:fileURL.path], @"fileURL must point to a path which exists");
+    NSAssert([fileName length] > 0, @"fileName required");
+    NSAssert([[fileName pathExtension] length] > 0, @"fileExtension required");
+    
+    //
+    // we can't upload tabs right away because the document is being uploaded in a consequent call.
+    DSTabs* tabs = recipient.tabs;
+    recipient.tabs = nil;
+    
+    //
+    // convert the Mantle recipient object to dictionary
+    // JSON serialization doesn't know how to deal with Mantle
+    NSDictionary *recipientDictionary = [MTLJSONAdapter JSONDictionaryFromModel:recipient];
+    
+    NSString *relativeURLString = [[NSString alloc] initWithFormat:@"accounts/%@/envelopes", self.account.accountID];
+    return [self startDataTaskWithMethod:@"POST"
+                       relativeURLString:relativeURLString
+                                bodyData:[@{ @"emailSubject" : fileName,
+                                             @"status"       : DSStringFromEnvelopeStatus(DSEnvelopeStatusDraft),
+                                             @"recipients"   : @{ @"signers": @[ recipientDictionary ] } } ds_JSONData]
+                           responseClass:[DSCreateEnvelopeResponse class]
+                       completionHandler:^(DSCreateEnvelopeResponse *createEnvelopeResponse, NSError *error) {
+                           if (error) {
+                               completionHandler(nil, error);
+                               return;
+                           }
+                           [self startUploadDocumentTaskWithFileName:fileName
+                                                             fileURL:fileURL
+                                                          documentID:@"1"
+                                                          envelopeID:createEnvelopeResponse.envelopeID
+                                                   completionHandler:^(id JSONObject, NSError *error) {
+                                                       if (error) {
+                                                           completionHandler(nil, error);
+                                                           return;
+                                                       }
+                                                       [self startUploadRecipientTabs:createEnvelopeResponse.envelopeID
+                                                                          recipiendID:@"1"
+                                                                                 tabs:tabs
+                                                                    completionHandler:^(id JSONObject, NSError *error) {
+                                                                        if (error) {
+                                                                            completionHandler(nil, error);
+                                                                            return;
+                                                                        }
+                                                                        [self startSendDraftEnvelopeTaskWithEnvelopeID:createEnvelopeResponse.envelopeID
+                                                                                                     completionHandler:^(id JSONObject, NSError *error) {
+                                                                                                         if (error) {
+                                                                                                             completionHandler(nil, error);
+                                                                                                             return;
+                                                                                                         }
+                                                                                                         completionHandler(createEnvelopeResponse, nil);
+                                                                                                     }];
+                                                                    }];
+                                                       
+                                                   }];
+                       }];
 }
 
 
@@ -648,6 +712,24 @@ withResponseObject:(id)responseObject
                        completionHandler:completionHandler];
 }
 
+- (NSURLSessionDataTask *)startUploadRecipientTabs:(NSString *)envelopeID
+                                       recipiendID:(NSString *)recipientID
+                                              tabs:(DSTabs*)tabs
+                                                 completionHandler:(void (^)(id JSONObject, NSError *error))completionHandler {
+    NSAssert(self.isAuthenticated, @"Call -[DSSessionManager authenticate] before starting additional tasks.");
+    NSParameterAssert(envelopeID);
+    NSParameterAssert(completionHandler);
+    
+    NSString *relativeURLString = [[NSString alloc] initWithFormat:@"accounts/%@/envelopes/%@/recipients/%@/tabs", self.account.accountID, envelopeID, recipientID];
+    NSDictionary *tabsDictionary = [MTLJSONAdapter JSONDictionaryFromModel:tabs];
+
+    return [self startDataTaskWithMethod:@"POST"
+                       relativeURLString:relativeURLString
+                                bodyData:[tabsDictionary ds_JSONData]
+                           responseClass:nil
+                       completionHandler:completionHandler];
+}
+
 
 - (NSURLSessionDataTask *)startSendDraftEnvelopeTaskWithEnvelopeID:(NSString *)envelopeID
                                             completionHandler:(void (^)(id JSONObject, NSError *error))completionHandler {
@@ -662,6 +744,8 @@ withResponseObject:(id)responseObject
                            responseClass:nil
                        completionHandler:completionHandler];
 }
+
+
 
 
 - (NSURLSessionDataTask *)startEnvelopesListTaskWithLogicalGrouping:(DSLogicalEnvelopeGroup)logicalGroup

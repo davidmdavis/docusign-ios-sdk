@@ -7,5 +7,6 @@
 + (NSDictionary *)JSONKeyPathsByPropertyKey {
     return nil;
 }
+// TODO transform array
 
 @end

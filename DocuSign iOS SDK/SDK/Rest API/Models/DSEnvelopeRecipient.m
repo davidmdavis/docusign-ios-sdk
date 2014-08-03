@@ -37,4 +37,8 @@
     return [NSValueTransformer mtl_JSONDictionaryTransformerWithModelClass:[DSEnvelopeRecipientEmailNotification class]];
 }
 
++ (NSValueTransformer *)tabsJSONTransformer {
+    return [NSValueTransformer mtl_JSONDictionaryTransformerWithModelClass:[DSTabs class]];
+}
+
 @end

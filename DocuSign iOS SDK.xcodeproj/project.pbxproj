@@ -12,7 +12,10 @@
 		177F2239193818A300BEC92C /* Sales Order.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 177F2238193818A300BEC92C /* Sales Order.pdf */; };
 		17EA2003192C370900AA6A4C /* DocuSign-iOS-SDK.podspec in Resources */ = {isa = PBXBuildFile; fileRef = 17EA2002192C370900AA6A4C /* DocuSign-iOS-SDK.podspec */; };
 		17EA2005192C38F700AA6A4C /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 17EA2004192C38F700AA6A4C /* LICENSE */; };
-		2AC9676019870A2400B80976 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2AC9675F19870A2400B80976 /* libPods.a */; };
+		2A7A8CEB198EA9CD007ACCB8 /* Sales Order.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 177F2238193818A300BEC92C /* Sales Order.pdf */; };
+		2AC96763198726C200B80976 /* DSRemoteSendTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AC96762198726C200B80976 /* DSRemoteSendTests.m */; };
+		2AC9676519895F8900B80976 /* signer.json in Resources */ = {isa = PBXBuildFile; fileRef = 2AC9676419895F8900B80976 /* signer.json */; };
+		2AC967671989634D00B80976 /* signer-no-tabs.json in Resources */ = {isa = PBXBuildFile; fileRef = 2AC967661989634D00B80976 /* signer-no-tabs.json */; };
 		2AE9A48F1981ADFF004C8C24 /* DSApproveTab.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AE9A4581981ADFF004C8C24 /* DSApproveTab.m */; };
 		2AE9A4901981ADFF004C8C24 /* DSApproveTab.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AE9A4581981ADFF004C8C24 /* DSApproveTab.m */; };
 		2AE9A4911981ADFF004C8C24 /* DSCheckboxTab.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AE9A45A1981ADFF004C8C24 /* DSCheckboxTab.m */; };
@@ -160,6 +163,9 @@
 		17EA2004192C38F700AA6A4C /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		17EDFAE7193007BA00D74281 /* DocuSign-iOS-SDK.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "DocuSign-iOS-SDK.h"; sourceTree = "<group>"; };
 		2AC9675F19870A2400B80976 /* libPods.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libPods.a; path = "Pods/build/Debug-iphoneos/libPods.a"; sourceTree = "<group>"; };
+		2AC96762198726C200B80976 /* DSRemoteSendTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSRemoteSendTests.m; sourceTree = "<group>"; };
+		2AC9676419895F8900B80976 /* signer.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = signer.json; sourceTree = "<group>"; };
+		2AC967661989634D00B80976 /* signer-no-tabs.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "signer-no-tabs.json"; sourceTree = "<group>"; };
 		2AE9A4571981ADFF004C8C24 /* DSApproveTab.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSApproveTab.h; sourceTree = "<group>"; };
 		2AE9A4581981ADFF004C8C24 /* DSApproveTab.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSApproveTab.m; sourceTree = "<group>"; };
 		2AE9A4591981ADFF004C8C24 /* DSCheckboxTab.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSCheckboxTab.h; sourceTree = "<group>"; };
@@ -369,7 +375,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2AC9676019870A2400B80976 /* libPods.a in Frameworks */,
 				57603F671906D41500E8C850 /* XCTest.framework in Frameworks */,
 				57603F691906D41500E8C850 /* UIKit.framework in Frameworks */,
 				57603F681906D41500E8C850 /* Foundation.framework in Frameworks */,
@@ -508,6 +513,9 @@
 				57603F6D1906D41500E8C850 /* Supporting Files */,
 				2AE9A4C71982D35E004C8C24 /* tabs.json */,
 				2AE9A4C91982D55C004C8C24 /* JsonTests.m */,
+				2AC96762198726C200B80976 /* DSRemoteSendTests.m */,
+				2AC9676419895F8900B80976 /* signer.json */,
+				2AC967661989634D00B80976 /* signer-no-tabs.json */,
 			);
 			path = "DocuSign iOS SDKTests";
 			sourceTree = "<group>";
@@ -821,6 +829,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2A7A8CEB198EA9CD007ACCB8 /* Sales Order.pdf in Resources */,
+				2AC967671989634D00B80976 /* signer-no-tabs.json in Resources */,
+				2AC9676519895F8900B80976 /* signer.json in Resources */,
 				57603F711906D41500E8C850 /* InfoPlist.strings in Resources */,
 				2AE9A4C81982D35E004C8C24 /* tabs.json in Resources */,
 			);
@@ -960,6 +971,7 @@
 				2AE9A4B21981ADFF004C8C24 /* DSNoteTab.m in Sources */,
 				2AE9A4C01981ADFF004C8C24 /* DSTabs.m in Sources */,
 				2AE9A4A81981ADFF004C8C24 /* DSFullNameTab.m in Sources */,
+				2AC96763198726C200B80976 /* DSRemoteSendTests.m in Sources */,
 				2AE9A4901981ADFF004C8C24 /* DSApproveTab.m in Sources */,
 				2AE9A4AE1981ADFF004C8C24 /* DSListItem.m in Sources */,
 				2AE9A4A01981ADFF004C8C24 /* DSEnvelopeIdTab.m in Sources */,

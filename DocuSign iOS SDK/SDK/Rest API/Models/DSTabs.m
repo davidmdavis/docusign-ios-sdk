@@ -32,4 +32,103 @@
     return nil;
 }
 
++ (NSValueTransformer *)approveTabsJSONTransformer {
+    return [NSValueTransformer mtl_JSONArrayTransformerWithModelClass:[DSApproveTab class]];
+}
+
++ (NSValueTransformer *)checkboxTabsJSONTransformer {
+    return [NSValueTransformer mtl_JSONArrayTransformerWithModelClass:[DSCheckboxTab class]];
+}
+
++ (NSValueTransformer *)companyTabsJSONTransformer {
+    return [NSValueTransformer mtl_JSONArrayTransformerWithModelClass:[DSCompanyTab class]];
+}
++ (NSValueTransformer *)dateSignedTabsJSONTransformer {
+    return [NSValueTransformer mtl_JSONArrayTransformerWithModelClass:[DSDateSignedTab class]];
+}
+
++ (NSValueTransformer *)dateTabsJSONTransformer {
+    return [NSValueTransformer mtl_JSONArrayTransformerWithModelClass:[DSDateTab class]];
+}
+
++ (NSValueTransformer *)declineTabsJSONTransformer {
+    return [NSValueTransformer mtl_JSONArrayTransformerWithModelClass:[DSDeclineTab class]];
+}
+
++ (NSValueTransformer *)emailAddressTabsJSONTransformer {
+    return [NSValueTransformer mtl_JSONArrayTransformerWithModelClass:[DSEmailAddressTab class]];
+}
+
++ (NSValueTransformer *)emailTabsJSONTransformer {
+    return [NSValueTransformer mtl_JSONArrayTransformerWithModelClass:[DSEmailTab class]];
+}
+
++ (NSValueTransformer *)envelopeIdTabsJSONTransformer {
+    return [NSValueTransformer mtl_JSONArrayTransformerWithModelClass:[DSEnvelopeIdTab class]];
+}
+
++ (NSValueTransformer *)firstNameTabsJSONTransformer {
+    return [NSValueTransformer mtl_JSONArrayTransformerWithModelClass:[DSFirstNameTab class]];
+}
+
++ (NSValueTransformer *)formulaTabsJSONTransformer {
+    return [NSValueTransformer mtl_JSONArrayTransformerWithModelClass:[DSFormulaTab class]];
+}
+
+
++ (NSValueTransformer *)fullNameTabsJSONTransformer {
+    return [NSValueTransformer mtl_JSONArrayTransformerWithModelClass:[DSFullNameTab class]];
+}
+
++ (NSValueTransformer *)initialHereTabsJSONTransformer {
+    return [NSValueTransformer mtl_JSONArrayTransformerWithModelClass:[DSInitialHereTab class]];
+}
+
+
++ (NSValueTransformer *)lastNameTabsJSONTransformer {
+    return [NSValueTransformer mtl_JSONArrayTransformerWithModelClass:[DSLastNameTab class]];
+}
+
+
++ (NSValueTransformer *)listTabsJSONTransformer {
+    return [NSValueTransformer mtl_JSONArrayTransformerWithModelClass:[DSListTab class]];
+}
+
+
++ (NSValueTransformer *)noteTabsJSONTransformer {
+    return [NSValueTransformer mtl_JSONArrayTransformerWithModelClass:[DSNoteTab class]];
+}
+
++ (NSValueTransformer *)numberTabsJSONTransformer {
+    return [NSValueTransformer mtl_JSONArrayTransformerWithModelClass:[DSNumberTab class]];
+}
+
++ (NSValueTransformer *)radioGroupTabsJSONTransformer {
+    return [NSValueTransformer mtl_JSONArrayTransformerWithModelClass:[DSRadioGroupTab class]];
+}
+
++ (NSValueTransformer *)signerAttachmentTabsJSONTransformer {
+    return [NSValueTransformer mtl_JSONArrayTransformerWithModelClass:[DSSignerAttachmentTab class]];
+}
+
++ (NSValueTransformer *)signHereTabsJSONTransformer {
+    return [NSValueTransformer mtl_JSONArrayTransformerWithModelClass:[DSSignHereTab class]];
+}
+
++ (NSValueTransformer *)ssnTabsJSONTransformer {
+    return [NSValueTransformer mtl_JSONArrayTransformerWithModelClass:[DSSsnTab class]];
+}
+
++ (NSValueTransformer *)textTabsJSONTransformer {
+    return [NSValueTransformer mtl_JSONArrayTransformerWithModelClass:[DSTextTab class]];
+}
+
++ (NSValueTransformer *)titleTabsJSONTransformer {
+    return [NSValueTransformer mtl_JSONArrayTransformerWithModelClass:[DSTitleTab class]];
+}
+
++ (NSValueTransformer *)zipTabsJSONTransformer {
+    return [NSValueTransformer mtl_JSONArrayTransformerWithModelClass:[DSZipTab class]];
+}
+
 @end

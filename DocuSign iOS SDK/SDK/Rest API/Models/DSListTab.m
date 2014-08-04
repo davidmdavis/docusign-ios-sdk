@@ -8,5 +8,9 @@
 + (NSDictionary *)JSONKeyPathsByPropertyKey {
     return nil;
 }
-// TODO: need array transform
+
++ (NSValueTransformer *)listItemsJSONTransformer {
+    return [NSValueTransformer mtl_JSONArrayTransformerWithModelClass:[DSListItem class]];
+}
+
 @end

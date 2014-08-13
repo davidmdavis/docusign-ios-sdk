@@ -3,6 +3,8 @@ DocuSign iOS SDK Beta
 
 This **BETA** SDK is built on our public [REST API](https://www.docusign.com/p/RESTAPIGuide/RESTAPIGuide.htm) and provides a quick and easy way for developers to add DocuSign's world-class document signing experience to their native iOS apps.
 
+**WARNING**: This beta release of the DocuSign iOS SDK is under active development, and the interfaces are still being refined. Please use this in production at your own risk.
+
 Pre-requisites
 ----------
 
@@ -174,4 +176,4 @@ If you have a file in that needs to be signed, create a DocuSign envelope and pr
 License
 ----------
 
-The DocuSign iOS SDK is licensed under the [DOCUSIGN API SDK LICENSE](LICENSE).
+The DocuSign iOS SDK is licensed under the [DOCUSIGN Mobile iOS SDK LICENSE](LICENSE).

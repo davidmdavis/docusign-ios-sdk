@@ -94,6 +94,13 @@ extern NSString * const DSSessionManagerNotificationUserInfoKeyError;
 
 
 /**
+ *  The OAuth token for the authenticated user
+ */
+@property (nonatomic, readonly) NSString *authToken;
+
+
+
+/**
  *  Preferred initializer. Returns a DSSessionManager ready to authenticate the user with the given token.
  *
  *  @param integratorKey Identifies the application accessing the DocuSign API. See https://www.docusign.com/developer-center/quick-start/first-api-call

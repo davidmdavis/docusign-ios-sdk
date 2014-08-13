@@ -400,7 +400,10 @@ typedef NS_ENUM(NSInteger, DSSigningViewControllerViewTag) {
 
 
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error {
-    [self failedSigningWithError:error];
+    BOOL frameLoadInterrupted = (error.code == 102 && [error.domain isEqualToString:@"WebKitErrorDomain"]);
+    if (error.code != NSURLErrorCancelled && !frameLoadInterrupted) { // Ignore these errors. They happen during normal interaction with signing
+        [self failedSigningWithError:error];
+    }
 }
 
 

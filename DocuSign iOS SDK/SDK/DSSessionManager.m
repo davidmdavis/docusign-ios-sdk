@@ -54,7 +54,7 @@ NSString * const DSSessionManagerDefaultVersion = @"v2";
 @interface DSSessionManager ()
 
 @property (nonatomic) NSString *integratorKey;
-@property (nonatomic) NSString *authToken;
+@property (nonatomic, readwrite) NSString *authToken;
 @property (nonatomic) NSString *username;
 @property (nonatomic) NSString *password;
 

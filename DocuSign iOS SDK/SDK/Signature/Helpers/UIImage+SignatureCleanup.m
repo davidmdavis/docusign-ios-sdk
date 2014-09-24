@@ -94,7 +94,7 @@ NSRange MakeRange(NSInteger* sumArray, NSInteger length) {
         newSize = CGSizeMake(tempImage.size.width, MIN(roundf(tempImage.size.width / ratio), tempImage.size.height));
     }
     
-    return [croppedImage resizedImage:newSize interpolationQuality:kCGInterpolationHigh];
+    return [croppedImage resizedImageToFitInSize:self.size scaleIfSmaller:NO];
 }
 
 - (UIImage *)imageWithWhiteCropped {
@@ -132,7 +132,7 @@ NSRange MakeRange(NSInteger* sumArray, NSInteger length) {
 -(UIImage *)imageCroppedToSize:(CGSize)previewSize {
     
     // By default, core graphics has trouble keeping track of image orientation (UIKit works fine). The following reorients the backing CGImage
-    UIImage *reorientedImage = [self resizedImage:self.size interpolationQuality:kCGInterpolationNone];
+    UIImage *reorientedImage =  [self resizedImageToFitInSize:self.size scaleIfSmaller:NO];
     
     // Crop the image to the preview window bounds
     CGSize rawSize = self.size;

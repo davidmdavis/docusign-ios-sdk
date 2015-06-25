@@ -16,6 +16,7 @@
 
 #import "DSLogicalEnvelopeGroup.h"
 
+@import UIKit;
 
 extern NSString * const DSSessionManagerErrorDomain;
 

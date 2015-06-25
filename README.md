@@ -40,7 +40,7 @@ Once you have CocoaPods installed, create a file called `podfile` in the root di
 ```ruby
 platform :ios, '7.0'
 
-pod 'DocuSign-iOS-SDK'
+pod 'DocuSign-iOS-SDK', '0.1.3-beta'
 ```
 
 Then in the same directory as your podfile run

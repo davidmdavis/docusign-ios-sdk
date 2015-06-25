@@ -706,8 +706,10 @@ withResponseObject:(id)responseObject
             break;
         }
     }
-    if (error && outError) {
-        *outError = error;
+    if (error) {
+        if (outError) {
+            *outError = error;
+        }
         return nil;
     } else {
         return templateRoles;

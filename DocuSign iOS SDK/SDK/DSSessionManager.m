@@ -657,7 +657,7 @@ withResponseObject:(id)responseObject
 - (NSArray *)templateRolesFromRecipients:(NSArray *)recipients error:(NSError **)outError {
     
     NSError *error;
-    NSMutableArray *templateRoles;
+    NSMutableArray *templateRoles = [NSMutableArray array];
     
     for (DSEnvelopeRecipient *recipient in recipients) {
         if ([recipient isKindOfClass:[DSEnvelopeSigner class]]) {

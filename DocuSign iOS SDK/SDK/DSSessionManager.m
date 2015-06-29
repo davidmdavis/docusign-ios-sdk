@@ -718,6 +718,7 @@ withResponseObject:(id)responseObject
 
 - (NSURLSessionDataTask *)startSendEnvelopeFromTemplateTaskWithTemplateId:(NSString *)templateId
                                                                recipients:(NSArray *)recipients
+                                                             emailSubject:(NSString *)emailSubject
                                                         completionHandler:(void (^)(DSCreateEnvelopeResponse *response, NSError *error))completionHandler {
     NSAssert(self.isAuthenticated, @"Call -[DSSessionManager authenticate] before starting additional tasks.");
     NSParameterAssert(templateId);
@@ -731,14 +732,19 @@ withResponseObject:(id)responseObject
         return nil;
     }
     
+    NSMutableDictionary *body = [@{ @"status"       : DSStringFromEnvelopeStatus(DSEnvelopeStatusSent),
+                                    @"templateId"   : templateId,
+                                    @"templateRoles": templateRoles } mutableCopy];
+
+    if (emailSubject) {
+        body[@"emailSubject"] = emailSubject;
+    }
+    
     // configure endpoint, build request body, and send
     NSString *relativeURLString = [[NSString alloc] initWithFormat:@"accounts/%@/envelopes", self.account.accountID];
     return [self startDataTaskWithMethod:@"POST"
                        relativeURLString:relativeURLString
-                                bodyData:[@{ @"emailSubject" : [NSString stringWithFormat:@"%@ %@", @"Envelope created from templateId: ", templateId],
-                                             @"status"       : DSStringFromEnvelopeStatus(DSEnvelopeStatusSent),
-                                             @"templateId"   : templateId,
-                                             @"templateRoles": templateRoles } ds_JSONData]
+                                bodyData:[body ds_JSONData]
                            responseClass:[DSCreateEnvelopeResponse class]
                        completionHandler:^(DSCreateEnvelopeResponse *createEnvelopeResponse, NSError *error) {
                            if (error) {

@@ -201,11 +201,13 @@ extern NSString * const DSSessionManagerNotificationUserInfoKeyError;
  *
  *  @param templateId   A valid templateId copied from an existing server template in your account.
  *  @param recipients   An array of DSEnvelopeRecipients.  Currently signers and in-person signer recipient types are supported.
+ *  @param emailSubject Subject of the signing request email. Pass nil for default template subject.
  *
  *  @return A newly initialized NSURLSessionDataTask object.
  */
 - (NSURLSessionDataTask *)startSendEnvelopeFromTemplateTaskWithTemplateId:(NSString *)templateId
                                                                recipients:(NSArray *)recipients
+                                                             emailSubject:(NSString *)emailSubject
                                                         completionHandler:(void (^)(DSCreateEnvelopeResponse *response, NSError *error))completionHandler;
 
 

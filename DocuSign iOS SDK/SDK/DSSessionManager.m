@@ -726,7 +726,7 @@ withResponseObject:(id)responseObject
 
     NSError *templateRolesError;
     NSArray *templateRoles = [self templateRolesFromRecipients:recipients error:&templateRolesError];
-    if (templateRolesError) {
+    if (templateRolesError) { // TODO: generate an error if count is zero
         completionHandler(nil, templateRolesError);
         return nil;
     }

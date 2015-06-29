@@ -1,11 +1,3 @@
-DocuSign DevCon 2015
-----------
-
-![Alt text](DevCon.jpg "DocuSign DevCon 2015")
-
-Looking to fast-track your integration?  Join us at DocuSign DevCon 2015 to learn from the leading business platforms, attend hands-on coding sessions, and network directly with DocuSign engineers and architects.  We'll be taking over Union Square in San Francisco for this 2-day developer conference starting with an opening keynote from the legendary Geoffrey Moore.  [LEARN MORE](http://momentum.docusign.com/san-francisco/dev-con/?mc=devcon-github-ios)
-
-
 DocuSign iOS SDK Beta
 =========================================
 
@@ -18,7 +10,7 @@ Pre-requisites
 
 ### DocuSign Developer account (Free)
 
-You can create your free dev account at the [DocuSign DevCenter](https://www.docusign.com/developer-center) using this [registration from](https://www.docusign.com/developer-center/get-started). You will need the **Integrator Key** from your developer account in order to use the DocuSign iOS SDK.
+You can create your free dev account at the [DocuSign DevCenter](https://www.docusign.com/developer-center) using this [registration form](https://www.docusign.com/developer-center/get-started). You will need the **Integrator Key** from your developer account in order to use the DocuSign iOS SDK.
 
 ### Useful Reading
 

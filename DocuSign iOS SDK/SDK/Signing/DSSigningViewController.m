@@ -301,12 +301,10 @@ typedef NS_ENUM(NSInteger, DSSigningViewControllerViewTag) {
 
 
 - (void)signing:(DSSigningAPIManager *)signingAPIManager canFinishChanged:(BOOL)canFinish {
-    self.navigationItem.rightBarButtonItem.enabled = canFinish;
-    if (![self.signingAPIManager canFinish] && ![self.signingAPIManager isFreeform]) {
-        self.navigationItem.rightBarButtonItem.title = @"Next";
-    } else {
-        self.navigationItem.rightBarButtonItem.title = @"Finish";
-    }
+    UIBarButtonItem *rightButton = self.navigationItem.rightBarButtonItem;
+    BOOL isFreeform = [self.signingAPIManager isFreeform];
+    rightButton.enabled = canFinish || !isFreeform; // Guided signing has next button, so always enabled
+    rightButton.title = (canFinish || isFreeform) ? @"Finish" : @"Next";
 }
 
 

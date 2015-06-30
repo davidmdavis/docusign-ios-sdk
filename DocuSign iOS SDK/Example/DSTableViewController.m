@@ -8,20 +8,7 @@
 
 #import "DSTableViewController.h"
 
-#import "DSSessionManager.h"
-#import "DSNetworkLogger.h"
-#import "DSSigningViewController.h"
-
-#import "DSLoginViewController.h"
-#import "DSLoginAccount.h"
-
-#import "DSCreateEnvelopeResponse.h"
-
-#import "DSEnvelopesListResponse.h"
-#import "DSEnvelopesListEnvelope.h"
-#import "DSEnvelopeRecipientsResponse.h"
-#import "DSEnvelopeRecipient.h"
-
+#import "DocuSign-iOS-SDK.h"
 
 NSString * const DSTableViewControllerIntegratorKey = @"<your-docusign-integrator-key>";
 DSRestAPIEnvironment const DSTableViewControllerEnvironment = DSRestAPIEnvironmentDemo;

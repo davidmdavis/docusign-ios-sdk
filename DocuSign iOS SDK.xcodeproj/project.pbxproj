@@ -95,6 +95,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0EE09FAA5FA5FFD42F6B9CC6 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		171C106519382E63002C7CCC /* NSString+DS_ValidEmail.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+DS_ValidEmail.h"; sourceTree = "<group>"; };
 		171C106619382E63002C7CCC /* NSString+DS_ValidEmail.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+DS_ValidEmail.m"; sourceTree = "<group>"; };
 		171C106819384D8D002C7CCC /* README.md */ = {isa = PBXFileReference; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
@@ -102,7 +103,6 @@
 		17EA2002192C370900AA6A4C /* DocuSign-iOS-SDK.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "DocuSign-iOS-SDK.podspec"; sourceTree = "<group>"; };
 		17EA2004192C38F700AA6A4C /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		17EDFAE7193007BA00D74281 /* DocuSign-iOS-SDK.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "DocuSign-iOS-SDK.h"; sourceTree = "<group>"; };
-		54088CEB7A224B80AED0FB5F /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 		5706DC1219195993002E2B6A /* DSFinePrintViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSFinePrintViewController.h; sourceTree = "<group>"; };
 		5706DC1319195993002E2B6A /* DSFinePrintViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSFinePrintViewController.m; sourceTree = "<group>"; };
 		57119592190F0B0400A98859 /* DSSigningViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSSigningViewController.h; sourceTree = "<group>"; };
@@ -236,6 +236,7 @@
 		57FD6019191455A900C58190 /* DSCompleteSigningViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSCompleteSigningViewController.m; sourceTree = "<group>"; };
 		57FD601B1914589C00C58190 /* DSStoryboardFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSStoryboardFactory.h; sourceTree = "<group>"; };
 		57FD601C1914589C00C58190 /* DSStoryboardFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSStoryboardFactory.m; sourceTree = "<group>"; };
+		654BA930AD5DC1590CE3396F /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		D67ED8D8B7E54337B189ABA3 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -282,6 +283,15 @@
 				57BB2D83191D4003002639C7 /* Helpers */,
 			);
 			path = Signature;
+			sourceTree = "<group>";
+		};
+		1FD81C37C6CD125CEE18ACE2 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				654BA930AD5DC1590CE3396F /* Pods.debug.xcconfig */,
+				0EE09FAA5FA5FFD42F6B9CC6 /* Pods.release.xcconfig */,
+			);
+			name = Pods;
 			sourceTree = "<group>";
 		};
 		574C5186190AF56E00B5E2FA /* Helpers */ = {
@@ -333,7 +343,7 @@
 				17EA2002192C370900AA6A4C /* DocuSign-iOS-SDK.podspec */,
 				17EA2004192C38F700AA6A4C /* LICENSE */,
 				171C106819384D8D002C7CCC /* README.md */,
-				54088CEB7A224B80AED0FB5F /* Pods.xcconfig */,
+				1FD81C37C6CD125CEE18ACE2 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -668,7 +678,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Pods-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		CB6A0492659542E2B8430E9D /* Check Pods Manifest.lock */ = {
@@ -870,7 +880,7 @@
 		};
 		57603F771906D41500E8C850 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 54088CEB7A224B80AED0FB5F /* Pods.xcconfig */;
+			baseConfigurationReference = 654BA930AD5DC1590CE3396F /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -884,7 +894,7 @@
 		};
 		57603F781906D41500E8C850 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 54088CEB7A224B80AED0FB5F /* Pods.xcconfig */;
+			baseConfigurationReference = 0EE09FAA5FA5FFD42F6B9CC6 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;

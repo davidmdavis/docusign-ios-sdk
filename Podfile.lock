@@ -4,7 +4,7 @@ PODS:
   - DSTextEntryValidation (1.0):
     - CMPopTipView (~> 2.2)
   - Mantle (1.5):
-    - Mantle/extobjc
+    - Mantle/extobjc (= 1.5)
   - Mantle/extobjc (1.5)
   - TPKeyboardAvoiding (1.2.3)
 
@@ -15,10 +15,10 @@ DEPENDENCIES:
   - TPKeyboardAvoiding (~> 1.2)
 
 SPEC CHECKSUMS:
-  AKANetworkLogging: 7936fe0b7a083825e79326588b18fa57d301eb4d
-  CMPopTipView: f731ea93316c4f964d3d5d8e71b4ba0ae30bf5a4
-  DSTextEntryValidation: 1a5c04cc150b5c7f021f11de74b3d5802833dd42
-  Mantle: c67a7e45e14196ed42b2a7cbb98ff6a9920e6b92
-  TPKeyboardAvoiding: ca26afa683d829cb96fe69b887fc8be4178f0b9a
+  AKANetworkLogging: 25f623162046a1fc9ec77b042924c1db2ca0b1b8
+  CMPopTipView: a0a88404b9f46a5cfc16ce54bdb1b9bf9acb9aff
+  DSTextEntryValidation: 89b89b156e3cfb6cbf1bc83f040c8b92959c319e
+  Mantle: 3bf6db311c8b4a19b6be01f2483fa4590aa166f3
+  TPKeyboardAvoiding: ab1760b9813202b5a570a2cef4b4404ef36b50c5
 
-COCOAPODS: 0.33.1
+COCOAPODS: 0.37.2

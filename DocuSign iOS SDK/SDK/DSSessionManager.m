@@ -685,10 +685,10 @@ withResponseObject:(id)responseObject
             if ([inPersonSigner.hostName length] != 0 && [inPersonSigner.hostEmail length] != 0 && [inPersonSigner.signerName length] != 0 && [inPersonSigner.roleName length] != 0) {
                 // hostName, hostEmail, signerName, and roleName are required template parameters for in-person signers
                 NSMutableDictionary *templateRole = [NSMutableDictionary dictionaryWithDictionary:
-                                                     @{@"hostName"      : inPersonSigner.hostName,
-                                                       @"hostEmail"     : inPersonSigner.hostEmail,
-                                                       @"signerName"    : inPersonSigner.signerName,
-                                                       @"roleName"      : inPersonSigner.roleName }];
+                                                     @{@"name"               : inPersonSigner.hostName,
+                                                       @"email"              : inPersonSigner.hostEmail,
+                                                       @"inPersonSignerName" : inPersonSigner.signerName,
+                                                       @"roleName"           : inPersonSigner.roleName }];
                 if ([inPersonSigner.clientUserID length] != 0) {
                     templateRole[@"clientUserId"] = inPersonSigner.clientUserID;
                 }

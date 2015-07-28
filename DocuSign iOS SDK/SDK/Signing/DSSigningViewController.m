@@ -278,6 +278,8 @@ typedef NS_ENUM(NSInteger, DSSigningViewControllerViewTag) {
         return;
     }
     
+    return; //Turned off for demo
+    
     NSString *signerName = self.currentSigner.name;
     DSStartSigningViewController *viewController = [[DSStartSigningViewController alloc] initWithConsumerDisclosure:[self.signingAPIManager consumerDisclosure]
                                                                                                       recipientName:signerName
@@ -319,6 +321,10 @@ typedef NS_ENUM(NSInteger, DSSigningViewControllerViewTag) {
     if ([self isHostedSigning]) { // We will ignore here, because we ALWAYS show for hosted signing is -signingIsReady
         return;
     }
+    
+    [self.signingAPIManager acceptConsumerDisclosure]; // Force accept for demo
+    
+    return; // demo
     
     NSString *signerName = self.currentSigner.name;
     DSStartSigningViewController *viewController = [[DSStartSigningViewController alloc] initWithConsumerDisclosure:consumerDisclosure

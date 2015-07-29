@@ -3,12 +3,17 @@
     {
       "idiom" : "universal",
       "scale" : "1x",
-      "filename" : "powered_ds_logo.png"
+      "filename" : "ext_powered_by_ds.png"
     },
     {
       "idiom" : "universal",
       "scale" : "2x",
-      "filename" : "powered_ds_logo@2x.png"
+      "filename" : "ext_powered_by_ds@2x.png"
+    },
+    {
+      "idiom" : "universal",
+      "scale" : "3x",
+      "filename" : "ext_powered_by_ds@3x.png"
     }
   ],
   "info" : {

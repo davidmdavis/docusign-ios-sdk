@@ -70,7 +70,9 @@
                             </connections>
                         </barButtonItem>
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="WVA-TH-En4"/>
-                        <barButtonItem enabled="NO" image="powered_by" style="plain" id="b5q-x0-cYq"/>
+                        <barButtonItem image="powered_by" style="plain" id="b5q-x0-cYq">
+                            <color key="tintColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
+                        </barButtonItem>
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="AXv-h5-iZL"/>
                         <barButtonItem image="paginate_down_icon" id="bPE-FR-rmL">
                             <connections>
@@ -473,7 +475,7 @@
         <image name="big_checkmark" width="71" height="51"/>
         <image name="paginate_down_icon" width="21" height="12"/>
         <image name="paginate_up_icon" width="21" height="12"/>
-        <image name="powered_by" width="120" height="19"/>
+        <image name="powered_by" width="67" height="27"/>
         <image name="rotate_left_icon" width="31" height="20"/>
         <image name="rotate_right_icon" width="31" height="20"/>
     </resources>

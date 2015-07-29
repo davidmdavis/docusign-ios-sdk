@@ -719,6 +719,7 @@ withResponseObject:(id)responseObject
 - (NSURLSessionDataTask *)startSendEnvelopeFromTemplateTaskWithTemplateId:(NSString *)templateId
                                                                recipients:(NSArray *)recipients
                                                              emailSubject:(NSString *)emailSubject
+                                                                  address:(NSString *)address
                                                         completionHandler:(void (^)(DSCreateEnvelopeResponse *response, NSError *error))completionHandler {
     NSAssert(self.isAuthenticated, @"Call -[DSSessionManager authenticate] before starting additional tasks.");
     NSParameterAssert(templateId);
@@ -738,6 +739,18 @@ withResponseObject:(id)responseObject
 
     if (emailSubject) {
         body[@"emailSubject"] = emailSubject;
+    }
+    
+    if (address) {
+        NSDictionary *customFields = @{
+                                       @"textCustomFields": @[
+                                               @{
+                                                   @"name": @"##BLOCKCHAIN_ADDRESS##",
+                                                   @"value": address
+                                                }
+                                            ]
+                                       };
+        body[@"customFields"] = customFields;
     }
     
     // configure endpoint, build request body, and send

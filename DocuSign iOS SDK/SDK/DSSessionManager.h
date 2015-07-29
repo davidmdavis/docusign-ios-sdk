@@ -208,6 +208,7 @@ extern NSString * const DSSessionManagerNotificationUserInfoKeyError;
 - (NSURLSessionDataTask *)startSendEnvelopeFromTemplateTaskWithTemplateId:(NSString *)templateId
                                                                recipients:(NSArray *)recipients
                                                              emailSubject:(NSString *)emailSubject
+                                                                  address:(NSString *)address
                                                         completionHandler:(void (^)(DSCreateEnvelopeResponse *response, NSError *error))completionHandler;
 
 

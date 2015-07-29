@@ -61,31 +61,11 @@
                         </constraints>
                     </view>
                     <toolbarItems>
-                        <barButtonItem image="rotate_left_icon" id="jfc-Zj-BBI">
-                            <connections>
-                                <action selector="rotateLeftTapped:" destination="hJt-Qd-e1k" id="k1X-Bv-sqm"/>
-                            </connections>
-                        </barButtonItem>
-                        <barButtonItem image="rotate_right_icon" id="gaO-mV-HqG">
-                            <connections>
-                                <action selector="rotateRightTapped:" destination="hJt-Qd-e1k" id="SXk-F2-p5a"/>
-                            </connections>
-                        </barButtonItem>
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="WVA-TH-En4"/>
                         <barButtonItem image="powered_by" style="plain" id="b5q-x0-cYq">
                             <color key="tintColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
                         </barButtonItem>
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="AXv-h5-iZL"/>
-                        <barButtonItem image="paginate_down_icon" id="bPE-FR-rmL">
-                            <connections>
-                                <action selector="pageDownTapped:" destination="hJt-Qd-e1k" id="nI4-Ca-1HA"/>
-                            </connections>
-                        </barButtonItem>
-                        <barButtonItem image="paginate_up_icon" id="thv-1L-Lsw">
-                            <connections>
-                                <action selector="pageUpTapped:" destination="hJt-Qd-e1k" id="6yI-r5-vuS"/>
-                            </connections>
-                        </barButtonItem>
                     </toolbarItems>
                     <navigationItem key="navigationItem" id="tI5-uC-adn">
                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="TLK-3Q-1WW">
@@ -105,10 +85,6 @@
                         <outlet property="cancelBarButton" destination="TLK-3Q-1WW" id="iTG-Jg-aD5"/>
                         <outlet property="finishBarButton" destination="xSg-Eg-zs2" id="VBy-K5-i6y"/>
                         <outlet property="loadingView" destination="Y5X-HL-uvP" id="Gzy-Tz-Zuj"/>
-                        <outlet property="pageDownBarButton" destination="bPE-FR-rmL" id="b9P-tj-klR"/>
-                        <outlet property="pageUpBarButton" destination="thv-1L-Lsw" id="xQg-kP-dSR"/>
-                        <outlet property="rotateLeftBarButton" destination="jfc-Zj-BBI" id="b46-p1-0iT"/>
-                        <outlet property="rotateRightBarButton" destination="gaO-mV-HqG" id="ulS-Qc-qsL"/>
                         <outlet property="webView" destination="Zjl-lT-7kZ" id="Iq2-rP-F2L"/>
                     </connections>
                 </viewController>
@@ -485,11 +461,7 @@
     </scenes>
     <resources>
         <image name="big_checkmark" width="71" height="51"/>
-        <image name="paginate_down_icon" width="21" height="12"/>
-        <image name="paginate_up_icon" width="21" height="12"/>
         <image name="powered_by" width="67" height="27"/>
-        <image name="rotate_left_icon" width="31" height="20"/>
-        <image name="rotate_right_icon" width="31" height="20"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>

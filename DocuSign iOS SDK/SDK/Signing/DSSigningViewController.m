@@ -44,7 +44,7 @@ typedef NS_ENUM(NSInteger, DSSigningViewControllerViewTag) {
 };
 
 
-@interface DSSigningViewController () <DSSigningAPIDelegate, UIActionSheetDelegate, DSStartSigningViewControllerDelegate, DSDeclineSigningViewControllerDelegate, DSCompleteSigningViewControllerDelegate, DSSignatureCaptureDelegate>
+@interface DSSigningViewController () <DSSigningAPIDelegate, UIActionSheetDelegate, DSStartSigningViewControllerDelegate, DSDeclineSigningViewControllerDelegate, DSCompleteSigningViewControllerDelegate, DSSignatureCaptureDelegate, UIGestureRecognizerDelegate>
 
 
 @property (nonatomic, weak) IBOutlet UIWebView *webView;
@@ -59,6 +59,7 @@ typedef NS_ENUM(NSInteger, DSSigningViewControllerViewTag) {
 
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *pageDownBarButton;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *pageUpBarButton;
+@property (weak, nonatomic) IBOutlet UIView *startingPromptView;
 
 - (IBAction)cancelTapped:(id)sender;
 - (IBAction)finishTapped:(id)sender;
@@ -83,6 +84,7 @@ typedef NS_ENUM(NSInteger, DSSigningViewControllerViewTag) {
 
 @property (nonatomic, readonly) NSURL *messageURL;
 
+@property (nonatomic) BOOL receivedFirstTouch;
 
 @end
 
@@ -121,6 +123,34 @@ typedef NS_ENUM(NSInteger, DSSigningViewControllerViewTag) {
     self.webView.hidden = YES;
     
     self.signingAPIManager = [[DSSigningAPIManager alloc] initWithWebView:self.webView messageURL:[self messageURL] andDelegate:self];
+    
+    UIGestureRecognizer *touchDetectingGestureRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:nil action:nil];
+    touchDetectingGestureRecognizer.delegate = self;
+    [self.webView addGestureRecognizer:touchDetectingGestureRecognizer];
+    
+    self.startingPromptView.hidden = YES;
+    self.startingPromptView.layer.cornerRadius = 10;
+}
+
+- (void)hideStartingPromptView {
+    [UIView animateWithDuration:0.3
+                          delay:0
+                        options:UIViewAnimationOptionAllowUserInteraction
+                     animations:^{
+                         self.startingPromptView.alpha = 0;
+                     }
+                     completion:^(BOOL finished) {
+                         [self.startingPromptView removeFromSuperview];
+                     }];
+}
+
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch {
+    if (!self.receivedFirstTouch) {
+        self.receivedFirstTouch = YES;
+        [self.webView removeGestureRecognizer:gestureRecognizer];
+        [self hideStartingPromptView];
+    }
+    return NO;
 }
 
 
@@ -191,6 +221,9 @@ typedef NS_ENUM(NSInteger, DSSigningViewControllerViewTag) {
 
 
 - (IBAction)finishTapped:(id)sender {
+    if (self.startingPromptView) {
+        [self hideStartingPromptView];
+    }
     if (![self.signingAPIManager canFinish] && ![self.signingAPIManager isFreeform]) {
         [self.signingAPIManager autoNavigate];
         return;
@@ -274,6 +307,7 @@ typedef NS_ENUM(NSInteger, DSSigningViewControllerViewTag) {
     if (![self isHostedSigning]) { // If this is not hosted signing, we will have shown this screen already in -didRequestConsumerDisclosureConsent: if it was necessary
         self.loadingView.hidden = YES;
         self.webView.hidden = NO;
+        self.startingPromptView.hidden = NO;
         [self.navigationController setToolbarHidden:NO animated:YES];
         return;
     }

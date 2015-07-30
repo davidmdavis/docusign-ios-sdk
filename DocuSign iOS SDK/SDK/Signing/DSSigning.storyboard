@@ -30,7 +30,7 @@
                                         <animations/>
                                     </activityIndicatorView>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Loading..." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4dM-kQ-qJP">
-                                        <rect key="frame" x="0.0" y="28" width="100" height="21"/>
+                                        <rect key="frame" x="0.0" y="28" width="100" height="20.5"/>
                                         <animations/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="highlightedColor"/>
@@ -48,16 +48,39 @@
                                     <constraint firstItem="Eil-5N-1bb" firstAttribute="top" secondItem="Y5X-HL-uvP" secondAttribute="top" id="tSc-GV-Hia"/>
                                 </constraints>
                             </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VEk-sc-1u2">
+                                <rect key="frame" x="192" y="111" width="384" height="46"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dei-za-4CP">
+                                        <rect key="frame" x="0.0" y="0.0" width="384" height="46"/>
+                                        <animations/>
+                                        <state key="normal" title="Get Started">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="finishTapped:" destination="hJt-Qd-e1k" eventType="touchUpInside" id="cyq-H3-EKd"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <animations/>
+                                <color key="backgroundColor" white="0.0" alpha="0.77282639953987731" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="46" id="bbo-J2-VJX"/>
+                                    <constraint firstAttribute="width" constant="384" id="eoq-I3-d0O"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="Y5X-HL-uvP" firstAttribute="centerY" secondItem="Zjl-lT-7kZ" secondAttribute="centerY" constant="-0.5" id="Hfu-UP-F0n"/>
                             <constraint firstItem="Y5X-HL-uvP" firstAttribute="centerX" secondItem="Zjl-lT-7kZ" secondAttribute="centerX" id="Lo5-3F-Jxz"/>
+                            <constraint firstItem="VEk-sc-1u2" firstAttribute="top" secondItem="aNm-gX-qtC" secondAttribute="bottom" constant="47" id="P5f-Kn-8L6"/>
                             <constraint firstAttribute="trailing" secondItem="Zjl-lT-7kZ" secondAttribute="trailing" id="W2w-GY-1FD"/>
                             <constraint firstItem="Zjl-lT-7kZ" firstAttribute="leading" secondItem="3HT-0G-BlM" secondAttribute="leading" id="WgA-RI-52y"/>
                             <constraint firstItem="Zjl-lT-7kZ" firstAttribute="top" secondItem="aNm-gX-qtC" secondAttribute="bottom" constant="-64" id="fGM-Mv-w6z"/>
                             <constraint firstItem="CmO-Td-ugw" firstAttribute="top" secondItem="Zjl-lT-7kZ" secondAttribute="bottom" constant="-44" id="iRv-36-pka"/>
+                            <constraint firstAttribute="centerX" secondItem="VEk-sc-1u2" secondAttribute="centerX" id="wFS-sJ-fpq"/>
                         </constraints>
                     </view>
                     <toolbarItems>
@@ -85,6 +108,7 @@
                         <outlet property="cancelBarButton" destination="TLK-3Q-1WW" id="iTG-Jg-aD5"/>
                         <outlet property="finishBarButton" destination="xSg-Eg-zs2" id="VBy-K5-i6y"/>
                         <outlet property="loadingView" destination="Y5X-HL-uvP" id="Gzy-Tz-Zuj"/>
+                        <outlet property="startingPromptView" destination="VEk-sc-1u2" id="b9O-xH-rYr"/>
                         <outlet property="webView" destination="Zjl-lT-7kZ" id="Iq2-rP-F2L"/>
                     </connections>
                 </viewController>

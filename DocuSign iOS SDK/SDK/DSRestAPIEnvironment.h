@@ -11,7 +11,8 @@
 
 typedef NS_ENUM(NSInteger, DSRestAPIEnvironment) {
     DSRestAPIEnvironmentDemo,
-    DSRestAPIEnvironmentProduction
+    DSRestAPIEnvironmentProduction,
+    DSRestAPIEnvironmentOneBox9
 };
 
 static inline NSString *DSURLStringFromEnvironment(DSRestAPIEnvironment environment) {
@@ -21,6 +22,9 @@ static inline NSString *DSURLStringFromEnvironment(DSRestAPIEnvironment environm
             break;
         case DSRestAPIEnvironmentProduction:
             return @"https://www.docusign.net";
+            break;
+        case DSRestAPIEnvironmentOneBox9:
+            return @"https://onebox9.docusign.net";
             break;
     }
 }

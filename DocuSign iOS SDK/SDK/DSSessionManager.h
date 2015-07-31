@@ -46,7 +46,7 @@ extern NSString * const DSSessionManagerNotificationUserInfoKeyError;
 @class DSEnvelopesListResponse;
 @class DSEnvelopeDetailsResponse, DSTemplateDetailsResponse, DSEnvelopeRecipientsResponse;
 @class DSUserSignaturesResponse, DSUserSignature;
-
+@class DSEnvelopeCustomFieldsResponse;
 
 @protocol DSSessionManagerAuthenticationDelegate <NSObject>
 
@@ -211,6 +211,8 @@ extern NSString * const DSSessionManagerNotificationUserInfoKeyError;
                                                                   address:(NSString *)address
                                                         completionHandler:(void (^)(DSCreateEnvelopeResponse *response, NSError *error))completionHandler;
 
+- (NSURLSessionDataTask *)startEnvelopeCustomFieldsTaskForEnvelopeWithID:(NSString *)envelopeID
+                                                       completionHandler:(void (^)(DSEnvelopeCustomFieldsResponse *response, NSError *error))completionHandler;
 
 /**
  *  Lists (retrieves) envelopes for a given search folder.  (I.E. See what envelopes are awaiting your signature)

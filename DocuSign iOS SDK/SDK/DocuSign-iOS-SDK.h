@@ -26,6 +26,10 @@
 #import "DSUserSignature.h"
 #import "DSUserSignaturesResponse.h"
 
+#import "DSEnvelopeCustomFieldsResponse.h"
+#import "DSListCustomField.h"
+#import "DSTextCustomField.h"
+
 #import "DSNetworkLogger.h"
 
 #import "DSSigningViewController.h"

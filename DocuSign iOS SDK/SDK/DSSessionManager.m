@@ -35,6 +35,7 @@
 #import "DSUserSignaturesResponse.h"
 #import "DSUserSignature.h"
 
+#import "DSEnvelopeCustomFieldsResponse.h"
 
 NSString * const DSSessionManagerErrorDomain = @"DSSessionManagerErrorDomain";
 
@@ -767,6 +768,20 @@ withResponseObject:(id)responseObject
                                completionHandler(createEnvelopeResponse, nil);
                            }
                        }];
+}
+
+- (NSURLSessionDataTask *)startEnvelopeCustomFieldsTaskForEnvelopeWithID:(NSString *)envelopeID
+                                                       completionHandler:(void (^)(DSEnvelopeCustomFieldsResponse *, NSError *))completionHandler {
+    NSAssert(self.isAuthenticated, @"Call -[DSSessionManager authenticate] before starting additional tasks.");
+    NSParameterAssert(envelopeID);
+    NSParameterAssert(completionHandler);
+    
+    NSString *relativeURLString = [[NSString alloc] initWithFormat:@"accounts/%@/envelopes/%@/custom_fields", self.account.accountID, envelopeID];
+    
+    return [self startDataTaskToGETRelativeURLString:relativeURLString
+                                     queryDictionary:nil
+                                       responseClass:[DSEnvelopeCustomFieldsResponse class]
+                                   completionHandler:completionHandler];
 }
 
 

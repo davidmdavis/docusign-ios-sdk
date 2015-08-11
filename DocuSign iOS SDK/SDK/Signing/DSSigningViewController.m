@@ -34,7 +34,7 @@
 #import "DSUserSignature.h"
 
 #import "DSRotationForwardingNavigationControllerViewController.h"
-
+#import "UIViewController+DSLoading.h"
 
 NSString * const DSSigningViewControllerErrorDomain = @"DSSigningViewControllerErrorDomain";
 
@@ -512,6 +512,7 @@ typedef NS_ENUM(NSInteger, DSSigningViewControllerViewTag) {
 
 - (void)signatureCapture:(UIViewController *)capController didFinishWithInitials:(UIImage *)initials {
     [self dismissViewControllerAnimated:YES completion:nil];
+    [self ds_showLoading];
     [self.sessionManager startRecipientSignatureCreateTaskForRecipientID:self.currentSigner.recipientID inEnvelopeWithID:self.envelopeID image:initials signaturePart:DSSignaturePartInitials completionHandler:^(NSError *error) {
         if (error) {
             [self handleSignatureError:error];
@@ -519,10 +520,12 @@ typedef NS_ENUM(NSInteger, DSSigningViewControllerViewTag) {
         }
         [self.sessionManager startRecipientSignatureDetailsTaskForRecipientID:self.currentSigner.recipientID inEnvelopeWithID:self.envelopeID completionHandler:^(DSUserSignature *response, NSError *error) {
             if (error) {
+                [self ds_hideLoading];
                 [self handleSignatureError:error];
                 return;
             }
             [self.signingAPIManager adoptInitials:response.initials150ImageID];
+            [self ds_hideLoading];
         }];
     }];
 }
@@ -530,6 +533,7 @@ typedef NS_ENUM(NSInteger, DSSigningViewControllerViewTag) {
 
 - (void)signatureCapture:(UIViewController *)capController didFinishWithSignature:(UIImage *)signature {
     [self dismissViewControllerAnimated:YES completion:nil];
+    [self ds_showLoading];
     [self.sessionManager startRecipientSignatureCreateTaskForRecipientID:self.currentSigner.recipientID inEnvelopeWithID:self.envelopeID image:signature signaturePart:DSSignaturePartSignature completionHandler:^(NSError *error) {
         if (error) {
             [self handleSignatureError:error];
@@ -537,10 +541,12 @@ typedef NS_ENUM(NSInteger, DSSigningViewControllerViewTag) {
         }
         [self.sessionManager startRecipientSignatureDetailsTaskForRecipientID:self.currentSigner.recipientID inEnvelopeWithID:self.envelopeID completionHandler:^(DSUserSignature *response, NSError *error) {
             if (error) {
+                [self ds_hideLoading];
                 [self handleSignatureError:error];
                 return;
             }
             [self.signingAPIManager adoptSignature:response.signature150ImageID];
+            [self ds_hideLoading];
         }];
     }];
 }

@@ -16,6 +16,7 @@
 #import "DSChooseAccountViewController.h"
 #import "DSLoginAccount.h"
 
+#import "UIViewController+DSLoading.h"
 
 @interface DSLoginViewController () <UITextFieldDelegate, DSSessionManagerAuthenticationDelegate, DSChooseAccountViewControllerDelegate>
 
@@ -95,6 +96,7 @@
         [[[UIAlertView alloc] initWithTitle:@"Please enter your credentials" message:nil delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
         return;
     }
+    [self ds_showLoading];
     [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
     self.sessionManager = [[DSSessionManager alloc] initWithIntegratorKey:self.integratorKey
                                                            forEnvironment:self.environment
@@ -109,18 +111,21 @@
 
 
 - (void)sessionManager:(DSSessionManager *)sessionManager authenticationSucceededWithAccount:(DSLoginAccount *)account {
+    [self ds_hideLoading];
     [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
     [self.delegate loginViewController:self didLoginWithSessionManager:self.sessionManager];
 }
 
 
 - (void)sessionManager:(DSSessionManager *)sessionManager authenticationFailedWithError:(NSError *)error {
+    [self ds_hideLoading];
     [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
     [[[UIAlertView alloc] initWithTitle:@"Login Failed" message:error.localizedDescription delegate:nil cancelButtonTitle:@"Try Again" otherButtonTitles:nil] show];
 }
 
 
 - (void)sessionManager:(DSSessionManager *)sessionManager chooseAccountIDFromAvailableAccounts:(NSArray *)accounts completeAuthenticationHandler:(void (^)(NSString *accountID))completeAuthenticationHandler {
+    [self ds_hideLoading];
     [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
     self.completeAuthenticationHandler = completeAuthenticationHandler;
     DSChooseAccountViewController *viewController = [[DSChooseAccountViewController alloc] initWithAccounts:accounts delegate:self];

@@ -228,10 +228,17 @@ typedef NS_ENUM(NSInteger, DSSigningViewControllerViewTag) {
         [self.signingAPIManager autoNavigate];
         return;
     }
-    DSCompleteSigningViewController *controller = [[DSCompleteSigningViewController alloc] initWithDelegate:self];
-    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:controller];
-    navController.modalPresentationStyle = UIModalPresentationFormSheet;
-    [self presentViewController:navController animated:YES completion:nil];
+    UIAlertController *controller = [UIAlertController alertControllerWithTitle:@"Are you finished signing?" message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil];
+    UIAlertAction *finishAction = [UIAlertAction actionWithTitle:@"Finish Signing" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        [self ds_showLoading];
+        [self changeSigningStatus:DSSigningCompletedStatusSigned withObject:nil];
+    }];
+    [controller addAction:cancelAction];
+    [controller addAction:finishAction];
+
+    controller.popoverPresentationController.barButtonItem = sender;
+    [self presentViewController:controller animated:YES completion:nil];
 }
 
 
@@ -273,8 +280,6 @@ typedef NS_ENUM(NSInteger, DSSigningViewControllerViewTag) {
 }
 
 - (void)changeSigningStatus:(DSSigningCompletedStatus)status withObject:(id)object {
-    self.loadingView.hidden = NO;
-    self.webView.hidden = YES;
     
     if (!self.signingAPIManager.ready) { // If APIManager isn't ready, just dismiss
         [self.delegate signingViewController:self completedWithStatus:status];
@@ -423,13 +428,6 @@ typedef NS_ENUM(NSInteger, DSSigningViewControllerViewTag) {
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
     return YES;
 }
-
-
-- (void)webViewDidStartLoad:(UIWebView *)webView {
-    self.loadingView.hidden = NO;
-    self.webView.hidden = YES;
-}
-
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView {
     self.loadingView.hidden = YES;

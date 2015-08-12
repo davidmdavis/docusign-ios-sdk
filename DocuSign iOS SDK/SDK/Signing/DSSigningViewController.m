@@ -286,6 +286,10 @@ typedef NS_ENUM(NSInteger, DSSigningViewControllerViewTag) {
         return;
     }
     
+    if ([self.delegate respondsToSelector:@selector(signingViewController:startedTransitionToStatus:)]) {
+        [self.delegate signingViewController:self startedTransitionToStatus:status];
+    }
+    
     switch (status) {
         case DSSigningCompletedStatusSigned:
             [self.signingAPIManager finishSigning];

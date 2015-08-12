@@ -17,4 +17,8 @@
 - (void)signingViewController:(DSSigningViewController *)signingViewController completedWithStatus:(DSSigningCompletedStatus)status;
 - (void)signingViewController:(DSSigningViewController *)signingViewController failedWithError:(NSError *)error;
 
+@optional
+
+- (void)signingViewController:(DSSigningViewController *)signingViewController startedTransitionToStatus:(DSSigningCompletedStatus)status;
+
 @end

@@ -13,7 +13,7 @@ Pod::Spec.new do |s|
   s.requires_arc = true
   
   s.source_files = ['**/SDK/**/*.{h,m}']
-  s.resources = ['**/SDK/**/*.{storyboard,xcassets}']
+  s.resources = ['**/SDK/**/*.{storyboard,xcassets,xib}']
   
   s.frameworks = 'AVFoundation', 'CoreLocation', 'Foundation', 'ImageIO', 'MobileCoreServices', 'QuartzCore', 'UIKit'
   s.libraries = 'objc'

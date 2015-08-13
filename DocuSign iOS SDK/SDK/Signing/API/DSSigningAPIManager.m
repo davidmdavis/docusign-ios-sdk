@@ -147,7 +147,6 @@ static NSString * const DS_SIGNING_API_TABS[] = {
 
 - (void)userContentController:(WKUserContentController *)userContentController didReceiveScriptMessage:(WKScriptMessage *)message {
     if ([message.name isEqualToString:DS_SIGNING_MESSAGE_HANDLER]) {
-        NSLog(@"%@", message.body);
         [self handleMessage:(NSString *)message.body[@"id"] data:(NSDictionary *)message.body[@"data"]];
     } else if ([message.name isEqualToString:DS_SIGNING_STARTED_HANDLER]) {
         self.awaitingFirstMessage = YES;

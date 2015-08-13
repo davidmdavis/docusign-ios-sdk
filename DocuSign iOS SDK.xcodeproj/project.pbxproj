@@ -12,6 +12,7 @@
 		173B00FB1B6C259D00FBBC12 /* DSEnvelopeCustomFieldsResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 173B00FA1B6C259D00FBBC12 /* DSEnvelopeCustomFieldsResponse.m */; };
 		173B00FE1B6C26A800FBBC12 /* DSListCustomField.m in Sources */ = {isa = PBXBuildFile; fileRef = 173B00FD1B6C26A800FBBC12 /* DSListCustomField.m */; };
 		173B01011B6C271500FBBC12 /* DSTextCustomField.m in Sources */ = {isa = PBXBuildFile; fileRef = 173B01001B6C271500FBBC12 /* DSTextCustomField.m */; };
+		1745B5D81B7D262000A52FEF /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1745B5D71B7D262000A52FEF /* WebKit.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		177F2239193818A300BEC92C /* Sales Order.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 177F2238193818A300BEC92C /* Sales Order.pdf */; };
 		17EA2003192C370900AA6A4C /* DocuSign-iOS-SDK.podspec in Resources */ = {isa = PBXBuildFile; fileRef = 17EA2002192C370900AA6A4C /* DocuSign-iOS-SDK.podspec */; };
 		17EA2005192C38F700AA6A4C /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 17EA2004192C38F700AA6A4C /* LICENSE */; };
@@ -114,6 +115,7 @@
 		173B00FD1B6C26A800FBBC12 /* DSListCustomField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSListCustomField.m; sourceTree = "<group>"; };
 		173B00FF1B6C271500FBBC12 /* DSTextCustomField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSTextCustomField.h; sourceTree = "<group>"; };
 		173B01001B6C271500FBBC12 /* DSTextCustomField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSTextCustomField.m; sourceTree = "<group>"; };
+		1745B5D71B7D262000A52FEF /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		177F2238193818A300BEC92C /* Sales Order.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "Sales Order.pdf"; sourceTree = "<group>"; };
 		17EA2002192C370900AA6A4C /* DocuSign-iOS-SDK.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "DocuSign-iOS-SDK.podspec"; sourceTree = "<group>"; };
 		17EA2004192C38F700AA6A4C /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
@@ -271,6 +273,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1745B5D81B7D262000A52FEF /* WebKit.framework in Frameworks */,
 				57603F471906D41500E8C850 /* CoreGraphics.framework in Frameworks */,
 				57603F491906D41500E8C850 /* UIKit.framework in Frameworks */,
 				57603F451906D41500E8C850 /* Foundation.framework in Frameworks */,
@@ -390,6 +393,7 @@
 		57603F431906D41500E8C850 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				1745B5D71B7D262000A52FEF /* WebKit.framework */,
 				57603F441906D41500E8C850 /* Foundation.framework */,
 				57603F461906D41500E8C850 /* CoreGraphics.framework */,
 				57603F481906D41500E8C850 /* UIKit.framework */,

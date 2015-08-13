@@ -6,13 +6,15 @@
 //  Copyright (c) 2013 DocuSign, Inc. All rights reserved.
 //
 
+@import WebKit;
+
 #import "DSSigningAPITab.h"
 
 @class DSSigningAPIConsumerDisclosure, DSSigningAPIDeclineSigning;
 
 @class DSSigningAPIManager, DSSigningAPIDeclineOptions, DSSigningAPIAdoptSignatureTabDetails, DSSigningAPIAddCCRecipients;
 
-@protocol DSSigningAPIDelegate <UIWebViewDelegate>
+@protocol DSSigningAPIDelegate <WKNavigationDelegate>
 
 - (void)signingIsReady:(DSSigningAPIManager *)signingAPIManager;
 
@@ -53,9 +55,13 @@
 /**
  *  Load a signing session in DSSigningAPIManager, any current sessions will cancel and save the session for later.
  */
-- (instancetype)initWithWebView:(UIWebView *)webView messageURL:(NSURL *)messageURL andDelegate:(id<DSSigningAPIDelegate>)delegate;
+- (instancetype)initWithViewFrame:(CGRect)frame messageURL:(NSURL *)messageURL andDelegate:(id<DSSigningAPIDelegate>)delegate;
 
 @property (nonatomic, readonly) NSURL *messageURL;
+
+@property (nonatomic, strong, readonly) WKWebView *webView;
+
+- (void)startSigningWithURL:(NSURL *)url;
 
 /**
  *  Object complying with DSSigningAPIManagerDelegate that will receive signing session event notifications
@@ -79,7 +85,7 @@
  *
  *  @return YES if signing finished successfully, NO otherwise
  */
-- (BOOL)finishSigning;
+- (void)finishSigning:(void (^)(BOOL finished))completion;
 
 #pragma mark - Carbon Copy Recipients
 
@@ -88,7 +94,7 @@
  *
  *  @return the default information to display when prompting the user to add carbon copy recipients
  */
-- (DSSigningAPIAddCCRecipients *)carbonCopyRecipientAddingOptions;
+- (void)carbonCopyRecipientAddingOptions:(void (^)(DSSigningAPIAddCCRecipients *options))completion;
 
 /**
  *  Adds carbon copy recipients to the envelope. Used to
@@ -111,23 +117,21 @@
  *
  *  @return the Electronic Record and Signature Disclosure the signer must agree to
  */
-- (DSSigningAPIConsumerDisclosure *)consumerDisclosure;
+- (void)consumerDisclosure:(void (^)(DSSigningAPIConsumerDisclosure *disclosure))completion;
 
 #pragma mark - Decline
 
 /**
- *  Returns YES if current signer is allowed to decline the envelope.
- *
- *  @return YES if current signer is allowed to decline the envelope
+ *  YES if current signer is allowed to decline the envelope.
  */
-- (BOOL)canDecline;
+@property (nonatomic) BOOL canDecline;
 
 /**
  *  Return the options available to decline signing an envelope. If no options are returned, decline is not allowed.
  *
  *  @return the options available to decline signing an envelope
  */
-- (DSSigningAPIDeclineOptions *)declineOptions;
+- (void)declineOptions:(void (^)(DSSigningAPIDeclineOptions *options))completion;
 
 /**
  *  Decline to sign an envelope, and end the signing ceremony.
@@ -185,14 +189,14 @@
  *
  *  @return The number of pages.
  */
-- (NSInteger)pageCount;
+- (void)pageCount:(void (^)(NSUInteger count))completion;
 
 /**
  *  Returns the current page number.
  *
  *  @return the current page number
  */
-- (NSInteger)currentPageNumber;
+- (void)currentPageNumber:(void (^)(NSUInteger count))completion;
 
 #pragma mark - Rotate Page
 
@@ -223,18 +227,16 @@
 @property (nonatomic) DSSigningAPITab selectedFreeformTab;
 
 /**
- *  Returns YES if tabs can be selected and applied by the current signer.
- *
- *  @return YES if tabs can be selected and applied by the current signer
+ *  YES if tabs can be selected and applied by the current signer.
  */
-- (BOOL)isFreeform;
+@property (nonatomic) BOOL isFreeform;
 
 /**
  *  Returns information describing the tab which caused the user to adopt their signature.
  *
  *  @return information describing the tab which caused the user to adopt their signature
  */
-- (DSSigningAPIAdoptSignatureTabDetails *)currentSignatureTabDetails;
+- (void)currentSignatureTabDetails:(void (^)(DSSigningAPIAdoptSignatureTabDetails *details))completion;
 
 /**
  *  If YES, converts pdf fields in the document to tags. Otherwise ???

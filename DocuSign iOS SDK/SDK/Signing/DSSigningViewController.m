@@ -36,6 +36,8 @@
 #import "DSRotationForwardingNavigationControllerViewController.h"
 #import "UIViewController+DSLoading.h"
 
+@import WebKit;
+
 NSString * const DSSigningViewControllerErrorDomain = @"DSSigningViewControllerErrorDomain";
 
 typedef NS_ENUM(NSInteger, DSSigningViewControllerViewTag) {
@@ -47,7 +49,7 @@ typedef NS_ENUM(NSInteger, DSSigningViewControllerViewTag) {
 @interface DSSigningViewController () <DSSigningAPIDelegate, UIActionSheetDelegate, DSStartSigningViewControllerDelegate, DSDeclineSigningViewControllerDelegate, DSCompleteSigningViewControllerDelegate, DSSignatureCaptureDelegate, UIGestureRecognizerDelegate>
 
 
-@property (nonatomic, weak) IBOutlet UIWebView *webView;
+@property (nonatomic, weak) IBOutlet UIView *containerView;
 
 @property (weak, nonatomic) IBOutlet UIView *loadingView;
 
@@ -72,12 +74,9 @@ typedef NS_ENUM(NSInteger, DSSigningViewControllerViewTag) {
 
 @property (nonatomic) NSString *envelopeID;
 @property (nonatomic) NSString *recipientID;
-@property (nonatomic) DSSessionManager *sessionManager;
 @property (nonatomic, weak) id<DSSigningViewControllerDelegate> delegate;
 
 @property (nonatomic) DSSigningAPIManager *signingAPIManager;
-
-@property (nonatomic) BOOL initiatedSigningLoad;
 
 @property (nonatomic) DSEnvelopeRecipientsResponse *recipientsResponse;
 @property (nonatomic) DSEnvelopeRecipient *currentSigner;
@@ -118,15 +117,14 @@ typedef NS_ENUM(NSInteger, DSSigningViewControllerViewTag) {
     
     self.title = nil;
     
-    self.webView.keyboardDisplayRequiresUserAction = NO;
+    self.signingAPIManager = [[DSSigningAPIManager alloc] initWithViewFrame:self.view.bounds messageURL:[self messageURL] andDelegate:self];
+    [self.containerView addSubview:self.signingAPIManager.webView];
     
-    self.webView.hidden = YES;
-    
-    self.signingAPIManager = [[DSSigningAPIManager alloc] initWithWebView:self.webView messageURL:[self messageURL] andDelegate:self];
+    self.containerView.hidden = YES;
     
     UIGestureRecognizer *touchDetectingGestureRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:nil action:nil];
     touchDetectingGestureRecognizer.delegate = self;
-    [self.webView addGestureRecognizer:touchDetectingGestureRecognizer];
+    [self.signingAPIManager.webView addGestureRecognizer:touchDetectingGestureRecognizer];
     
     self.startingPromptView.hidden = YES;
     self.startingPromptView.layer.cornerRadius = 10;
@@ -147,66 +145,80 @@ typedef NS_ENUM(NSInteger, DSSigningViewControllerViewTag) {
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch {
     if (!self.receivedFirstTouch) {
         self.receivedFirstTouch = YES;
-        [self.webView removeGestureRecognizer:gestureRecognizer];
+        [self.signingAPIManager.webView removeGestureRecognizer:gestureRecognizer];
         [self hideStartingPromptView];
     }
     return NO;
 }
 
+- (void)updateWebViewFrame {
+    self.signingAPIManager.webView.frame = self.view.bounds;
+}
+
+- (void)viewWillLayoutSubviews {
+    [super viewWillLayoutSubviews];
+    [self updateWebViewFrame];
+}
+
+- (BOOL)shouldAutomaticallyForwardRotationMethods {
+    return YES;
+}
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    if (!self.initiatedSigningLoad) {
+    if (!self.initiatedSigningLoad && [self.sessionManager isAuthenticated]) {
         self.initiatedSigningLoad = YES;
-        
-        [self.sessionManager startEnvelopeDetailsTaskForEnvelopeWithID:self.envelopeID completionHandler:^(DSEnvelopeDetailsResponse *response, NSError *error) {
-            if (error) {
-                return;
+        [self initializeSigning];
+    }
+}
+
+- (void)initializeSigning {
+    [self.sessionManager startEnvelopeDetailsTaskForEnvelopeWithID:self.envelopeID completionHandler:^(DSEnvelopeDetailsResponse *response, NSError *error) {
+        if (error) {
+            return;
+        }
+        if (![self isHostedSigning]) {
+            self.title = response.emailSubject;
+        }
+    }];
+    [self.sessionManager startEnvelopeRecipientsTaskForEnvelopeWithID:self.envelopeID completionHandler:^(DSEnvelopeRecipientsResponse *response, NSError *error) {
+        if (error) {
+            [self failedSigningWithError:error];
+            return;
+        }
+        self.recipientsResponse = response;
+        for (DSEnvelopeRecipient *recipient in [self.recipientsResponse allSigners]) {
+            if ([recipient.userID isEqualToString:self.sessionManager.account.userID] || [recipient.clientUserID length] > 0) {
+                self.currentSigner = recipient;
+                if ([self.recipientID length] == 0) {
+                    self.recipientID = self.currentSigner.recipientID;
+                }
+                if ([self isHostedSigning]) {
+                    DSEnvelopeInPersonSigner *inPersonSigner = (DSEnvelopeInPersonSigner *)self.currentSigner;
+                    NSString *titleString;
+                    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+                            titleString = [NSString stringWithFormat:@"Now Signing: %@", inPersonSigner.signerName];
+                    } else {
+                        titleString = inPersonSigner.signerName;
+                    }
+                    self.title = titleString;
+                }
+                break;
             }
-            if (![self isHostedSigning]) {
-                self.title = response.emailSubject;
-            }
-        }];
-        [self.sessionManager startEnvelopeRecipientsTaskForEnvelopeWithID:self.envelopeID completionHandler:^(DSEnvelopeRecipientsResponse *response, NSError *error) {
+        }
+        if (!self.currentSigner || [self.recipientID length] == 0) {
+            [self failedSigningWithError:[NSError errorWithDomain:DSSigningViewControllerErrorDomain code:DSSigningViewControllerErrorCodeInvalidSigner userInfo:nil]];
+            return;
+        }
+        [self.sessionManager startSigningURLTaskForRecipientWithID:self.currentSigner.recipientID userID:self.currentSigner.userID clientUserID:self.currentSigner.clientUserID inEnvelopeWithID:self.envelopeID returnURL:self.messageURL completionHandler:^(NSString *signingURLString, NSError *error) {
             if (error) {
                 [self failedSigningWithError:error];
                 return;
             }
-            self.recipientsResponse = response;
-            for (DSEnvelopeRecipient *recipient in [self.recipientsResponse allSigners]) {
-                if ([recipient.userID isEqualToString:self.sessionManager.account.userID] || [recipient.clientUserID length] > 0) {
-                    self.currentSigner = recipient;
-                    if ([self.recipientID length] == 0) {
-                        self.recipientID = self.currentSigner.recipientID;
-                    }
-                    if ([self isHostedSigning]) {
-                        DSEnvelopeInPersonSigner *inPersonSigner = (DSEnvelopeInPersonSigner *)self.currentSigner;
-                        NSString *titleString;
-                        if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
-                            titleString = [NSString stringWithFormat:@"Now Signing: %@", inPersonSigner.signerName];
-                        } else {
-                            titleString = inPersonSigner.signerName;
-                        }
-                        self.title = titleString;
-                    }
-                    break;
-                }
-            }
-            if (!self.currentSigner || [self.recipientID length] == 0) {
-                [self failedSigningWithError:[NSError errorWithDomain:DSSigningViewControllerErrorDomain code:DSSigningViewControllerErrorCodeInvalidSigner userInfo:nil]];
-                return;
-            }
-            [self.sessionManager startSigningURLTaskForRecipientWithID:self.currentSigner.recipientID userID:self.currentSigner.userID clientUserID:self.currentSigner.clientUserID inEnvelopeWithID:self.envelopeID returnURL:self.messageURL completionHandler:^(NSString *signingURLString, NSError *error) {
-                if (error) {
-                    [self failedSigningWithError:error];
-                    return;
-                }
-                [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:signingURLString]]];
-            }];
+            [self.signingAPIManager startSigningWithURL:[NSURL URLWithString:signingURLString]];
         }];
-    }
+    }];
 }
-
 
 #pragma mark - User Interaction
 
@@ -224,7 +236,7 @@ typedef NS_ENUM(NSInteger, DSSigningViewControllerViewTag) {
     if (self.startingPromptView) {
         [self hideStartingPromptView];
     }
-    if (![self.signingAPIManager canFinish] && ![self.signingAPIManager isFreeform]) {
+    if (![self.signingAPIManager canFinish] && !self.signingAPIManager.isFreeform) {
         [self.signingAPIManager autoNavigate];
         return;
     }
@@ -291,9 +303,12 @@ typedef NS_ENUM(NSInteger, DSSigningViewControllerViewTag) {
     }
     
     switch (status) {
-        case DSSigningCompletedStatusSigned:
-            [self.signingAPIManager finishSigning];
+        case DSSigningCompletedStatusSigned: {
+            [self.signingAPIManager finishSigning:^(BOOL finished) {
+                [self.delegate signingViewController:self completedWithStatus:status];
+            }];
             break;
+        }
         case DSSigningCompletedStatusDeferred:
             [self.signingAPIManager cancelSigning];
             break;
@@ -308,14 +323,13 @@ typedef NS_ENUM(NSInteger, DSSigningViewControllerViewTag) {
     [self.delegate signingViewController:self failedWithError:error];
 }
 
-
 #pragma mark - DSSigningAPIDelegate
 
 
 - (void)signingIsReady:(DSSigningAPIManager *)signingAPIManager {
     if (![self isHostedSigning]) { // If this is not hosted signing, we will have shown this screen already in -didRequestConsumerDisclosureConsent: if it was necessary
         self.loadingView.hidden = YES;
-        self.webView.hidden = NO;
+        self.containerView.hidden = NO;
         self.startingPromptView.hidden = NO;
         [self.navigationController setToolbarHidden:NO animated:YES];
         return;
@@ -324,19 +338,24 @@ typedef NS_ENUM(NSInteger, DSSigningViewControllerViewTag) {
     return; //Turned off for demo
     
     NSString *signerName = self.currentSigner.name;
-    DSStartSigningViewController *viewController = [[DSStartSigningViewController alloc] initWithConsumerDisclosure:[self.signingAPIManager consumerDisclosure]
-                                                                                                      recipientName:signerName
-                                                                                                       requestEmail:YES
-                                                                                                           delegate:self];
-    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:viewController];
-    navController.modalPresentationStyle = UIModalPresentationFormSheet;
-
-    self.loadingView.hidden = YES;
-
-    [self presentViewController:navController animated:YES completion:^{
-        self.webView.hidden = NO;
-        [self.navigationController setToolbarHidden:NO animated:NO];
+    [self.signingAPIManager consumerDisclosure:^(DSSigningAPIConsumerDisclosure *disclosure) {
+        DSStartSigningViewController *viewController = [[DSStartSigningViewController alloc] initWithConsumerDisclosure:disclosure
+                                                                                                          recipientName:signerName
+                                                                                                           requestEmail:YES
+                                                                                                               delegate:self];
+        UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:viewController];
+        navController.modalPresentationStyle = UIModalPresentationFormSheet;
+        
+        self.loadingView.hidden = YES;
+        
+        [self presentViewController:navController animated:YES completion:^{
+            self.containerView.hidden = NO;
+            [self.navigationController setToolbarHidden:NO animated:NO];
+        }];
     }];
+    
+    // refresh webview frame now that signing has loaded
+    [self updateWebViewFrame];
 }
 
 
@@ -394,7 +413,7 @@ typedef NS_ENUM(NSInteger, DSSigningViewControllerViewTag) {
     DSDrawSignatureController *drawSignature = [[[DSStoryboardFactory sharedStoryboardFactory] signatureStoryboard] instantiateInitialViewController];
     drawSignature.signaturePart = adoptSignatureOptions.type == DSSigningAPITabSignHere ? DSSignaturePartSignature : DSSignaturePartInitials;
     drawSignature.delegate = self;
-    drawSignature.allowCameraSignatureCapture = YES;
+    drawSignature.allowCameraSignatureCapture = NO;
     UINavigationController *navigationController = [[DSRotationForwardingNavigationControllerViewController alloc] initWithRootViewController:drawSignature];
     navigationController.modalPresentationStyle = UIModalPresentationFormSheet;
     [self presentViewController:navigationController animated:YES completion:nil];
@@ -425,21 +444,14 @@ typedef NS_ENUM(NSInteger, DSSigningViewControllerViewTag) {
     [self.delegate signingViewController:self completedWithStatus:DSSigningCompletedStatusSigned];
 }
 
+#pragma - WKNavigationDelegate
 
-#pragma - UIWebViewDelegate
-
-
-- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
-    return YES;
-}
-
-- (void)webViewDidFinishLoad:(UIWebView *)webView {
+- (void)webView:(WKWebView *)webView didFinishNavigation:(WKNavigation *)navigation {
     self.loadingView.hidden = YES;
-    self.webView.hidden = NO;
+    self.containerView.hidden = NO;
 }
 
-
-- (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error {
+- (void)webView:(WKWebView *)webView didFailProvisionalNavigation:(WKNavigation *)navigation withError:(NSError *)error {
     BOOL frameLoadInterrupted = (error.code == 102 && [error.domain isEqualToString:@"WebKitErrorDomain"]);
     if (error.code != NSURLErrorCancelled && !frameLoadInterrupted) { // Ignore these errors. They happen during normal interaction with signing
         [self failedSigningWithError:error];

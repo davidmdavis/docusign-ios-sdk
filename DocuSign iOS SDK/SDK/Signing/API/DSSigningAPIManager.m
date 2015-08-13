@@ -18,9 +18,15 @@
 #import "DSSigningAPIConsumerDisclosure.h"
 #import "DSSigningAPIAdoptSignatureTabDetails.h"
 #import "DSSigningAPIAddCCRecipients.h"
+#import "DSSigningCompletedStatus.h"
 
 #import "NSURL+DS_QueryDictionary.h"
 
+@import WebKit;
+
+static NSString * const DS_SIGNING_API = @"DSSigning";
+static NSString * const DS_SIGNING_STARTED_HANDLER = @"DSSigningStartedHandler";
+static NSString * const DS_SIGNING_MESSAGE_HANDLER = @"DSSigningMessageHandler";
 static NSString * const DS_SIGNING_API_TABS[] = {
     @"null",
     @"'SignHere'",
@@ -33,9 +39,8 @@ static NSString * const DS_SIGNING_API_TABS[] = {
     @"'Title'"
 };
 
-@interface DSSigningAPIManager() <CLLocationManagerDelegate, UIWebViewDelegate>
+@interface DSSigningAPIManager() <CLLocationManagerDelegate, WKScriptMessageHandler, WKNavigationDelegate>
 
-@property (nonatomic, weak) UIWebView *webView;
 @property (nonatomic) NSURL *messageURL;
 
 @property (nonatomic) CLLocationManager *locationManager;
@@ -49,16 +54,45 @@ static NSString * const DS_SIGNING_API_TABS[] = {
 
 #pragma mark - Lifecycle
 
-- (instancetype)initWithWebView:(UIWebView *)webView messageURL:(NSURL *)messageURL andDelegate:(id<DSSigningAPIDelegate>)delegate {
+- (instancetype)initWithViewFrame:(CGRect)frame messageURL:(NSURL *)messageURL andDelegate:(id<DSSigningAPIDelegate>)delegate {
     self = [super init];
     if (self) {
-        _webView = webView;
-        webView.delegate = self;
-        _messageURL = messageURL;
         _delegate = delegate;
-        [self startJavaScriptBridge];
+        _messageURL = messageURL;
+        
+        // relay signing api messages to us
+        WKWebViewConfiguration *config = [[WKWebViewConfiguration alloc] init];
+        [config.userContentController addScriptMessageHandler:self name:DS_SIGNING_MESSAGE_HANDLER];
+        [config.userContentController addScriptMessageHandler:self name:DS_SIGNING_STARTED_HANDLER];
+        
+        // add script to init signing api on page load finish
+        NSString *signingApiInitJs = [NSString stringWithFormat:
+                                      @"DSSigning.init({"
+                                      @"    sendMessage: function(id, data) {"
+                                      @"        webkit.messageHandlers.%@.postMessage({"
+                                      @"                                                  id: id,"
+                                      @"                                                  data: data,"
+                                      @"                                              });"
+                                      @"    },"
+                                      @"    suppress: {"
+                                      @"        addCCRecipientsDialog: false"
+                                      @"    }"
+                                      @"});"
+                                      @"webkit.messageHandlers.%@.postMessage('started');",
+                                      DS_SIGNING_MESSAGE_HANDLER,
+                                      DS_SIGNING_STARTED_HANDLER];
+        [config.userContentController addUserScript:[[WKUserScript alloc] initWithSource:signingApiInitJs
+                                                                           injectionTime:WKUserScriptInjectionTimeAtDocumentEnd
+                                                                        forMainFrameOnly:YES]];
+        
+        _webView = [[WKWebView alloc] initWithFrame:frame configuration:config];
+        _webView.navigationDelegate = self;
     }
     return self;
+}
+
+- (void)startSigningWithURL:(NSURL *)url {
+    [self.webView loadRequest:[NSURLRequest requestWithURL:url]];
 }
 
 - (void)dealloc {
@@ -69,70 +103,59 @@ static NSString * const DS_SIGNING_API_TABS[] = {
     return !self.awaitingFirstMessage;
 }
 
-#pragma mark - UIWebViewDelegate
+#pragma mark - WKNavigationDelegate (formerly UIWebViewDelegate)
 
-- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
-    NSDictionary *queryParameters = [request.URL ds_queryDictionary];
-    NSString *messageId = queryParameters[@"messageId"];
-    NSString *messageData = queryParameters[@"data"];
+// replaces UIWebViewDelegate webView:shouldStartLoadWithRequest:navigationType
+- (void)webView:(WKWebView *)webView decidePolicyForNavigationAction:(WKNavigationAction *)navigationAction decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler {
+    NSDictionary *queryParameters = [navigationAction.request.URL ds_queryDictionary];
     NSString *event = queryParameters[@"event"];
-    if ([messageId length] > 0) {
-        [self handleMessage:messageId data:messageData];
-        return NO;
-    } else if ([event length] > 0) {
+    if ([event length] > 0) {
         [self handleEvent:event];
-        return NO;
-    } else if ([self.delegate respondsToSelector:@selector(webView:shouldStartLoadWithRequest:navigationType:)]) {
-        return [self.delegate webView:webView shouldStartLoadWithRequest:request navigationType:navigationType];
-    }
-    return YES;
-}
-
-- (void)webViewDidStartLoad:(UIWebView *)webView {
-    if ([self.delegate respondsToSelector:@selector(webViewDidStartLoad:)]) {
-        [self.delegate webViewDidStartLoad:webView];
+        decisionHandler(WKNavigationActionPolicyCancel);
+    } else if ([navigationAction.request.URL.absoluteString rangeOfString:@"SessionTimeout"].location != NSNotFound) {
+        [self.delegate signingDidTimeout:self];
+        decisionHandler(WKNavigationActionPolicyCancel);
+    } else if ([self.delegate respondsToSelector:@selector(webView:decidePolicyForNavigationAction:decisionHandler:)]) {
+        return [self.delegate webView:webView decidePolicyForNavigationAction:navigationAction decisionHandler:decisionHandler];
+    } else {
+        decisionHandler(WKNavigationActionPolicyAllow);
     }
 }
 
-- (void)webViewDidFinishLoad:(UIWebView *)webView {
-    [self startJavaScriptBridge];
-    if ([self.delegate respondsToSelector:@selector(webViewDidFinishLoad:)]) {
-        [self.delegate webViewDidFinishLoad:webView];
+// replaces UIWebViewDelegate webViewDidStartLoad
+- (void)webView:(WKWebView *)webView didStartProvisionalNavigation:(WKNavigation *)navigation {
+    if ([self.delegate respondsToSelector:@selector(webView:didStartProvisionalNavigation:)]) {
+        [self.delegate webView:webView didStartProvisionalNavigation:navigation];
     }
 }
 
-- (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error {
-    if ([self.delegate respondsToSelector:@selector(webView:didFailLoadWithError:)]) {
-        [self.delegate webView:webView didFailLoadWithError:error];
+// replaces UIWebViewDelegate webViewDidFinishLoad
+- (void)webView:(WKWebView *)webView didFinishNavigation:(WKNavigation *)navigation {
+    if ([self.delegate respondsToSelector:@selector(webView:didFinishNavigation:)]) {
+        [self.delegate webView:webView didFinishNavigation:navigation];
     }
 }
 
-#pragma mark -
+// replaces UIWebViewDelegate webView:didFailLoadWithError
+- (void)webView:(WKWebView *)webView didFailProvisionalNavigation:(WKNavigation *)navigation withError:(NSError *)error {
+    if ([self.delegate respondsToSelector:@selector(webView:didFailProvisionalNavigation:withError:)]) {
+        [self.delegate webView:webView didFailProvisionalNavigation:navigation withError:error];
+    }
+}
 
-- (void)startJavaScriptBridge {
-    if ([[self.webView stringByEvaluatingJavaScriptFromString:@"DSSigning !== undefined"] boolValue]) {
+#pragma mark - JavaScript and URL Handling
+
+- (void)userContentController:(WKUserContentController *)userContentController didReceiveScriptMessage:(WKScriptMessage *)message {
+    if ([message.name isEqualToString:DS_SIGNING_MESSAGE_HANDLER]) {
+        NSLog(@"%@", message.body);
+        [self handleMessage:(NSString *)message.body[@"id"] data:(NSDictionary *)message.body[@"data"]];
+    } else if ([message.name isEqualToString:DS_SIGNING_STARTED_HANDLER]) {
         self.awaitingFirstMessage = YES;
-        [self.webView stringByEvaluatingJavaScriptFromString:[NSString stringWithFormat:
-             @"DSSigning.init({"
-             @"    sendMessage: function(id, data) {"
-             @"        var iframe = document.createElement('iframe');"
-             @"        var src = '%@?messageId=' + id + '&data=' + encodeURIComponent(JSON.stringify(data || {}));"
-             @"        iframe.setAttribute('src', src);"
-             @"        document.documentElement.appendChild(iframe);"
-             @"        iframe.parentNode.removeChild(iframe);"
-             @"        iframe = null;"
-             @"    },"
-             @"    suppress: {"
-             @"        addCCRecipientsDialog: false"
-             @"    }"
-             @"});", [self.messageURL absoluteString]]];
     }
 }
 
-- (void)handleMessage:(NSString *)messageId data:(NSString *)data {
-    NSData *jsonData = [data dataUsingEncoding:NSUTF8StringEncoding];
-    NSError *jsonParseError;
-    NSDictionary *jsonDictionary = [NSJSONSerialization JSONObjectWithData:jsonData options:0 error:&jsonParseError];
+- (void)handleMessage:(NSString *)messageId data:(NSDictionary *)data {
+    NSDictionary *jsonDictionary = data;
     
     // handle message is sometimes enters here from another thread
     // make sure all delegate calls here are passed back in the main
@@ -140,19 +163,23 @@ static NSString * const DS_SIGNING_API_TABS[] = {
         if (self.awaitingFirstMessage) {
             self.awaitingFirstMessage = NO;
             [self.delegate signingIsReady:self];
+            
+            // get decline options to initialize self.canDecline
+            [self declineOptions:nil];
+            
+            [self isFreeformEnabled:^(BOOL freeform) {
+                self.isFreeform = freeform;
+            }];
         }
-
-        if (!jsonParseError && jsonDictionary) {
+        
+        if (jsonDictionary) {
             if ([messageId isEqualToString:@"acceptConsumerDisclosureRequested"]) {
-                DSSigningAPIConsumerDisclosure *disclosure = [self consumerDisclosure];
-                
-                [self.delegate signing:self didRequestConsumerDisclosureConsent:disclosure]; // TODO: for some reason the disclosure I get has all blank properties, the string is just {}
+                [self consumerDisclosure:^(DSSigningAPIConsumerDisclosure *disclosure) {
+                    [self.delegate signing:self didRequestConsumerDisclosureConsent:disclosure]; // TODO: for some reason the disclosure I get has all blank properties, the string is just {}
+                }];
             } else if ([messageId isEqualToString:@"canFinishChanged"]) {
-                DSSigningAPICanFinishChanged *canFinishChanged = [MTLJSONAdapter modelOfClass:[DSSigningAPICanFinishChanged class]
-                                                                           fromJSONDictionary:jsonDictionary
-                                                                                        error:nil];
-                self.canFinish = canFinishChanged.canFinish;
-                [self.delegate signing:self canFinishChanged:canFinishChanged.canFinish];
+                self.canFinish = [data[@"canFinish"] boolValue];
+                [self.delegate signing:self canFinishChanged:self.canFinish];
             } else if ([messageId isEqualToString:@"adoptSignatureRequested"]) {
                 DSSigningAPIAdoptSignatureTabDetails *details = [MTLJSONAdapter modelOfClass:[DSSigningAPIAdoptSignatureTabDetails class]
                                                                           fromJSONDictionary:jsonDictionary[@"tab"]
@@ -164,7 +191,7 @@ static NSString * const DS_SIGNING_API_TABS[] = {
             } else if ([messageId isEqualToString:@"applyFormFieldsRequested"]) {
                 [self.delegate signingFoundFormFields:self];
             } else if ([messageId isEqualToString:@"inPersonSignerEmailRequested"]) {
-                [self.webView stringByEvaluatingJavaScriptFromString:[NSString stringWithFormat:@"DSSigning.setInPersonSignerEmail('%@')", self.inPersonSignerEmail ?: @""]];
+                [self evaluateSigningApiMethod:[NSString stringWithFormat:@"DSSigning.setInPersonSignerEmail('%@')", self.inPersonSignerEmail ?: @""]];
             } else if ([messageId isEqualToString:@"declineRequested"]) {
                 [self.delegate signing:self didRequestDecline:[MTLJSONAdapter modelOfClass:[DSSigningAPIDeclineOptions class]
                                                                         fromJSONDictionary:jsonDictionary
@@ -206,126 +233,145 @@ static NSString * const DS_SIGNING_API_TABS[] = {
     }
 }
 
-#pragma mark - JSON Helpers
+#pragma mark - Signing API Helpers
 
-- (NSDictionary *)dictionaryByEvaluatingJavaScriptFromString:(NSString *)string {
-    NSString *cmd = [NSString stringWithFormat:
-                     @"( function() {"
-                     @"  var result = %@;"
-                     @"  result = result instanceof Object ? JSON.stringify(result) : (result || '{}');"
-                     @"  return result;"
-                     @"})()", string];
-    NSString *jsonString = [self.webView stringByEvaluatingJavaScriptFromString:cmd];
-    NSError *jsonParseError;
-    return [NSJSONSerialization JSONObjectWithData:[jsonString dataUsingEncoding:NSUTF8StringEncoding] options:0 error:&jsonParseError];
+- (void)evaluateSigningApiMethod:(NSString *)method {
+    [self evaluateSigningApiMethod:method completion:nil];
+}
+
+- (void)evaluateSigningApiMethod:(NSString *)method completion:(void (^)(id, NSError *))completion {
+    [self.webView evaluateJavaScript:[NSString stringWithFormat:@"%@.%@", DS_SIGNING_API, method] completionHandler:completion];
 }
 
 #pragma mark - Signing Lifecycle
 
 - (void)saveSigning {
-    [self.webView stringByEvaluatingJavaScriptFromString:@"DSSigning.save()"];
+    [self evaluateSigningApiMethod:@"save()"];
 }
 
 - (void)cancelSigning {
-    [self.webView stringByEvaluatingJavaScriptFromString:@"DSSigning.exit()"];
+    [self evaluateSigningApiMethod:@"exit()"];
 }
 
-- (BOOL)finishSigning {
-    NSDictionary *finishResult = [self dictionaryByEvaluatingJavaScriptFromString:@"DSSigning.finish()"];
-    return [finishResult[@"finished"] boolValue];
+- (void)finishSigning:(void (^)(BOOL finished))completion {
+    [self evaluateSigningApiMethod:@"finish()" completion:^(id result, NSError *err) {
+        if (completion) {
+            completion([result[@"finished"] boolValue]);
+        }
+    }];
 }
 
 #pragma mark - Carbon Copy Recipients
 
-- (DSSigningAPIAddCCRecipients *)carbonCopyRecipientAddingOptions {
-    NSDictionary *dictionary = [self dictionaryByEvaluatingJavaScriptFromString:@"DSSigning.getAddCCRecipientsOptions()"];
-    return [MTLJSONAdapter modelOfClass:[DSSigningAPIAddCCRecipients class]
-                     fromJSONDictionary:dictionary
-                                  error:nil];
+- (void)carbonCopyRecipientAddingOptions:(void (^)(DSSigningAPIAddCCRecipients *options))completion {
+    [self evaluateSigningApiMethod:@"getAddCCRecipientsOptions()" completion:^(id result, NSError *err) {
+        if (completion) {
+            completion([MTLJSONAdapter modelOfClass:[DSSigningAPIAddCCRecipients class]
+                                 fromJSONDictionary:(NSDictionary *)result
+                                              error:nil]);
+        }
+    }];
 }
 
 - (void)addCarbonCopyRecipients:(DSSigningAPIAddCCRecipients *)carbonCopyRecipients {
-    [self.webView stringByEvaluatingJavaScriptFromString:[NSString stringWithFormat:@"DSSigning.addCCRecipients(%@)", [MTLJSONAdapter JSONDictionaryFromModel:carbonCopyRecipients]]];
+    [self evaluateSigningApiMethod:[NSString stringWithFormat:@"addCCRecipients(%@)",
+                                    [MTLJSONAdapter JSONDictionaryFromModel:carbonCopyRecipients]]];
 }
 
 #pragma mark - Consumer Disclosure
 
-- (DSSigningAPIConsumerDisclosure *)consumerDisclosure {
-    NSDictionary *dictionary = [self dictionaryByEvaluatingJavaScriptFromString:@"DSSigning.getConsumerDisclosure()"];
-    return [MTLJSONAdapter modelOfClass:[DSSigningAPIConsumerDisclosure class]
-                     fromJSONDictionary:dictionary
-                                  error:nil];
+- (void)consumerDisclosure:(void (^)(DSSigningAPIConsumerDisclosure *disclosure))completion {
+    [self evaluateSigningApiMethod:@"getAddCCRecipientsOptions()" completion:^(id result, NSError *err) {
+        if (completion) {
+            completion([MTLJSONAdapter modelOfClass:[DSSigningAPIConsumerDisclosure class]
+                                 fromJSONDictionary:(NSDictionary *)result
+                                              error:nil]);
+        }
+    }];
 }
 
 - (void)acceptConsumerDisclosure {
-    [self.webView stringByEvaluatingJavaScriptFromString:@"DSSigning.setConsumerDisclosureAccepted(true)"];
+    [self evaluateSigningApiMethod:@"setConsumerDisclosureAccepted(true)"];
 }
 
 #pragma mark - Decline
 
-- (BOOL)canDecline {
-    return [[self dictionaryByEvaluatingJavaScriptFromString:@"DSSigning.getDeclineOptions()"] count] > 0;
-}
-
-- (DSSigningAPIDeclineOptions *)declineOptions {
-    NSDictionary *dictionary = [self dictionaryByEvaluatingJavaScriptFromString:@"DSSigning.getDeclineOptions()"];
-    return [MTLJSONAdapter modelOfClass:[DSSigningAPIDeclineOptions class]
-                     fromJSONDictionary:dictionary
-                                  error:nil];
+- (void)declineOptions:(void (^)(DSSigningAPIDeclineOptions *options))completion {
+    [self evaluateSigningApiMethod:@"getDeclineOptions()" completion:^(id result, NSError *err) {
+        NSDictionary *dict = (NSDictionary *)result;
+        self.canDecline = [dict count] > 0;
+        if (completion) {
+            if (self.canDecline) {
+                completion([MTLJSONAdapter modelOfClass:[DSSigningAPIDeclineOptions class]
+                                     fromJSONDictionary:dict
+                                                  error:nil]);
+            } else {
+                completion(nil);
+            }
+        }
+    }];
 }
 
 - (void)declineSigningWithDetails:(DSSigningAPIDeclineSigning *)details {
-    [self.webView stringByEvaluatingJavaScriptFromString:[NSString stringWithFormat:@"DSSigning.decline(%@)", [MTLJSONAdapter JSONDictionaryFromModel:details]]];
+    [self evaluateSigningApiMethod:[NSString stringWithFormat:@"decline(%@)", [MTLJSONAdapter JSONDictionaryFromModel:details]]];
 }
 
 #pragma mark - Signature
 
 - (void)adoptSignature:(NSString *)signatureImageId {
-    [self.webView stringByEvaluatingJavaScriptFromString:[NSString stringWithFormat:@"DSSigning.adoptSignature({signatureGuid:'%@'});", signatureImageId]];
+    [self evaluateSigningApiMethod:[NSString stringWithFormat:@"adoptSignature({signatureGuid:'%@'});", signatureImageId]];
 }
 
 - (void)adoptInitials:(NSString *)initialsImageId {
-    [self.webView stringByEvaluatingJavaScriptFromString:[NSString stringWithFormat:@"DSSigning.adoptSignature({initialsGuid:'%@'});", initialsImageId]];
+    [self evaluateSigningApiMethod:[NSString stringWithFormat:@"adoptSignature({initialsGuid:'%@'});", initialsImageId]];
 }
 
 - (void)cancelAdoptSignatureOrInitials {
-    [self.webView stringByEvaluatingJavaScriptFromString:@"DSSigning.adoptSignature();"];
+    [self evaluateSigningApiMethod:@"adoptSignature();"];
 }
 
 #pragma mark - Navigate Document
 
 - (void)autoNavigate {
-    [self.webView stringByEvaluatingJavaScriptFromString:@"DSSigning.autoNavigate()"];
+    [self evaluateSigningApiMethod:@"autoNavigate()"];
 }
 
 - (void)scrollToNextPage {
-    [self.webView stringByEvaluatingJavaScriptFromString:@"DSSigning.navigateToNextPage()"];
+    [self evaluateSigningApiMethod:@"navigateToNextPage()"];
 }
 
 - (void)scrollToPreviousPage {
-    [self.webView stringByEvaluatingJavaScriptFromString:@"DSSigning.navigateToPreviousPage()"];
+    [self evaluateSigningApiMethod:@"navigateToPreviousPage()"];
 }
 
 - (void)scrollToPage:(NSInteger)page {
-    [self.webView stringByEvaluatingJavaScriptFromString:[NSString stringWithFormat:@"DSSigning.setCurrentPage(%ld)", (long)page]];
+    [self evaluateSigningApiMethod:[NSString stringWithFormat:@"setCurrentPage(%ld)", (long)page]];
 }
 
-- (NSInteger)pageCount {
-    return [[self.webView stringByEvaluatingJavaScriptFromString:@"DSSigning.getPageCount()"] integerValue];
+- (void)pageCount:(void (^)(NSUInteger count))completion {
+    [self evaluateSigningApiMethod:@"getPageCount()" completion:^(id result, NSError *err) {
+        if (completion) {
+            completion([[result stringValue] integerValue]);
+        }
+    }];
 }
 
-- (NSInteger)currentPageNumber {
-    return [[self.webView stringByEvaluatingJavaScriptFromString:@"DSSigning.getCurrentPage()"] integerValue];
+- (void)currentPageNumber:(void (^)(NSUInteger page))completion {
+    [self evaluateSigningApiMethod:@"getCurrentPage()" completion:^(id result, NSError *err) {
+        if (completion) {
+            completion([[result stringValue] integerValue]);
+        }
+    }];
 }
 
 #pragma mark - Page Rotation
 
 - (void)rotatePageLeft {
-    [self.webView stringByEvaluatingJavaScriptFromString:@"DSSigning.rotatePage('left')"];
+    [self evaluateSigningApiMethod:@"rotatePage('left')"];
 }
 
 - (void)rotatePageRight {
-    [self.webView stringByEvaluatingJavaScriptFromString:@"DSSigning.rotatePage('right')"];
+    [self evaluateSigningApiMethod:@"rotatePage('right')"];
 }
 
 #pragma mark - Hosted Signing
@@ -334,23 +380,30 @@ static NSString * const DS_SIGNING_API_TABS[] = {
 
 - (void)setSelectedFreeformTab:(DSSigningAPITab)selectedFreeformTab {
     NSString *tabType = DS_SIGNING_API_TABS[selectedFreeformTab];
-    [self.webView stringByEvaluatingJavaScriptFromString:[NSString stringWithFormat:@"DSSigning.setSelectedFreeformTabType(%@)", tabType]];
+    [self evaluateSigningApiMethod:[NSString stringWithFormat:@"setSelectedFreeformTabType(%@)", tabType]];
     _selectedFreeformTab = selectedFreeformTab;
 }
 
-- (BOOL)isFreeform {
-    return [[self.webView stringByEvaluatingJavaScriptFromString:@"DSSigning.isFreeformEnabled()"] boolValue];
+- (void)isFreeformEnabled:(void (^)(BOOL freeform))completion {
+    [self evaluateSigningApiMethod:@"isFreeformEnabled()" completion:^(id result, NSError *err) {
+        if (completion) {
+            completion([[result stringValue] boolValue]);
+        }
+    }];
 }
 
-- (DSSigningAPIAdoptSignatureTabDetails *)currentSignatureTabDetails {
-    NSDictionary *dictionary = [self dictionaryByEvaluatingJavaScriptFromString:@"DSSigning.getAdoptSignatureTabDetails()"];
-    return [MTLJSONAdapter modelOfClass:[DSSigningAPIAdoptSignatureTabDetails class]
-                     fromJSONDictionary:dictionary
-                                  error:nil];
+- (void)currentSignatureTabDetails:(void (^)(DSSigningAPIAdoptSignatureTabDetails *details))completion {
+    [self evaluateSigningApiMethod:@"getAddCCRecipientsOptions()" completion:^(id result, NSError *err) {
+        if (completion) {
+            completion([MTLJSONAdapter modelOfClass:[DSSigningAPIAdoptSignatureTabDetails class]
+                                 fromJSONDictionary:(NSDictionary *)result
+                                              error:nil]);
+        }
+    }];
 }
 
 - (void)applyFormFields:(BOOL)apply {
-    [self.webView stringByEvaluatingJavaScriptFromString:[NSString stringWithFormat:@"DSSigning.applyFormFields(%@)", apply ? @"true" : @"false"]];
+    [self evaluateSigningApiMethod:[NSString stringWithFormat:@"applyFormFields(%@)", apply ? @"true" : @"false"]];
 }
 
 #pragma mark - CLLocationManagerDelegate
@@ -381,7 +434,7 @@ static NSString * const DS_SIGNING_API_TABS[] = {
                           newLocation.coordinate.latitude,
                           newLocation.coordinate.longitude,
                           (newLocation.speed < 0)              ? @"null" : [NSString stringWithFormat:@"%f", newLocation.speed]];
-    [self.webView stringByEvaluatingJavaScriptFromString:[NSString stringWithFormat:@"DSSigning.setGeoLocation(%@);", position]];
+    [self evaluateSigningApiMethod:[NSString stringWithFormat:@"setGeoLocation(%@);", position]];
 }
 
 @end

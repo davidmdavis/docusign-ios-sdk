@@ -24,8 +24,9 @@ typedef NS_ENUM(NSInteger, DSSigningViewControllerErrorCode) {
 
 @property (nonatomic, readonly) NSString *envelopeID;
 @property (nonatomic, readonly) NSString *recipientID;
-@property (nonatomic, readonly) DSSessionManager *sessionManager;
+@property (nonatomic) DSSessionManager *sessionManager;
 @property (nonatomic, readonly, weak) id<DSSigningViewControllerDelegate> delegate;
+@property (nonatomic) BOOL initiatedSigningLoad;
 
 - (instancetype)initWithEnvelopeID:(NSString *)envelopeID recipientID:(NSString *)recipientID sessionManager:(DSSessionManager *)sessionManager delegate:(id<DSSigningViewControllerDelegate>)delegate;
 

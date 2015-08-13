@@ -551,6 +551,39 @@ withResponseObject:(id)responseObject
                        }];
 }
 
+- (NSURLSessionDataTask *)startSigningURLTaskForRecipient:(DSEnvelopeRecipient *)recipient
+                                         inEnvelopeWithID:(NSString *)envelopeID
+                                                returnURL:(NSURL *)returnURL
+                                        completionHandler:(void (^)(NSString *, NSError *))completionHandler {
+    NSAssert(self.isAuthenticated, @"Call -[DSSessionManager authenticate] before starting additional tasks.");
+    NSParameterAssert(recipient);
+    NSParameterAssert(envelopeID);
+    NSParameterAssert(returnURL);
+    NSParameterAssert(completionHandler);
+    
+    NSString *relativeURLString = [[NSString alloc] initWithFormat:@"accounts/%@/envelopes/%@/views/recipient", self.account.accountID, envelopeID];
+    
+    NSMutableDictionary *requestDictionary = [[NSDictionary dictionaryWithObjectsAndKeys:
+                                               returnURL.absoluteString, @"returnUrl",
+                                               recipient.name, @"userName",
+                                               recipient.email, @"email",
+                                               @"password", @"authenticationMethod",
+                                               recipient.clientUserID, @"clientUserId", nil] mutableCopy];
+    
+    return [self startDataTaskWithMethod:@"POST"
+                       relativeURLString:relativeURLString
+                                bodyData:[requestDictionary ds_JSONData] // not sure about authenticationMethod but currently it is required - PLAT-1973
+                           responseClass:nil
+                       completionHandler:^(id JSONObject, NSError *error) {
+                           if (error) {
+                               completionHandler(nil, error);
+                           } else {
+                               NSString *signingURLString = [JSONObject[@"url"] stringByReplacingOccurrencesOfString:@"Member" withString:@"signing"];
+                               signingURLString = [signingURLString stringByAppendingString:@"&platform=ios&version=1"];
+                               completionHandler(signingURLString, nil);
+                           }
+                       }];}
+
 
 - (NSURLSessionDataTask *)startCreateSelfSignEnvelopeTaskWithFileName:(NSString *)fileName
                                                               fileURL:(NSURL *)fileURL
@@ -985,6 +1018,18 @@ withResponseObject:(id)responseObject
     
     return [[DSSigningViewController alloc] initWithEnvelopeID:envelopeID
                                                    recipientID:recipientID
+                                                sessionManager:self
+                                                      delegate:delegate];
+}
+
+- (DSSigningViewController *)signingViewControllerForRecipient:(DSEnvelopeRecipient *)recipient inEnvelopeWithID:(NSString *)envelopeID delegate:(id<DSSigningViewControllerDelegate>)delegate {
+    NSAssert(self.isAuthenticated, @"Call -[DSSessionManager authenticate] before starting additional tasks.");
+    
+    NSParameterAssert(envelopeID);
+    NSParameterAssert(delegate);
+    
+    return [[DSSigningViewController alloc] initWithEnvelopeID:envelopeID
+                                                     recipient:recipient
                                                 sessionManager:self
                                                       delegate:delegate];
 }

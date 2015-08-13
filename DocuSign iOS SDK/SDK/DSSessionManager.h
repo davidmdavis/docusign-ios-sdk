@@ -47,6 +47,7 @@ extern NSString * const DSSessionManagerNotificationUserInfoKeyError;
 @class DSEnvelopeDetailsResponse, DSTemplateDetailsResponse, DSEnvelopeRecipientsResponse;
 @class DSUserSignaturesResponse, DSUserSignature;
 @class DSEnvelopeCustomFieldsResponse;
+@class DSEnvelopeRecipient;
 
 @protocol DSSessionManagerAuthenticationDelegate <NSObject>
 
@@ -180,6 +181,12 @@ extern NSString * const DSSessionManagerNotificationUserInfoKeyError;
                                                inEnvelopeWithID:(NSString *)envelopeID
                                                       returnURL:(NSURL *)returnURL
                                               completionHandler:(void (^)(NSString *signingURLString, NSError *error))completionHandler;
+
+
+- (NSURLSessionDataTask *)startSigningURLTaskForRecipient:(DSEnvelopeRecipient *)recipient
+                                         inEnvelopeWithID:(NSString *)envelopeID
+                                                returnURL:(NSURL *)returnURL
+                                        completionHandler:(void (^)(NSString *signingURLString, NSError *error))completionHandler;
 
 
 /**
@@ -344,6 +351,7 @@ extern NSString * const DSSessionManagerNotificationUserInfoKeyError;
  */
 - (DSSigningViewController *)signingViewControllerForRecipientWithID:(NSString *)recipientID inEnvelopeWithID:(NSString *)envelopeID delegate:(id<DSSigningViewControllerDelegate>)delegate;
 
+- (DSSigningViewController *)signingViewControllerForRecipient:(DSEnvelopeRecipient *)recipient inEnvelopeWithID:(NSString *)envelopeID delegate:(id<DSSigningViewControllerDelegate>)delegate;
 
 #pragma mark - Logging
 

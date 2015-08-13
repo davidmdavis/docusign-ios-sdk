@@ -95,6 +95,16 @@ typedef NS_ENUM(NSInteger, DSSigningViewControllerViewTag) {
 
 #pragma mark - Lifecycle
 
+- (instancetype)initWithEnvelopeID:(NSString *)envelopeID recipient:(DSEnvelopeRecipient *)recipient sessionManager:(DSSessionManager *)sessionManager delegate:(id<DSSigningViewControllerDelegate>)delegate {
+    self = [self initWithEnvelopeID:envelopeID recipientID:recipient.recipientID sessionManager:sessionManager delegate:delegate];
+    
+    if (!self) {
+        return nil;
+    }
+    
+    _currentSigner = recipient;
+    return self;
+}
 
 - (instancetype)initWithEnvelopeID:(NSString *)envelopeID recipientID:(NSString *)recipientID sessionManager:(DSSessionManager *)sessionManager delegate:(id<DSSigningViewControllerDelegate>)delegate {
     self = [[[DSStoryboardFactory sharedStoryboardFactory] signingStoryboard] instantiateViewControllerWithIdentifier:@"DSSigningViewController"];
@@ -173,51 +183,62 @@ typedef NS_ENUM(NSInteger, DSSigningViewControllerViewTag) {
 }
 
 - (void)initializeSigning {
-    [self.sessionManager startEnvelopeDetailsTaskForEnvelopeWithID:self.envelopeID completionHandler:^(DSEnvelopeDetailsResponse *response, NSError *error) {
-        if (error) {
-            return;
-        }
-        if (![self isHostedSigning]) {
-            self.title = response.emailSubject;
-        }
-    }];
-    [self.sessionManager startEnvelopeRecipientsTaskForEnvelopeWithID:self.envelopeID completionHandler:^(DSEnvelopeRecipientsResponse *response, NSError *error) {
-        if (error) {
-            [self failedSigningWithError:error];
-            return;
-        }
-        self.recipientsResponse = response;
-        for (DSEnvelopeRecipient *recipient in [self.recipientsResponse allSigners]) {
-            if ([recipient.userID isEqualToString:self.sessionManager.account.userID] || [recipient.clientUserID length] > 0) {
-                self.currentSigner = recipient;
-                if ([self.recipientID length] == 0) {
-                    self.recipientID = self.currentSigner.recipientID;
-                }
-                if ([self isHostedSigning]) {
-                    DSEnvelopeInPersonSigner *inPersonSigner = (DSEnvelopeInPersonSigner *)self.currentSigner;
-                    NSString *titleString;
-                    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
-                            titleString = [NSString stringWithFormat:@"Now Signing: %@", inPersonSigner.signerName];
-                    } else {
-                        titleString = inPersonSigner.signerName;
-                    }
-                    self.title = titleString;
-                }
-                break;
-            }
-        }
-        if (!self.currentSigner || [self.recipientID length] == 0) {
-            [self failedSigningWithError:[NSError errorWithDomain:DSSigningViewControllerErrorDomain code:DSSigningViewControllerErrorCodeInvalidSigner userInfo:nil]];
-            return;
-        }
-        [self.sessionManager startSigningURLTaskForRecipientWithID:self.currentSigner.recipientID userID:self.currentSigner.userID clientUserID:self.currentSigner.clientUserID inEnvelopeWithID:self.envelopeID returnURL:self.messageURL completionHandler:^(NSString *signingURLString, NSError *error) {
+    if (self.currentSigner) {
+        [self.sessionManager startSigningURLTaskForRecipient:self.currentSigner inEnvelopeWithID:self.envelopeID returnURL:self.messageURL completionHandler:^(NSString *signingURLString, NSError *error) {
             if (error) {
                 [self failedSigningWithError:error];
                 return;
             }
             [self.signingAPIManager startSigningWithURL:[NSURL URLWithString:signingURLString]];
         }];
-    }];
+        
+        [self.sessionManager startEnvelopeDetailsTaskForEnvelopeWithID:self.envelopeID completionHandler:^(DSEnvelopeDetailsResponse *response, NSError *error) {
+            if (error) {
+                return;
+            }
+            if (![self isHostedSigning]) {
+                self.title = response.emailSubject;
+            }
+        }];
+    } else {
+        [self.sessionManager startEnvelopeRecipientsTaskForEnvelopeWithID:self.envelopeID completionHandler:^(DSEnvelopeRecipientsResponse *response, NSError *error) {
+            if (error) {
+                [self failedSigningWithError:error];
+                return;
+            }
+            self.recipientsResponse = response;
+            for (DSEnvelopeRecipient *recipient in [self.recipientsResponse allSigners]) {
+                if ([recipient.userID isEqualToString:self.sessionManager.account.userID] || [recipient.clientUserID length] > 0) {
+                    self.currentSigner = recipient;
+                    if ([self.recipientID length] == 0) {
+                        self.recipientID = self.currentSigner.recipientID;
+                    }
+                    if ([self isHostedSigning]) {
+                        DSEnvelopeInPersonSigner *inPersonSigner = (DSEnvelopeInPersonSigner *)self.currentSigner;
+                        NSString *titleString;
+                        if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+                            titleString = [NSString stringWithFormat:@"Now Signing: %@", inPersonSigner.signerName];
+                        } else {
+                            titleString = inPersonSigner.signerName;
+                        }
+                        self.title = titleString;
+                    }
+                    break;
+                }
+            }
+            if (!self.currentSigner || [self.recipientID length] == 0) {
+                [self failedSigningWithError:[NSError errorWithDomain:DSSigningViewControllerErrorDomain code:DSSigningViewControllerErrorCodeInvalidSigner userInfo:nil]];
+                return;
+            }
+            [self.sessionManager startSigningURLTaskForRecipientWithID:self.currentSigner.recipientID userID:self.currentSigner.userID clientUserID:self.currentSigner.clientUserID inEnvelopeWithID:self.envelopeID returnURL:self.messageURL completionHandler:^(NSString *signingURLString, NSError *error) {
+                if (error) {
+                    [self failedSigningWithError:error];
+                    return;
+                }
+                [self.signingAPIManager startSigningWithURL:[NSURL URLWithString:signingURLString]];
+            }];
+        }];
+    }
 }
 
 #pragma mark - User Interaction

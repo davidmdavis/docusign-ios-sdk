@@ -18,7 +18,7 @@ typedef NS_ENUM(NSInteger, DSSigningViewControllerErrorCode) {
     DSSigningViewControllerErrorCodeTimeout
 };
 
-@class DSSessionManager;
+@class DSSessionManager, DSEnvelopeRecipient;
 
 @interface DSSigningViewController : UIViewController
 
@@ -29,5 +29,6 @@ typedef NS_ENUM(NSInteger, DSSigningViewControllerErrorCode) {
 @property (nonatomic) BOOL initiatedSigningLoad;
 
 - (instancetype)initWithEnvelopeID:(NSString *)envelopeID recipientID:(NSString *)recipientID sessionManager:(DSSessionManager *)sessionManager delegate:(id<DSSigningViewControllerDelegate>)delegate;
+- (instancetype)initWithEnvelopeID:(NSString *)envelopeID recipient:(DSEnvelopeRecipient *)recipient sessionManager:(DSSessionManager *)sessionManager delegate:(id<DSSigningViewControllerDelegate>)delegate;
 
 @end

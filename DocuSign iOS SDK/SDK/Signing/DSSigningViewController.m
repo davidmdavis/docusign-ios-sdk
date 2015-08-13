@@ -192,14 +192,6 @@ typedef NS_ENUM(NSInteger, DSSigningViewControllerViewTag) {
             [self.signingAPIManager startSigningWithURL:[NSURL URLWithString:signingURLString]];
         }];
         
-        [self.sessionManager startEnvelopeDetailsTaskForEnvelopeWithID:self.envelopeID completionHandler:^(DSEnvelopeDetailsResponse *response, NSError *error) {
-            if (error) {
-                return;
-            }
-            if (![self isHostedSigning]) {
-                self.title = response.emailSubject;
-            }
-        }];
     } else {
         [self.sessionManager startEnvelopeRecipientsTaskForEnvelopeWithID:self.envelopeID completionHandler:^(DSEnvelopeRecipientsResponse *response, NSError *error) {
             if (error) {
@@ -239,6 +231,14 @@ typedef NS_ENUM(NSInteger, DSSigningViewControllerViewTag) {
             }];
         }];
     }
+    [self.sessionManager startEnvelopeDetailsTaskForEnvelopeWithID:self.envelopeID completionHandler:^(DSEnvelopeDetailsResponse *response, NSError *error) {
+        if (error) {
+            return;
+        }
+        if (![self isHostedSigning]) {
+            self.title = response.emailSubject;
+        }
+    }];
 }
 
 #pragma mark - User Interaction

@@ -325,9 +325,7 @@ typedef NS_ENUM(NSInteger, DSSigningViewControllerViewTag) {
     
     switch (status) {
         case DSSigningCompletedStatusSigned: {
-            [self.signingAPIManager finishSigning:^(BOOL finished) {
-                [self.delegate signingViewController:self completedWithStatus:status];
-            }];
+            [self.signingAPIManager finishSigning:nil];
             break;
         }
         case DSSigningCompletedStatusDeferred:

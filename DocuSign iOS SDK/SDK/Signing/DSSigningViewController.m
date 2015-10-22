@@ -453,7 +453,7 @@ typedef NS_ENUM(NSInteger, DSSigningViewControllerViewTag) {
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
     if (actionSheet.tag == DSSigningViewControllerViewTagCancelSigning) {
         if (buttonIndex == actionSheet.destructiveButtonIndex) {
-            // TODO: show decline modal
+            [self changeSigningStatus:DSSigningCompletedStatusDeferred withObject:nil];
         } else if (buttonIndex == actionSheet.firstOtherButtonIndex) {
             [self changeSigningStatus:DSSigningCompletedStatusDeferred withObject:nil];
         }

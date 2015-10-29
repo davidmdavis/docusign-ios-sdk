@@ -20,7 +20,7 @@ static inline NSString *DSURLStringFromEnvironment(DSRestAPIEnvironment environm
             return @"https://demo.docusign.net";
             break;
         case DSRestAPIEnvironmentProduction:
-            return @"https://www.docusign.net";
+            return @"https://na2.docusign.net";
             break;
     }
 }
